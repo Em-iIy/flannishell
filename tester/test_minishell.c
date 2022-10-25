@@ -17,7 +17,6 @@ static char	*read_file(char *file)
 	int		b_read = read(fd, buffer, 1);
 
 	buffer[b_read] = 0;
-	//ret = ft_strdup(buffer);
 	while (b_read > 0)
 	{
 		temp = ret;
@@ -27,6 +26,7 @@ static char	*read_file(char *file)
 			buffer[b_read] = 0;
 		free(temp);
 	}
+	close(fd);
 	return (ret);
 }
 
@@ -42,9 +42,8 @@ TEST_TEAR_DOWN(minishell)
 
 TEST(minishell, pwd)
 {
-	char	expected[1000], resulted[1000];
+	char	*expected, *resulted;
 	char	*envp, *temp;
-	int		fd1, fd2, b_read;
 	t_lexer	*lxr;
 	t_env	*env;
 
@@ -52,16 +51,10 @@ TEST(minishell, pwd)
 	envp = ft_strjoin("PATH=:", temp);
 	env = env_cpy(&envp);
 	system("pwd > expected");
-	fd1 = open("expected", O_RDONLY);
-	b_read = read(fd1, expected, 1000);
-	expected[b_read] = 0;
-	close(fd1);
+	expected = read_file("expected");
 	lxr = lexer("pwd > resulted");
 	executor(parser(env, &lxr), &envp);
-	fd2 = open("resulted", O_RDONLY);
-	b_read = read(fd2, resulted, 1000);
-	resulted[b_read] = 0;
-	close(fd2);
+	resulted = read_file("resulted");
 	TEST_ASSERT_EQUAL_STRING(expected, resulted);
 }
 
