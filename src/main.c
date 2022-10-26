@@ -6,7 +6,7 @@
 /*   By: gwinnink <gwinnink@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/13 15:20:49 by gwinnink      #+#    #+#                 */
-/*   Updated: 2022/10/24 18:35:41 by fpurdom       ########   odam.nl         */
+/*   Updated: 2022/10/26 16:56:43 by fpurdom       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include <stdio.h>
 #include <readline/readline.h>
 #include <readline/history.h>
+#include <errno.h>
 #include "libft.h"
 #include "lexer.h"
 #include "parser.h"
@@ -57,6 +58,8 @@ int	main(int argc, char **argv, char **envp)
 			continue ;
 		prsr = parser(env, &lxr);
 		g_code = executor(prsr, new_envp);
+		if (g_code == 1 || g_code == 2 || g_code == ENOMEM)
+			perror("minishell");
 		free_lexer(&lxr);
 		free_parser(prsr);
 		free(line);

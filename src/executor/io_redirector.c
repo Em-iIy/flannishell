@@ -6,7 +6,7 @@
 /*   By: fpurdom <fpurdom@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/06 15:44:57 by fpurdom       #+#    #+#                 */
-/*   Updated: 2022/10/24 18:46:02 by fpurdom       ########   odam.nl         */
+/*   Updated: 2022/10/26 16:27:59 by fpurdom       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ static void	redirect_output(t_file *file)
 	else
 		fd = open(file->file_name, O_CREAT | O_RDWR | O_TRUNC, 0666);
 	if (fd < 0)
-		exit (-1);
+		exit (1);
 	if (dup2(fd, STDOUT_FILENO) < 0)
-		exit (-1);
+		exit (1);
 }
 
 static void	redirect_input(t_file *file)
@@ -37,9 +37,9 @@ static void	redirect_input(t_file *file)
 
 	fd = open(file->file_name, O_RDONLY);
 	if (fd < 0)
-		exit (-1);
+		exit (1);
 	if (dup2(fd, STDIN_FILENO) < 0)
-		exit (-1);
+		exit (1);
 }
 
 void	redirect_io(t_cmd *command)

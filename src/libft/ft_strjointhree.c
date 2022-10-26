@@ -1,26 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   parser_utils.c                                     :+:    :+:            */
+/*   ft_strjointhree.c                                  :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: gwinnink <gwinnink@student.codam.nl>         +#+                     */
+/*   By: fpurdom <fpurdom@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2022/09/22 14:34:14 by gwinnink      #+#    #+#                 */
-/*   Updated: 2022/10/26 19:46:52 by fpurdom       ########   odam.nl         */
+/*   Created: 2022/10/26 14:48:07 by fpurdom       #+#    #+#                 */
+/*   Updated: 2022/10/26 16:42:34 by fpurdom       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include "parser.h"
+#include "libft.h"
+#include <errno.h>
 
-t_parser	*init_parser(void)
+char	*ft_strjointhree(const char *s1, const char *s2, const char *s3)
 {
-	t_parser	*ret;
+	char	*ret;
+	char	*temp;
 
-	ret = (t_parser *)malloc(sizeof(t_parser));
+	temp = ft_strjoin(s1, s2);
+	if (!temp)
+		exit (ENOMEM);
+	ret = ft_strjoin(temp, s3);
+	free(temp);
 	if (!ret)
-		exit(-1);
-	ret->cmds = NULL;
-	ret->count = 0;
+		exit (ENOMEM);
 	return (ret);
 }

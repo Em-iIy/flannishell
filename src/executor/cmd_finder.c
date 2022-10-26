@@ -6,7 +6,7 @@
 /*   By: fpurdom <fpurdom@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/06 14:17:19 by fpurdom       #+#    #+#                 */
-/*   Updated: 2022/10/21 15:27:59 by fpurdom       ########   odam.nl         */
+/*   Updated: 2022/10/26 16:25:21 by fpurdom       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,12 @@ static char	*cmd_not_found(char **to_free, char *cmd_file, char *command)
 	exit (127);
 }
 
-static char	**get_paths(char **env)
+static char	*permission_denied(char **to_free, char *cmd_file, char *command)
 {
-	while (*env && ft_strncmp("PATH=", *env, 5))
-		env++;
-	return (ft_split(*env, ':'));
+	printf("minishell: %s: permission denied\n", command);
+	ft_free_all(to_free);
+	free(cmd_file);
+	exit (126);
 }
 
 char	*get_cmd_file(char *command, char **env)
@@ -39,23 +40,22 @@ char	*get_cmd_file(char *command, char **env)
 	char	**paths;
 	char	**to_free;
 	char	*cmd_file;
-	char	*temp;
 
-	paths = get_paths(env);
+	while (*env && ft_strncmp("PATH=", *env, 5))
+		env++;
+	paths = ft_split(*env, ':');
 	cmd_file = ft_strdup(command);
 	if (!paths || !cmd_file)
 		exit (ENOMEM);
 	to_free = paths;
-	while (access(cmd_file, X_OK) == -1 && *paths)
+	while (access(cmd_file, F_OK) == -1 && *paths)
 	{
 		free(cmd_file);
-		temp = ft_strjoin(*paths, "/");
-		cmd_file = ft_strjoin(temp, command);
-		if (!temp || !cmd_file)
-			exit (ENOMEM);
-		free(temp);
+		cmd_file = ft_strjointhree(*paths, "/", command);
 		paths++;
 	}
+	if (access(cmd_file, F_OK) == 0 && access(cmd_file, X_OK) == -1)
+		permission_denied(to_free, cmd_file, command);
 	if (!*paths)
 		cmd_not_found(to_free, cmd_file, command);
 	ft_free_all(to_free);

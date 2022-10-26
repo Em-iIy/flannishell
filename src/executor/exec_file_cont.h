@@ -1,26 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   parser_utils.c                                     :+:    :+:            */
+/*   exec_file_cont.h                                   :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: gwinnink <gwinnink@student.codam.nl>         +#+                     */
+/*   By: fpurdom <fpurdom@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2022/09/22 14:34:14 by gwinnink      #+#    #+#                 */
-/*   Updated: 2022/10/26 19:46:52 by fpurdom       ########   odam.nl         */
+/*   Created: 2022/10/26 19:22:31 by fpurdom       #+#    #+#                 */
+/*   Updated: 2022/10/26 19:37:24 by fpurdom       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include "parser.h"
+#ifndef EXEC_FILE_CONT_H
+# define EXEC_FILE_CONT_H
 
-t_parser	*init_parser(void)
-{
-	t_parser	*ret;
+void	exec_file_contents(char *file, int fd, char **env);
 
-	ret = (t_parser *)malloc(sizeof(t_parser));
-	if (!ret)
-		exit(-1);
-	ret->cmds = NULL;
-	ret->count = 0;
-	return (ret);
-}
+#endif

@@ -7,6 +7,7 @@ FILES_SRCS =	main.c \
 				executor_utils.c \
 				cmd_finder.c \
 				io_redirector.c \
+				exec_file_contents.c \
 				ft_echo.c \
 				lexer.c \
 				lexer_token.c \
@@ -37,6 +38,7 @@ FILES_OBJS = $(FILES_SRCS:.c=.o)
 DIR_SRCS = ./src/
 DIR_OBJS = ./obj/
 DIR_LIBFT = ./src/libft
+DIR_GNL = ./src/libft/get_next_line
 
 vpath %.c $(DIR_SRCS) $(DIR_OBJS)
 vpath %.c $(DIR_SRCS)lexer/ $(DIR_OBJS)
@@ -55,7 +57,7 @@ OBJS = $(FILES_OBJS:%=$(DIR_OBJS)%)
 # ----------------------------------------Flags
 CC = gcc
 # CFLAGS = -Wall -Wextra -Werror
-INC = -lreadline -Iinc -I$(DIR_LIBFT)
+INC = -Iinc -I$(DIR_LIBFT) -I$(DIR_GNL)
 
 # ----------------------------------------Libraries
 LIBFT = $(DIR_LIBFT)/libft.a
@@ -70,10 +72,10 @@ endif
 all: $(NAME)
 
 $(NAME): $(DIR_OBJS) $(OBJS) $(LIBFT)
-	$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(INC) $(LIBFT)
+	$(CC) $(CFLAGS) $(OBJS) -o $(NAME) -L $(HOME)/.brew/opt/readline/lib -lreadline $(INC) $(LIBFT)
 
 $(DIR_OBJS)%.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@ $(INC)
+	$(CC) $(CFLAGS) -c $< -o $@  -I $(HOME)/.brew/opt/readline/include $(INC)
 
 $(DIR_OBJS):
 	mkdir -p $@

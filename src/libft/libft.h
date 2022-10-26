@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: gwinnink <gwinnink@student.codam.nl>       +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/14 13:45:03 by gwinnink          #+#    #+#             */
-/*   Updated: 2022/09/08 12:13:47 by gwinnink         ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   libft.h                                            :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: gwinnink <gwinnink@student.codam.nl>         +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2021/12/14 13:45:03 by gwinnink      #+#    #+#                 */
+/*   Updated: 2022/10/26 15:06:23 by fpurdom       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void	*ft_calloc(unsigned int count, size_t size);
 char	*ft_strdup(const char *s1);
 char	*ft_substr(const char *s, unsigned int start, size_t len);
 char	*ft_strjoin(const char *s1, const char *s2);
+char	*ft_strjointhree(const char *s1, const char *s2, const char *s3);
 char	*ft_strtrim(const char *s1, const char *set);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 char	**ft_split(const char *s, char c);
