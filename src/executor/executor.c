@@ -6,7 +6,7 @@
 /*   By: fpurdom <fpurdom@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/22 16:29:32 by fpurdom       #+#    #+#                 */
-/*   Updated: 2022/10/26 16:56:11 by fpurdom       ########   odam.nl         */
+/*   Updated: 2022/10/27 13:47:16 by fpurdom       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static int	wait_forks(t_pipe *pipes, int *pid)
 	while (i <= pipes->pid_i)
 	{
 		if (waitpid(pid[i], &status, 0) == -1)
-			return (2);
+			return (1);
 		i++;
 	}
 	free(pid);

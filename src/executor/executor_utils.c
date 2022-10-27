@@ -6,7 +6,7 @@
 /*   By: fpurdom <fpurdom@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/04 16:20:52 by fpurdom       #+#    #+#                 */
-/*   Updated: 2022/10/26 19:51:17 by fpurdom       ########   odam.nl         */
+/*   Updated: 2022/10/27 13:32:02 by fpurdom       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,6 @@ void	exec_command(t_cmd *command, t_pipe *pipes, char **env)
 		if (fd == -1)
 			exit (1);
 		exec_file_contents(cmd_file, fd, env);
+		exit (0);
 	}
 }
