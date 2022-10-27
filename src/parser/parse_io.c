@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   parse_io.c                                         :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: gwinnink <gwinnink@student.codam.nl>         +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2022/10/14 11:32:18 by gwinnink      #+#    #+#                 */
-/*   Updated: 2022/10/20 16:37:06 by fpurdom       ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   parse_io.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gwinnink <gwinnink@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/14 11:32:18 by gwinnink          #+#    #+#             */
+/*   Updated: 2022/10/27 14:52:17 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ t_file	*parse_io(t_env *env, t_token **head)
 	if ((*head)->next == NULL)
 	{
 		printf("minishell: syntax error near unexpected token `newline'\n");
+		g_code = 258;
 		return (NULL);
 	}
 	else
