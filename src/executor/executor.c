@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   executor.c                                         :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: fpurdom <fpurdom@student.codam.nl>           +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2022/09/22 16:29:32 by fpurdom       #+#    #+#                 */
-/*   Updated: 2022/10/27 13:47:16 by fpurdom       ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   executor.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gwinnink <gwinnink@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/22 16:29:32 by fpurdom           #+#    #+#             */
+/*   Updated: 2022/10/27 18:32:19 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	executor(t_parser *parser, char **env)
 	t_pipe		pipes;
 	int			*pid;
 
-	pid = (int *)malloc((parser->count - 1) * sizeof(int));
+	pid = (int *)malloc((parser->count) * sizeof(int));
 	if (!pid)
 		return (ENOMEM);
 	command = parser->cmds;

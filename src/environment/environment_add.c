@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   environment_add.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gwinnink <gwinnink@student.codam.nl>       +#+  +:+       +#+        */
+/*   By: gwinnink <gwinnink@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 11:55:58 by gwinnink          #+#    #+#             */
-/*   Updated: 2022/10/11 12:53:42 by gwinnink         ###   ########.fr       */
+/*   Updated: 2022/10/27 17:39:07 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
+#include "libft.h"
 #include "environment_utils.h"
 #include "environment.h"
 
@@ -25,13 +26,10 @@ void	add_env(t_env **env, char *key, char *val)
 	if (target)
 	{
 		free(target->val);
-		target->val = val;
+		free(target->str);
+		target->val = ft_strdup(val);
+		target->str = ft_strjointhree(target->key, "=", target->val);
 	}
 	else
-	{
-		new = env_new(NULL);
-		new->key = key;
-		new->val = val;
-		env_add_front(env, new);
-	}
+		env_add_front(env, env_new(ft_strjointhree(new->key, "=", new->val)));
 }
