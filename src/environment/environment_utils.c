@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   environment_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gwinnink <gwinnink@student.codam.nl>       +#+  +:+       +#+        */
+/*   By: gwinnink <gwinnink@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 15:25:55 by gwinnink          #+#    #+#             */
-/*   Updated: 2022/10/11 12:20:12 by gwinnink         ###   ########.fr       */
+/*   Updated: 2022/10/27 19:16:23 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,28 +22,23 @@ t_env	*env_new(char *str)
 	ret = (t_env *)malloc(sizeof(t_env));
 	if (!ret)
 		exit(-1);
+	ret->str = NULL;
 	ret->key = NULL;
 	ret->val = NULL;
 	ret->next = NULL;
-	if (str)
+	if (!str)
+		return (ret);
+	ret->str = ft_strdup(str);
+	i = 0;
+	while (str[i] && str[i] != '=')
+		i++;
+	if (str[i] != '=')
 	{
-		i = 0;
-		while (str[i] && str[i] != '=')
-			i++;
-		ret->key = ft_substr(str, 0, i);
-		ret->val = ft_strdup(&str[i + 1]);
+		free(str);
+		return (ret);
 	}
-	return (ret);
-}
-
-char	*env_to_str(t_env *env)
-{
-	char	*temp;
-	char	*ret;
-
-	temp = ft_strjoin(env->key, "=");
-	ret = ft_strjoin(temp, env->val);
-	free(temp);
+	ret->key = ft_substr(str, 0, i);
+	ret->val = ft_strdup(&str[i + 1]);
 	return (ret);
 }
 
@@ -55,10 +50,12 @@ void	env_add_front(t_env **env, t_env *new)
 
 void	env_free(t_env *env)
 {
+	free(env->str);
 	free(env->key);
 	free(env->val);
 	free(env);
 }
+
 
 void	env_del(t_env **env, t_env *del)
 {
@@ -69,9 +66,22 @@ void	env_del(t_env **env, t_env *del)
 	{
 		*env = del->next;
 		env_free(del);
+		return ;
 	}
 	while (head->next != del)
 		head = head->next;
 	head->next = del->next;
 	env_free(del);
+}
+
+void	env_free_all(t_env **head)
+{
+	t_env	*temp;
+
+	while (*head)
+	{
+		temp = (*head)->next;
+		env_free(*head);
+		*head = temp;
+	}
 }

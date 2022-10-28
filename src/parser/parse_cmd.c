@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_cmd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gwinnink <gwinnink@student.codam.nl>       +#+  +:+       +#+        */
+/*   By: gwinnink <gwinnink@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 12:48:40 by gwinnink          #+#    #+#             */
-/*   Updated: 2022/10/18 21:00:14 by gwinnink         ###   ########.fr       */
+/*   Updated: 2022/10/27 19:14:37 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,28 +58,25 @@ static void	*free_n_ret_null(void *ptr)
 t_cmd	*parse_cmd(t_env *env, t_token **head)
 {
 	t_cmd	*ret;
-	char	*temp;
+	t_env	*env_temp;
 	t_file	*io_temp;
 
-	temp = (char *)ft_calloc(1, 1);
 	ret = cmd_new();
+	env_temp = NULL;
 	while (*head && (*head)->iden != PIPE)
 	{
 		if (check_io_iden((*head)->iden))
 		{
 			io_temp = parse_io(env, head);
 			if (!io_temp)
-				return (free_n_ret_null(temp));
+				return (free_n_ret_null(env_temp));
 			io_add_back(&ret->files, io_temp);
 		}
 		else if (check_valid_str_iden((*head)->iden, (*head)->content))
-		{
-			temp = add_cmd(temp, parse_str(env, head));
-			if (!temp)
-				return (NULL);
-		}
-		(*head) = (*head)->next;
+			env_add_front(&env_temp, env_new(parse_str(env, head)));
+		*head = (*head)->next;
 	}
-	ret->command = ft_split_n_free(temp, ' ');
+	ret->command = make_envp(env_temp);
+	env_free_all(&env_temp);
 	return (ret);
 }

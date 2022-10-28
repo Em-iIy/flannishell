@@ -29,6 +29,8 @@ int	g_code = 0;
 	system("leaks --quiet minishell");
 }*/
 
+int g_code = 0;
+
 int	main(int argc, char **argv, char **envp)
 {
 	char		*line;
@@ -59,7 +61,8 @@ int	main(int argc, char **argv, char **envp)
 		if (!lxr)
 			continue ;
 		prsr = parser(env, &lxr);
-		g_code = executor(prsr, new_envp);
+		if (prsr->count != 0)
+			g_code = executor(prsr, new_envp);
 		if (g_code == 2 || g_code == ENOMEM)
 			perror("minishell");
 		free_lexer(&lxr);
