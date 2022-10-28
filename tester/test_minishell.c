@@ -9,6 +9,8 @@
 #include <stdio.h>
 #include <fcntl.h>
 
+int	g_code = 0;
+
 static char	*read_file(char *file)
 {
 	int		fd = open(file, O_RDONLY);

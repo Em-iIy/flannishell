@@ -6,14 +6,12 @@
 /*   By: gwinnink <gwinnink@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/14 16:54:32 by gwinnink      #+#    #+#                 */
-/*   Updated: 2022/10/24 16:26:52 by fpurdom       ########   odam.nl         */
+/*   Updated: 2022/10/27 14:34:50 by fpurdom       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "environment.h"
 #include "libft.h"
-
-int	g_code = 0;
 
 char	*parser_expand(t_env *env, char *str)
 {

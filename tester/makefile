@@ -15,6 +15,7 @@ PRS_SRC = ../src/parser/
 ENV_SRC = ../src/environment/
 BLT_SRC = ../src/builtins/
 LIBFT_SRC = ../src/libft/
+GNL_SRC = ../src/libft/get_next_line/
 
 TEST_FILES = 	unity/src/unity.c \
 				unity/extras/fixture/src/unity_fixture.c \
@@ -25,6 +26,7 @@ TEST_FILES = 	unity/src/unity.c \
 				$(EXEC_SRC)executor_utils.c \
 				$(EXEC_SRC)cmd_finder.c \
 				$(EXEC_SRC)io_redirector.c \
+				$(EXEC_SRC)exec_file_contents.c \
 				$(BLT_SRC)ft_echo.c \
 				$(LXR_SRC)lexer.c \
 				$(LXR_SRC)lexer_token.c \
@@ -68,7 +70,7 @@ $(TEST_OBJ_DIR):
 
 # Unit tests
 $(TESTEXE): $(TEST_OBJ_FILES)
-	$(CC) $(CFLAGS) $^ -o $@ -I../inc -I$(LIBFT_SRC) $(LIBFT)
+	$(CC) $(CFLAGS) $^ -o $@ -I../inc -I$(LIBFT_SRC) -I$(GNL_SRC) $(LIBFT)
 
 $(TEST_OBJ_FILES): $(TEST_OBJ_DIR)/%.o : %.c
 	mkdir -p $(@D)

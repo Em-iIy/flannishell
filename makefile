@@ -7,7 +7,6 @@ FILES_SRCS =	main.c \
 				executor_utils.c \
 				cmd_finder.c \
 				io_redirector.c \
-				exec_file_contents.c \
 				ft_echo.c \
 				lexer.c \
 				lexer_token.c \
