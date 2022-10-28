@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   environment_utils.h                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gwinnink <gwinnink@student.codam.nl>       +#+  +:+       +#+        */
+/*   By: gwinnink <gwinnink@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 15:25:55 by gwinnink          #+#    #+#             */
-/*   Updated: 2022/10/11 12:19:00 by gwinnink         ###   ########.fr       */
+/*   Updated: 2022/10/27 17:10:01 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,6 @@
 # include "environment.h"
 
 //----------------------------------------Prototypes
-t_env	*env_new(char *str);
-char	*env_to_str(t_env *env);
-void	env_add_front(t_env **env, t_env *new);
 void	env_free(t_env *env);
 void	env_del(t_env **env, t_env *del);
 

@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   environment.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gwinnink <gwinnink@student.codam.nl>       +#+  +:+       +#+        */
+/*   By: gwinnink <gwinnink@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 15:29:08 by gwinnink          #+#    #+#             */
-/*   Updated: 2022/10/06 16:54:00 by gwinnink         ###   ########.fr       */
+/*   Updated: 2022/10/27 18:33:36 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
+#include "libft.h"
 #include "environment.h"
 #include "environment_utils.h"
 
@@ -48,7 +49,7 @@ char	**make_envp(t_env *env)
 	temp = env;
 	while (i >= 0)
 	{
-		ret[i] = env_to_str(temp);
+		ret[i] = ft_strdup(temp->str);
 		temp = temp->next;
 		i--;
 	}

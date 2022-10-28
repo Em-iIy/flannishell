@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   lexer.c                                            :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: gwinnink <gwinnink@student.codam.nl>         +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2022/09/06 17:21:16 by gwinnink      #+#    #+#                 */
-/*   Updated: 2022/10/21 15:19:09 by fpurdom       ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   lexer.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gwinnink <gwinnink@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/06 17:21:16 by gwinnink          #+#    #+#             */
+/*   Updated: 2022/10/27 16:32:42 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ t_lexer	*lexer(char *line)
 	//lexer_token_print(lxr->head);
 	if (lxr->dquote == 1 || lxr->quote == 1)
 	{
-		printf("Minishell: syntax error unclosed token\n");
+		g_code = 258;
+		printf("minishell: syntax error unclosed token\n");
 		free(lxr->line);
 		free_lexer(&lxr);
 		return (NULL);

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   main.c                                             :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: gwinnink <gwinnink@student.codam.nl>         +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2022/07/13 15:20:49 by gwinnink      #+#    #+#                 */
-/*   Updated: 2022/10/26 16:56:43 by fpurdom       ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gwinnink <gwinnink@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/07/13 15:20:49 by gwinnink          #+#    #+#             */
+/*   Updated: 2022/10/27 16:30:38 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@
 {
 	system("leaks --quiet minishell");
 }*/
+
+int g_code = 0;
 
 int	main(int argc, char **argv, char **envp)
 {
@@ -57,7 +59,8 @@ int	main(int argc, char **argv, char **envp)
 		if (!lxr)
 			continue ;
 		prsr = parser(env, &lxr);
-		g_code = executor(prsr, new_envp);
+		if (prsr->count != 0)
+			g_code = executor(prsr, new_envp);
 		if (g_code == 1 || g_code == 2 || g_code == ENOMEM)
 			perror("minishell");
 		free_lexer(&lxr);
