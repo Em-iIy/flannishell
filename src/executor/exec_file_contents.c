@@ -6,7 +6,7 @@
 /*   By: fpurdom <fpurdom@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/26 18:11:46 by fpurdom       #+#    #+#                 */
-/*   Updated: 2022/10/27 13:30:46 by fpurdom       ########   odam.nl         */
+/*   Updated: 2022/10/27 18:49:32 by fpurdom       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	exec_file_contents(char *file, int fd, char **envp)
 	if (!line)
 		exit (ENOMEM);
 	n = 1;
-	while (line)
+	while (line && *line)
 	{
 		lxr = lexer(line);
 		prsr = parser(env, &lxr);

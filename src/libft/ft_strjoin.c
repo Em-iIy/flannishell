@@ -6,11 +6,12 @@
 /*   By: gwinnink <gwinnink@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/12/14 13:44:30 by gwinnink      #+#    #+#                 */
-/*   Updated: 2022/10/26 16:42:01 by fpurdom       ########   odam.nl         */
+/*   Updated: 2022/10/27 13:57:42 by fpurdom       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <errno.h>
 
 char	*ft_strjoin(const char *s1, const char *s2)
 {
@@ -24,7 +25,7 @@ char	*ft_strjoin(const char *s1, const char *s2)
 		return (NULL);
 	ret = (char *)ft_calloc(ft_strlen(s1) + ft_strlen(s2) + 1, 1);
 	if (!ret)
-		return (NULL);
+		exit (ENOMEM);
 	while (s1[i])
 	{
 		ret[i] = s1[i];
