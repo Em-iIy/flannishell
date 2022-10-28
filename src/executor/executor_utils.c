@@ -6,10 +6,11 @@
 /*   By: fpurdom <fpurdom@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/04 16:20:52 by fpurdom       #+#    #+#                 */
-/*   Updated: 2022/10/27 19:03:08 by fpurdom       ########   odam.nl         */
+/*   Updated: 2022/10/28 17:25:24 by fpurdom       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 #include "cmd_finder.h"
 #include "io_redirector.h"
 #include "exec_file_cont.h"
@@ -19,12 +20,39 @@
 #include <errno.h>
 #include <fcntl.h>
 
+static int	has_path(char *command)
+{
+	int	i;
+
+	i = ft_strlen(command) - 1;
+	while (i >= 0 && command[i] != 47)
+		i--;
+	if (i < 0)
+		return (false);
+	if (access(command, F_OK) == -1)
+	{
+		printf("minishell: %s: No such file or directory\n", command);
+		exit (127);
+	}
+	else if (access(command, X_OK) == -1)
+	{
+		printf("minishell: %s: Permission denied\n", command);
+		exit (126);
+	}
+	return (true);
+}
+
 void	exec_command(t_cmd *command, t_pipe *pipes, char **env)
 {
 	char	*cmd_file;
 	int		fd;
 
-	cmd_file = get_cmd_file(*command->command, env);
+	if (cmd_is_builtin(command))
+		exit (0);
+	if (has_path(*command->command))
+		cmd_file = *command->command;
+	else
+		cmd_file = get_cmd_file(*command->command, env);
 	if (!command->frst_cmd && dup2(pipes->in_fd, STDIN_FILENO) < 0)
 		exit (2);
 	if (!command->lst_cmd && close(pipes->tube[0]))
@@ -35,8 +63,6 @@ void	exec_command(t_cmd *command, t_pipe *pipes, char **env)
 		exit (2);
 	if (command->files)
 		redirect_io(command);
-	if (cmd_is_builtin(command))
-		exit (0);
 	if (execve(cmd_file, command->command, env) == -1)
 		exit (2);
 }

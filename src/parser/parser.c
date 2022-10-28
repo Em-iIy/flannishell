@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   parser.c                                           :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: gwinnink <gwinnink@student.codam.nl>         +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2022/09/22 14:27:03 by gwinnink      #+#    #+#                 */
-/*   Updated: 2022/10/21 15:18:28 by fpurdom       ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   parser.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gwinnink <gwinnink@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/22 14:27:03 by gwinnink          #+#    #+#             */
+/*   Updated: 2022/10/27 16:02:13 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,15 +70,13 @@ static void	print_prsr(t_parser *prsr)
 	}
 }
 
-/*
-this function should set exit code to 258 if false
-*/
 static bool	check_cmd(t_cmd *cmd, t_token *token)
 {
 	if ((!*cmd->command && !cmd->files) || \
 		(token && token->iden == PIPE && !token->next))
 	{
 		printf("minishell: syntax error near unexpected token `|'\n");
+		g_code = 258;
 		return (false);
 	}
 	return (true);
@@ -121,7 +119,8 @@ t_parser	*parser(t_env *env, t_lexer **lxr)
 		parser->count++;
 		cmd_add_back(&parser->cmds, temp);
 	}
-	index_cmds(parser->cmds);
+	if (parser->count != 0)
+		index_cmds(parser->cmds);
 	//print_prsr(parser);
 	return (parser);
 }

@@ -6,7 +6,7 @@
 /*   By: gwinnink <gwinnink@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/22 13:16:36 by gwinnink      #+#    #+#                 */
-/*   Updated: 2022/10/27 17:58:43 by fpurdom       ########   odam.nl         */
+/*   Updated: 2022/10/28 14:49:14 by fpurdom       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,5 @@ typedef struct s_parser
 //----------------------------------------Prototypes
 t_parser	*parser(t_env *env, t_lexer **lxr);
 void		free_parser(t_parser *prsr);
-
 
 #endif
