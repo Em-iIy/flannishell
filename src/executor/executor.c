@@ -6,18 +6,20 @@
 /*   By: fpurdom <fpurdom@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/22 16:29:32 by fpurdom       #+#    #+#                 */
-/*   Updated: 2022/10/27 19:21:01 by fpurdom       ########   odam.nl         */
+/*   Updated: 2022/11/02 15:47:03 by fpurdom       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 #include "executor_utils.h"
 #include "executor.h"
+#include "builtins.h"
 #include <unistd.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <errno.h>
 
-static int	do_fork(t_cmd *command, t_pipe *pipes, char **env)
+static int	do_fork(t_cmd *command, t_pipe *pipes, t_env *env)
 {
 	pipes->i++;
 	pipes->pid[pipes->i] = fork();
@@ -46,30 +48,45 @@ static int	wait_forks(t_pipe *pipes)
 	return (0);
 }
 
-int	executor(t_parser *parser, char **env)
+static t_pipe	*init_pipe(int size)
+{
+	t_pipe	*pipes;
+
+	pipes = (t_pipe *)malloc(1 * sizeof(t_pipe));
+	if (!pipes)
+		exit (ENOMEM);
+	pipes->pid = (int *)malloc((size) * sizeof(int));
+	if (!pipes->pid)
+		exit (ENOMEM);
+	pipes->in_fd = STDIN_FILENO;
+	pipes->i = -1;
+	return (pipes);
+}
+
+int	executor(t_parser *parser, t_env *env)
 {
 	t_cmd		*command;
-	t_pipe		pipes;
+	t_pipe		*pipes;
 
-	pipes.pid = (int *)malloc((parser->count) * sizeof(int));
-	if (!pipes.pid)
-		return (ENOMEM);
+	pipes = init_pipe(parser->count);
 	command = parser->cmds;
-	pipes.in_fd = STDIN_FILENO;
-	pipes.i = -1;
 	while (command)
 	{
 		if (command->next)
-			if (pipe(pipes.tube))
+		{
+			if (pipe(pipes->tube))
 				return (2);
-		if (do_fork(command, &pipes, env))
+		}
+		else if (!ft_strncmp(*command->command, "exit", 5) && command->frst_cmd)
+			return (ft_exit(command));
+		if (do_fork(command, pipes, env))
 			return (2);
-		if (!command->lst_cmd && close(pipes.tube[1]))
+		if (!command->lst_cmd && close(pipes->tube[1]))
 			return (2);
-		if (!command->frst_cmd && close(pipes.in_fd))
+		if (!command->frst_cmd && close(pipes->in_fd))
 			return (2);
-		pipes.in_fd = pipes.tube[0];
+		pipes->in_fd = pipes->tube[0];
 		command = command->next;
 	}
-	return (wait_forks(&pipes));
+	return (wait_forks(pipes));
 }

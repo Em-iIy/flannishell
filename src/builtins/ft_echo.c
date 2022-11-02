@@ -6,7 +6,7 @@
 /*   By: fpurdom <fpurdom@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/20 14:08:02 by fpurdom       #+#    #+#                 */
-/*   Updated: 2022/10/21 17:54:39 by fpurdom       ########   odam.nl         */
+/*   Updated: 2022/11/02 14:57:54 by fpurdom       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,6 @@ int	ft_echo(char **strs)
 	}
 	if (n_option == false)
 		ft_putchar_fd('\n', 1);
+	g_code = 0;
 	return (1);
 }

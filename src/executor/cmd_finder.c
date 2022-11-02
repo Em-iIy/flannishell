@@ -6,7 +6,7 @@
 /*   By: fpurdom <fpurdom@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/06 14:17:19 by fpurdom       #+#    #+#                 */
-/*   Updated: 2022/10/26 16:25:21 by fpurdom       ########   odam.nl         */
+/*   Updated: 2022/11/02 15:34:09 by fpurdom       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 #include <stdio.h>
 #include <errno.h>
 
-static char	*cmd_not_found(char **to_free, char *cmd_file, char *command)
+static void	cmd_not_found(char **to_free, char *cmd_file, char *command)
 {
 	printf("minishell: %s: command not found\n", command);
 	ft_free_all(to_free);
@@ -27,25 +27,39 @@ static char	*cmd_not_found(char **to_free, char *cmd_file, char *command)
 	exit (127);
 }
 
-static char	*permission_denied(char **to_free, char *cmd_file, char *command)
+static void	permission_denied(char **to_free, char *cmd_file, char *command)
 {
-	printf("minishell: %s: permission denied\n", command);
-	ft_free_all(to_free);
-	free(cmd_file);
+	printf("minishell: %s: Permission denied\n", command);
+	if (to_free)
+		ft_free_all(to_free);
+	if (cmd_file)
+		free(cmd_file);
 	exit (126);
 }
 
-char	*get_cmd_file(char *command, char **env)
+static char	**find_path(t_env *env, char *command)
+{
+	char	*val;
+	char	**paths;
+
+	val = get_env(env, "PATH");
+	if (!val)
+		return (NULL);
+	paths = ft_split(val, ':');
+	if (!paths)
+		exit (ENOMEM);
+	return (paths);
+}
+
+char	*get_cmd_file(char *command, t_env *env)
 {
 	char	**paths;
 	char	**to_free;
 	char	*cmd_file;
 
-	while (*env && ft_strncmp("PATH=", *env, 5))
-		env++;
-	paths = ft_split(*env, ':');
+	paths = find_path(env, command);
 	cmd_file = ft_strdup(command);
-	if (!paths || !cmd_file)
+	if (!cmd_file)
 		exit (ENOMEM);
 	to_free = paths;
 	while (access(cmd_file, F_OK) == -1 && *paths)
@@ -66,6 +80,8 @@ int	cmd_is_builtin(t_cmd *command)
 {
 	if (!ft_strncmp(*command->command, "echo", 5))
 		return (ft_echo(command->command + 1));
+	if (!ft_strncmp(*command->command, "exit", 5))
+		return (ft_exit(command));
 	return (0);
 	/*else if (!ft_strncmp(*command->command, "cd", 2))
 		return (ft_cd());

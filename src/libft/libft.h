@@ -6,7 +6,7 @@
 /*   By: gwinnink <gwinnink@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/12/14 13:45:03 by gwinnink      #+#    #+#                 */
-/*   Updated: 2022/10/26 15:06:23 by fpurdom       ########   odam.nl         */
+/*   Updated: 2022/11/02 15:01:49 by fpurdom       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define LIBFT_H
 
 # include <stdlib.h>
+# include <stdbool.h>
 
 typedef struct s_list
 {
@@ -60,6 +61,7 @@ void	ft_putstr_fd(char *s, int fd);
 void	ft_putendl_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
 void	*ft_free_all(char **arr);
+bool	ft_check_valid_atoi(int *code, char *str);
 
 // Libft bonus functions
 t_list	*ft_lstnew(void *content);

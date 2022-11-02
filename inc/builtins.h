@@ -6,7 +6,7 @@
 /*   By: fpurdom <fpurdom@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/20 14:10:59 by fpurdom       #+#    #+#                 */
-/*   Updated: 2022/10/24 16:22:56 by fpurdom       ########   odam.nl         */
+/*   Updated: 2022/10/28 15:12:23 by fpurdom       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,5 +16,6 @@
 # include "parser.h"
 
 int	ft_echo(char **strs);
+int	ft_exit(t_cmd *command);
 
 #endif

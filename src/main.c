@@ -6,7 +6,7 @@
 /*   By: gwinnink <gwinnink@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/13 15:20:49 by gwinnink      #+#    #+#                 */
-/*   Updated: 2022/10/27 19:03:40 by fpurdom       ########   odam.nl         */
+/*   Updated: 2022/11/02 15:58:17 by fpurdom       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int	main(int argc, char **argv, char **envp)
 			continue ;
 		prsr = parser(env, &lxr);
 		if (prsr->count != 0)
-			g_code = executor(prsr, new_envp);
+			g_code = executor(prsr, env);
 		if (g_code == 2 || g_code == ENOMEM)
 			perror("minishell");
 		free_lexer(&lxr);
