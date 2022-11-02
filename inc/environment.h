@@ -3,10 +3,10 @@
 /*                                                        ::::::::            */
 /*   environment.h                                      :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: gwinnink <gwinnink@student.42.fr>            +#+                     */
+/*   By: gwinnink <gwinnink@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/05 15:25:55 by gwinnink      #+#    #+#                 */
-/*   Updated: 2022/10/28 17:12:49 by fpurdom       ########   odam.nl         */
+/*   Updated: 2022/11/02 15:56:25 by fpurdom       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
