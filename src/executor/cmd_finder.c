@@ -6,7 +6,7 @@
 /*   By: fpurdom <fpurdom@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/06 14:17:19 by fpurdom       #+#    #+#                 */
-/*   Updated: 2022/10/28 15:12:08 by fpurdom       ########   odam.nl         */
+/*   Updated: 2022/11/02 15:34:09 by fpurdom       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,19 +37,21 @@ static void	permission_denied(char **to_free, char *cmd_file, char *command)
 	exit (126);
 }
 
-static char	**find_path(char **env, char *command)
+static char	**find_path(t_env *env, char *command)
 {
-	while (*env && ft_strncmp("PATH=", *env, 5))
-		env++;
-	if (!*env)
-	{
-		printf("minishell: %s: No such file or directory\n", command);
-		exit (127);
-	}
-	return (ft_split(*env, ':'));
+	char	*val;
+	char	**paths;
+
+	val = get_env(env, "PATH");
+	if (!val)
+		return (NULL);
+	paths = ft_split(val, ':');
+	if (!paths)
+		exit (ENOMEM);
+	return (paths);
 }
 
-char	*get_cmd_file(char *command, char **env)
+char	*get_cmd_file(char *command, t_env *env)
 {
 	char	**paths;
 	char	**to_free;
@@ -57,7 +59,7 @@ char	*get_cmd_file(char *command, char **env)
 
 	paths = find_path(env, command);
 	cmd_file = ft_strdup(command);
-	if (!paths || !cmd_file)
+	if (!cmd_file)
 		exit (ENOMEM);
 	to_free = paths;
 	while (access(cmd_file, F_OK) == -1 && *paths)

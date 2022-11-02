@@ -6,7 +6,7 @@
 /*   By: fpurdom <fpurdom@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/04 16:20:52 by fpurdom       #+#    #+#                 */
-/*   Updated: 2022/10/28 17:25:24 by fpurdom       ########   odam.nl         */
+/*   Updated: 2022/11/02 15:39:46 by fpurdom       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,13 @@ static int	has_path(char *command)
 	return (true);
 }
 
-void	exec_command(t_cmd *command, t_pipe *pipes, char **env)
+void	exec_command(t_cmd *command, t_pipe *pipes, t_env *env)
 {
 	char	*cmd_file;
 	int		fd;
 
 	if (cmd_is_builtin(command))
-		exit (0);
+		exit (g_code);
 	if (has_path(*command->command))
 		cmd_file = *command->command;
 	else
@@ -63,6 +63,7 @@ void	exec_command(t_cmd *command, t_pipe *pipes, char **env)
 		exit (2);
 	if (command->files)
 		redirect_io(command);
-	if (execve(cmd_file, command->command, env) == -1)
-		exit (2);
+	if (execve(cmd_file, command->command, make_envp(env)) == -1)
+		exit (3);
+	exit (0);
 }

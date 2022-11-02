@@ -6,7 +6,7 @@
 /*   By: fpurdom <fpurdom@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/22 16:29:32 by fpurdom       #+#    #+#                 */
-/*   Updated: 2022/10/28 17:51:44 by fpurdom       ########   odam.nl         */
+/*   Updated: 2022/11/02 15:47:03 by fpurdom       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 #include <stdio.h>
 #include <errno.h>
 
-static int	do_fork(t_cmd *command, t_pipe *pipes, char **env)
+static int	do_fork(t_cmd *command, t_pipe *pipes, t_env *env)
 {
 	pipes->i++;
 	pipes->pid[pipes->i] = fork();
@@ -54,23 +54,21 @@ static t_pipe	*init_pipe(int size)
 
 	pipes = (t_pipe *)malloc(1 * sizeof(t_pipe));
 	if (!pipes)
-		return (NULL);
+		exit (ENOMEM);
 	pipes->pid = (int *)malloc((size) * sizeof(int));
 	if (!pipes->pid)
-		return (NULL);
+		exit (ENOMEM);
 	pipes->in_fd = STDIN_FILENO;
 	pipes->i = -1;
 	return (pipes);
 }
 
-int	executor(t_parser *parser, char **env)
+int	executor(t_parser *parser, t_env *env)
 {
 	t_cmd		*command;
 	t_pipe		*pipes;
 
 	pipes = init_pipe(parser->count);
-	if (pipes == NULL)
-		return (ENOMEM);
 	command = parser->cmds;
 	while (command)
 	{
@@ -80,7 +78,7 @@ int	executor(t_parser *parser, char **env)
 				return (2);
 		}
 		else if (!ft_strncmp(*command->command, "exit", 5) && command->frst_cmd)
-			ft_exit(command);
+			return (ft_exit(command));
 		if (do_fork(command, pipes, env))
 			return (2);
 		if (!command->lst_cmd && close(pipes->tube[1]))
