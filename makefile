@@ -19,6 +19,7 @@ FILES_SRCS =	main.c \
 				parser_utils.c \
 				parse_io.c \
 				parse_io_utils.c \
+				parse_hd_dlm.c \
 				parse_cmd.c \
 				parse_cmd_utils.c \
 				parse_str.c \
