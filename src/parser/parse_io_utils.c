@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   parse_io_utils.c                                   :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: gwinnink <gwinnink@student.codam.nl>         +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2022/10/18 12:38:37 by gwinnink      #+#    #+#                 */
-/*   Updated: 2022/10/20 16:41:08 by fpurdom       ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   parse_io_utils.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gwinnink <gwinnink@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/18 12:38:37 by gwinnink          #+#    #+#             */
+/*   Updated: 2022/11/02 18:04:31 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ t_file	*io_new(int iden)
 	ret->next = NULL;
 	ret->io = false;
 	ret->alt = false;
+	ret->hd_quotes = false;
 	if (iden == GREAT || iden == GREATGREAT)
 		ret->io = true;
 	if (iden == GREATGREAT || iden == LESSLESS)
