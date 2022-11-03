@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   main.c                                             :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: gwinnink <gwinnink@student.codam.nl>         +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2022/07/13 15:20:49 by gwinnink      #+#    #+#                 */
-/*   Updated: 2022/11/02 15:58:17 by fpurdom       ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gwinnink <gwinnink@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/07/13 15:20:49 by gwinnink          #+#    #+#             */
+/*   Updated: 2022/11/03 11:15:21 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,6 @@
 #include "parser.h"
 #include "environment.h"
 #include "executor.h"
-
-int	g_code = 0;
 
 /*static void	check_exit(void)
 {
@@ -42,7 +40,7 @@ int	main(int argc, char **argv, char **envp)
 	(void)argc;
 	(void)argv;
 	env = env_cpy(envp);
-	new_envp = make_envp(env);
+	// new_envp = make_envp(env);
 	//atexit(check_exit);
 	while (1)
 	{
@@ -52,11 +50,6 @@ int	main(int argc, char **argv, char **envp)
 		if (line[0] == '\0')
 			continue ;
 		add_history(line);
-		if (!ft_strncmp(line, "exit", 5))
-		{
-			printf("exit\n");
-			exit(0);
-		}
 		lxr = lexer(line);
 		if (!lxr)
 			continue ;

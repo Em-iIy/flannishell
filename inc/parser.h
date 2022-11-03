@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   parser.h                                           :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: gwinnink <gwinnink@student.codam.nl>         +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2022/09/22 13:16:36 by gwinnink      #+#    #+#                 */
-/*   Updated: 2022/10/28 14:49:14 by fpurdom       ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   parser.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gwinnink <gwinnink@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/22 13:16:36 by gwinnink          #+#    #+#             */
+/*   Updated: 2022/11/02 18:04:13 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef struct s_file
 	char			*file_name;
 	bool			io;
 	bool			alt;
+	bool			hd_quotes;
 }	t_file;
 
 typedef struct s_cmd
