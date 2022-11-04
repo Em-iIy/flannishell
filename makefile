@@ -9,6 +9,8 @@ FILES_SRCS =	main.c \
 				io_redirector.c \
 				ft_echo.c \
 				ft_exit.c \
+				ft_env.c \
+				ft_pwd.c \
 				lexer.c \
 				lexer_token.c \
 				lexer_token_utils.c \
