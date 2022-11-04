@@ -6,7 +6,7 @@
 /*   By: gwinnink <gwinnink@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 11:32:18 by gwinnink          #+#    #+#             */
-/*   Updated: 2022/11/02 19:52:04 by gwinnink         ###   ########.fr       */
+/*   Updated: 2022/11/03 12:36:44 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,15 +49,9 @@ t_file	*parse_io(t_env *env, t_token **head)
 	}
 	*head = (*head)->next;
 	if (temp_head->iden == LESSLESS)
-	{
 		temp = parse_hd_dlm(head, &hd_quotes);
-		printf("head->content = %s\n", (*head)->content);
-	}
 	else
-	{
 		temp = parse_str(env, head);
-		printf("head->content = %s\n", (*head)->content);
-	}
 	if (!temp)
 		return (NULL);
 	ret = file_init(temp_head->iden);
