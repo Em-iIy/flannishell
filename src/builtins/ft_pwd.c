@@ -6,11 +6,12 @@
 /*   By: gwinnink <gwinnink@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 14:39:44 by gwinnink          #+#    #+#             */
-/*   Updated: 2022/11/04 16:15:11 by gwinnink         ###   ########.fr       */
+/*   Updated: 2022/11/04 16:58:45 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <unistd.h>
 #include "builtins.h"
 
