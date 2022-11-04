@@ -6,7 +6,7 @@
 /*   By: gwinnink <gwinnink@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 15:20:49 by gwinnink          #+#    #+#             */
-/*   Updated: 2022/11/03 11:15:21 by gwinnink         ###   ########.fr       */
+/*   Updated: 2022/11/03 18:20:06 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ int	main(int argc, char **argv, char **envp)
 	(void)argc;
 	(void)argv;
 	env = env_cpy(envp);
+	env_shlvl_inc(&env);
 	// new_envp = make_envp(env);
 	//atexit(check_exit);
 	while (1)
