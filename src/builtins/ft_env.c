@@ -1,22 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtins.h                                         :+:      :+:    :+:   */
+/*   ft_env.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gwinnink <gwinnink@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/20 14:10:59 by fpurdom           #+#    #+#             */
-/*   Updated: 2022/11/04 13:09:30 by gwinnink         ###   ########.fr       */
+/*   Created: 2022/11/04 13:01:50 by gwinnink          #+#    #+#             */
+/*   Updated: 2022/11/04 13:10:37 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BUILTINS_H
-# define BUILTINS_H
+#include <stdio.h>
+#include "environment.h"
 
-# include "parser.h"
-
-int	ft_echo(char **strs);
-int	ft_exit(t_cmd *command);
-int	ft_env(t_env *env);
-
-#endif
+int	ft_env(t_env *env)
+{
+	while (env)
+	{
+		printf("minishell: %s\n", env->str);
+		env = env->next;
+	}
+	g_code = 0;
+	return (1);
+}
