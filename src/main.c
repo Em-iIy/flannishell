@@ -6,7 +6,7 @@
 /*   By: gwinnink <gwinnink@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/13 15:20:49 by gwinnink      #+#    #+#                 */
-/*   Updated: 2022/11/02 15:58:17 by fpurdom       ########   odam.nl         */
+/*   Updated: 2022/11/02 17:33:24 by fpurdom       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,6 @@ int	g_code = 0;
 	system("leaks --quiet minishell");
 }*/
 
-int g_code = 0;
-
 int	main(int argc, char **argv, char **envp)
 {
 	char		*line;
@@ -52,18 +50,13 @@ int	main(int argc, char **argv, char **envp)
 		if (line[0] == '\0')
 			continue ;
 		add_history(line);
-		if (!ft_strncmp(line, "exit", 5))
-		{
-			printf("exit\n");
-			exit(0);
-		}
 		lxr = lexer(line);
 		if (!lxr)
 			continue ;
 		prsr = parser(env, &lxr);
 		if (prsr->count != 0)
 			g_code = executor(prsr, env);
-		if (g_code == 2 || g_code == ENOMEM)
+		if (g_code == 2)
 			perror("minishell");
 		free_lexer(&lxr);
 		free_parser(prsr);

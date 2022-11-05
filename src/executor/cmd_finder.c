@@ -6,7 +6,7 @@
 /*   By: fpurdom <fpurdom@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/06 14:17:19 by fpurdom       #+#    #+#                 */
-/*   Updated: 2022/11/02 15:34:09 by fpurdom       ########   odam.nl         */
+/*   Updated: 2022/11/02 17:36:55 by fpurdom       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,10 @@ static char	**find_path(t_env *env, char *command)
 
 	val = get_env(env, "PATH");
 	if (!val)
-		return (NULL);
+	{
+		printf("minishell: %s: No such file or directory\n", command);
+		exit (127);
+	}
 	paths = ft_split(val, ':');
 	if (!paths)
 		exit (ENOMEM);

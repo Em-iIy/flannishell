@@ -6,7 +6,7 @@
 /*   By: fpurdom <fpurdom@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/22 16:29:32 by fpurdom       #+#    #+#                 */
-/*   Updated: 2022/11/02 15:47:03 by fpurdom       ########   odam.nl         */
+/*   Updated: 2022/11/05 13:36:11 by fpurdom       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "executor_utils.h"
 #include "executor.h"
 #include "builtins.h"
+#include "heredoc.h"
 #include <unistd.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -79,6 +80,8 @@ int	executor(t_parser *parser, t_env *env)
 		}
 		else if (!ft_strncmp(*command->command, "exit", 5) && command->frst_cmd)
 			return (ft_exit(command));
+		if (check_heredoc(command->files))
+			return (2);
 		if (do_fork(command, pipes, env))
 			return (2);
 		if (!command->lst_cmd && close(pipes->tube[1]))
@@ -88,5 +91,7 @@ int	executor(t_parser *parser, t_env *env)
 		pipes->in_fd = pipes->tube[0];
 		command = command->next;
 	}
-	return (wait_forks(pipes));
+	if (wait_forks(pipes))
+		return (2);
+	return (rm_heredoc_files(parser->cmds));
 }
