@@ -6,7 +6,7 @@
 /*   By: fpurdom <fpurdom@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/26 18:11:46 by fpurdom       #+#    #+#                 */
-/*   Updated: 2022/10/27 18:49:32 by fpurdom       ########   odam.nl         */
+/*   Updated: 2022/11/02 19:08:52 by fpurdom       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 #include <stdio.h>
 #include <fcntl.h>
 #include <errno.h>
+
+/*depricated file*/
 
 void	exec_file_contents(char *file, int fd, char **envp)
 {

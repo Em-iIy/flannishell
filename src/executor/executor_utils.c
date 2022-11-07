@@ -6,14 +6,13 @@
 /*   By: fpurdom <fpurdom@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/04 16:20:52 by fpurdom       #+#    #+#                 */
-/*   Updated: 2022/11/02 15:39:46 by fpurdom       ########   odam.nl         */
+/*   Updated: 2022/11/03 14:39:04 by fpurdom       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "cmd_finder.h"
 #include "io_redirector.h"
-#include "exec_file_cont.h"
 #include <unistd.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -47,12 +46,6 @@ void	exec_command(t_cmd *command, t_pipe *pipes, t_env *env)
 	char	*cmd_file;
 	int		fd;
 
-	if (cmd_is_builtin(command))
-		exit (g_code);
-	if (has_path(*command->command))
-		cmd_file = *command->command;
-	else
-		cmd_file = get_cmd_file(*command->command, env);
 	if (!command->frst_cmd && dup2(pipes->in_fd, STDIN_FILENO) < 0)
 		exit (2);
 	if (!command->lst_cmd && close(pipes->tube[0]))
@@ -63,6 +56,12 @@ void	exec_command(t_cmd *command, t_pipe *pipes, t_env *env)
 		exit (2);
 	if (command->files)
 		redirect_io(command);
+	if (cmd_is_builtin(command))
+		exit (g_code);
+	if (has_path(*command->command))
+		cmd_file = *command->command;
+	else
+		cmd_file = get_cmd_file(*command->command, env);
 	if (execve(cmd_file, command->command, make_envp(env)) == -1)
 		exit (3);
 	exit (0);

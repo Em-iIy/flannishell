@@ -62,7 +62,7 @@ int	ft_exit(t_cmd *command)
 	if (ft_check_valid_atoi(&code, command->command[1]) == false)
 	{
 		// *C*
-		exit_error_msg(command->command[1], " numeric argument required\n");
+		exit_error_msg(command->command[1], ": numeric argument required\n");
 		exit (255);
 	}
 	if (command->command[2])
