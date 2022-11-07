@@ -6,7 +6,7 @@
 /*   By: fpurdom <fpurdom@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/11/05 12:24:19 by fpurdom       #+#    #+#                 */
-/*   Updated: 2022/11/07 15:53:00 by fpurdom       ########   odam.nl         */
+/*   Updated: 2022/11/07 17:14:27 by fpurdom       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,10 @@ static int	open_heredoc(t_file *file, char *hd_name)
 		line = readline(">");
 		if (!line)
 			exit (0);
-		if (line[0] == '\0')
-			continue ;
 		if (!ft_strncmp(file->file_name, line, ft_strlen(line) + 1))
 			break ;
-		write(fd, line, ft_strlen(line));
-		write(fd, "\n", 1);
+		ft_putstr_fd(line, fd);
+		ft_putchar_fd('\n', fd);
 		free(line);
 	}
 	free(line);
@@ -80,11 +78,8 @@ int	rm_heredoc_files(t_cmd *commands)
 		files = commands->files;
 		while (files)
 		{
-			if (files->alt && !files->io)
-			{
-				if (unlink(files->file_name))
-					return (2);
-			}
+			if (files->alt && !files->io && unlink(files->file_name))
+				return (2);
 			files = files->next;
 		}
 		commands = commands->next;

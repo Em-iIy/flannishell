@@ -50,6 +50,7 @@ vpath %.c $(DIR_SRCS)parser/ $(DIR_OBJS)
 vpath %.c $(DIR_SRCS)executor/ $(DIR_OBJS)
 vpath %.c $(DIR_SRCS)builtins/ $(DIR_OBJS)
 vpath %.c $(DIR_SRCS)environment/ $(DIR_OBJS)
+vpath %.c $(DIR_SRCS)heredoc/ $(DIR_OBJS)
 
 
 # ----------------------------------------Sources
