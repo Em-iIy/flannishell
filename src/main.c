@@ -6,7 +6,7 @@
 /*   By: gwinnink <gwinnink@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/13 15:20:49 by gwinnink      #+#    #+#                 */
-/*   Updated: 2022/11/02 17:33:24 by fpurdom       ########   odam.nl         */
+/*   Updated: 2022/11/07 15:15:48 by fpurdom       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@
 {
 	system("leaks --quiet minishell");
 }*/
+
+int	g_code = 0;
 
 int	main(int argc, char **argv, char **envp)
 {

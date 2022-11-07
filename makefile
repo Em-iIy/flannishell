@@ -43,7 +43,6 @@ FILES_OBJS = $(FILES_SRCS:.c=.o)
 DIR_SRCS = ./src/
 DIR_OBJS = ./obj/
 DIR_LIBFT = ./src/libft
-DIR_GNL = ./src/libft/get_next_line
 
 vpath %.c $(DIR_SRCS) $(DIR_OBJS)
 vpath %.c $(DIR_SRCS)lexer/ $(DIR_OBJS)
@@ -62,7 +61,7 @@ OBJS = $(FILES_OBJS:%=$(DIR_OBJS)%)
 # ----------------------------------------Flags
 CC = gcc
 # CFLAGS = -Wall -Wextra -Werror
-INC = -Iinc -I$(DIR_LIBFT) -I$(DIR_GNL)
+INC = -Iinc -I$(DIR_LIBFT)
 
 # ----------------------------------------Libraries
 LIBFT = $(DIR_LIBFT)/libft.a
@@ -78,6 +77,7 @@ all: $(NAME)
 
 $(NAME): $(DIR_OBJS) $(OBJS) $(LIBFT)
 	$(CC) $(CFLAGS) $(OBJS) -o $(NAME) -L $(HOME)/.brew/opt/readline/lib -lreadline $(INC) $(LIBFT)
+	mkdir -p hd_files
 
 $(DIR_OBJS)%.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@  -I $(HOME)/.brew/opt/readline/include $(INC)
@@ -94,11 +94,13 @@ address:
 
 # ----------------------------------------Cleaning
 clean:
+	make -C $(DIR_LIBFT) clean
 	rm -f $(OBJS)
 
 fclean: clean
 	make -C $(DIR_LIBFT) fclean
 	rm -f $(NAME)
+	rm -rf hd_files
 
 re: fclean all
 

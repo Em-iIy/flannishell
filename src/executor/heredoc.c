@@ -6,7 +6,7 @@
 /*   By: fpurdom <fpurdom@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/11/05 12:24:19 by fpurdom       #+#    #+#                 */
-/*   Updated: 2022/11/05 13:38:47 by fpurdom       ########   odam.nl         */
+/*   Updated: 2022/11/07 15:53:00 by fpurdom       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	check_heredoc(t_file *files)
 	{
 		if (files->alt && !files->io)
 		{
-			hd_name = ft_strjoin("heredoc_", files->file_name);
+			hd_name = ft_strjoin("hd_files/", files->file_name);
 			if (!hd_name)
 				exit (ENOMEM);
 			if (open_heredoc(files, hd_name))
@@ -81,8 +81,10 @@ int	rm_heredoc_files(t_cmd *commands)
 		while (files)
 		{
 			if (files->alt && !files->io)
+			{
 				if (unlink(files->file_name))
 					return (2);
+			}
 			files = files->next;
 		}
 		commands = commands->next;

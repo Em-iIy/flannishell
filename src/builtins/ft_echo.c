@@ -6,7 +6,7 @@
 /*   By: fpurdom <fpurdom@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/20 14:08:02 by fpurdom       #+#    #+#                 */
-/*   Updated: 2022/11/03 14:56:15 by fpurdom       ########   odam.nl         */
+/*   Updated: 2022/11/07 17:03:21 by fpurdom       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,13 @@ int	ft_echo(char **strs)
 	bool	n_option;
 
 	n_option = false;
-	while (!ft_strncmp(*strs, "-n", 3))
+	while (*strs && !ft_strncmp(*strs, "-n", 3))
 	{
 		n_option = true;
 		strs++;
 	}
+	while (!**strs)
+		strs++;
 	while (*strs)
 	{
 		ft_putstr_fd(*strs, 1);
