@@ -8,6 +8,7 @@ FILES_SRCS =	main.c \
 				cmd_finder.c \
 				io_redirector.c \
 				heredoc.c \
+				hd_utils.c \
 				ft_echo.c \
 				ft_exit.c \
 				ft_env.c \

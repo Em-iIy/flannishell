@@ -6,45 +6,17 @@
 /*   By: fpurdom <fpurdom@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/11/05 12:24:19 by fpurdom       #+#    #+#                 */
-/*   Updated: 2022/11/07 17:14:27 by fpurdom       ########   odam.nl         */
+/*   Updated: 2022/11/07 19:46:49 by fpurdom       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "hd_utils.h"
 #include "libft.h"
 #include <errno.h>
 #include <fcntl.h>
-#include <stdio.h>
-#include <readline/readline.h>
 #include <unistd.h>
 
-static int	open_heredoc(t_file *file, char *hd_name)
-{
-	int		fd;
-	char	*line;
-
-	line = NULL;
-	fd = open(hd_name, O_CREAT | O_RDWR | O_TRUNC, 0666);
-	if (fd < 0)
-		return (1);
-	while (1)
-	{
-		line = readline(">");
-		if (!line)
-			exit (0);
-		if (!ft_strncmp(file->file_name, line, ft_strlen(line) + 1))
-			break ;
-		ft_putstr_fd(line, fd);
-		ft_putchar_fd('\n', fd);
-		free(line);
-	}
-	free(line);
-	if (close(fd))
-		return (1);
-	return (0);
-}
-
-int	check_heredoc(t_file *files)
+int	check_heredoc(t_file *files, t_env *env)
 {
 	int		fd;
 	char	*hd_name;
@@ -56,7 +28,7 @@ int	check_heredoc(t_file *files)
 			hd_name = ft_strjoin("hd_files/", files->file_name);
 			if (!hd_name)
 				exit (ENOMEM);
-			if (open_heredoc(files, hd_name))
+			if (open_heredoc(files, hd_name, env))
 			{
 				free(hd_name);
 				return (1);

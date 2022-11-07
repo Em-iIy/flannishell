@@ -6,7 +6,7 @@
 /*   By: fpurdom <fpurdom@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/20 14:08:02 by fpurdom       #+#    #+#                 */
-/*   Updated: 2022/11/07 17:03:21 by fpurdom       ########   odam.nl         */
+/*   Updated: 2022/11/07 18:50:35 by fpurdom       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,10 @@ int	ft_echo(char **strs)
 		n_option = true;
 		strs++;
 	}
-	while (!**strs)
-		strs++;
 	while (*strs)
 	{
 		ft_putstr_fd(*strs, 1);
-		if (*(strs + 1))
+		if (*(strs + 1) && **strs)
 			ft_putchar_fd(' ', 1);
 		strs++;
 	}
