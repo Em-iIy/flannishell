@@ -44,6 +44,7 @@ static int	wait_forks(t_pipe *pipes)
 		i++;
 	}
 	free(pipes->pid);
+	free(pipes);
 	if (WIFEXITED(status))
 		return (WEXITSTATUS(status));
 	return (0);

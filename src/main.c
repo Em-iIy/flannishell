@@ -22,8 +22,6 @@
 #include "environment.h"
 #include "executor.h"
 
-int	g_code = 0;
-
 /*static void	check_exit(void)
 {
 	system("leaks --quiet minishell");
@@ -40,7 +38,8 @@ int	main(int argc, char **argv, char **envp)
 	(void)argc;
 	(void)argv;
 	env = env_cpy(envp);
-	new_envp = make_envp(env);
+	env_shlvl_inc(&env);
+	// new_envp = make_envp(env);
 	//atexit(check_exit);
 	while (1)
 	{

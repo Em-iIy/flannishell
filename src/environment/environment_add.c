@@ -6,7 +6,7 @@
 /*   By: gwinnink <gwinnink@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 11:55:58 by gwinnink          #+#    #+#             */
-/*   Updated: 2022/10/27 17:39:07 by gwinnink         ###   ########.fr       */
+/*   Updated: 2022/11/03 18:26:05 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 void	add_env(t_env **env, char *key, char *val)
 {
 	t_env	*target;
-	t_env	*new;
+	char	*temp;
 
 	if (!key || !val)
 		return ;
@@ -31,5 +31,9 @@ void	add_env(t_env **env, char *key, char *val)
 		target->str = ft_strjointhree(target->key, "=", target->val);
 	}
 	else
-		env_add_front(env, env_new(ft_strjointhree(new->key, "=", new->val)));
+	{
+		temp = ft_strjointhree(key, "=", val);
+		env_add_front(env, env_new(temp));
+		free(temp);
+	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_token.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gwinnink <gwinnink@student.codam.nl>       +#+  +:+       +#+        */
+/*   By: gwinnink <gwinnink@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 14:22:49 by gwinnink          #+#    #+#             */
-/*   Updated: 2022/10/18 20:47:58 by gwinnink         ###   ########.fr       */
+/*   Updated: 2022/11/03 11:43:57 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,8 @@ static void	check_end(t_lexer *lexer, t_token *token)
 		if (tok_iden(&lexer->line[token->end_pos - 1]) != DEF)
 			end = &lexer->line[token->end_pos - 1];
 	end_iden = tok_iden(end);
-	if (end_iden == EXPAND || end_iden == QUOTE || end_iden == DQUOTE)
+	if (end_iden == EXPAND || end_iden == QUOTE || \
+		end_iden == DQUOTE || end_iden == DEF)
 		return ;
 	if (lexer->dquote == 1 || lexer->quote == 1)
 		return ;

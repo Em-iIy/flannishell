@@ -46,7 +46,7 @@ static char	**find_path(t_env *env, char *command)
 	if (!val)
 	{
 		printf("minishell: %s: No such file or directory\n", command);
-		exit (127);
+		exit(127);
 	}
 	paths = ft_split(val, ':');
 	if (!paths)

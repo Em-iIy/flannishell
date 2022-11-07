@@ -10,6 +10,8 @@ FILES_SRCS =	main.c \
 				heredoc.c \
 				ft_echo.c \
 				ft_exit.c \
+				ft_env.c \
+				ft_pwd.c \
 				lexer.c \
 				lexer_token.c \
 				lexer_token_utils.c \
@@ -20,6 +22,7 @@ FILES_SRCS =	main.c \
 				parser_utils.c \
 				parse_io.c \
 				parse_io_utils.c \
+				parse_hd_dlm.c \
 				parse_cmd.c \
 				parse_cmd_utils.c \
 				parse_str.c \
@@ -31,6 +34,7 @@ FILES_SRCS =	main.c \
 				environment_get.c \
 				environment_add.c \
 				environment_unset.c \
+				environment_shlvl.c \
 				environment_utils.c \
 
 FILES_OBJS = $(FILES_SRCS:.c=.o)
