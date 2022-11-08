@@ -6,7 +6,7 @@
 /*   By: fpurdom <fpurdom@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/11/05 12:24:19 by fpurdom       #+#    #+#                 */
-/*   Updated: 2022/11/08 13:16:40 by fpurdom       ########   odam.nl         */
+/*   Updated: 2022/11/08 13:27:29 by fpurdom       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,11 @@
 
 int	check_heredoc(t_file *files, t_env *env)
 {
-	int		i;
-	int		fd;
-	char	*hd_name;
-	char	*file_n;
+	static int	i = 0;
+	int			fd;
+	char		*hd_name;
+	char		*file_n;
 
-	i = 0;
 	while (files)
 	{
 		if (files->alt && !files->io)
