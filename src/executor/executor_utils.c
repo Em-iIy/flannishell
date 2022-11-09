@@ -6,7 +6,7 @@
 /*   By: fpurdom <fpurdom@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/04 16:20:52 by fpurdom       #+#    #+#                 */
-/*   Updated: 2022/11/03 14:39:04 by fpurdom       ########   odam.nl         */
+/*   Updated: 2022/11/09 13:02:50 by fpurdom       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	exec_command(t_cmd *command, t_pipe *pipes, t_env *env)
 		exit (2);
 	if (command->files)
 		redirect_io(command);
-	if (cmd_is_builtin(command))
+	if (cmd_is_builtin(command, env))
 		exit (g_code);
 	if (has_path(*command->command))
 		cmd_file = *command->command;

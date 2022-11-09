@@ -6,7 +6,7 @@
 /*   By: fpurdom <fpurdom@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/22 16:29:32 by fpurdom       #+#    #+#                 */
-/*   Updated: 2022/11/07 19:00:56 by fpurdom       ########   odam.nl         */
+/*   Updated: 2022/11/09 13:52:05 by fpurdom       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,17 @@ static t_pipe	*init_pipe(int size)
 	return (pipes);
 }
 
+static int	dont_fork(t_cmd *command, t_env *env)
+{
+	if (!(command->frst_cmd && command->lst_cmd))
+		return (0);
+	if (!ft_strncmp(*command->command, "exit", 5))
+		return (ft_exit(command));
+	if (!ft_strncmp(*command->command, "cd", 3))
+		return (ft_cd(env, command->command[1]));
+	return (0);
+}
+
 int	executor(t_parser *parser, t_env *env)
 {
 	t_cmd		*command;
@@ -81,8 +92,8 @@ int	executor(t_parser *parser, t_env *env)
 			if (pipe(pipes->tube))
 				return (2);
 		}
-		else if (!ft_strncmp(*command->command, "exit", 5) && command->frst_cmd)
-			return (ft_exit(command));
+		else if (dont_fork(command, env))
+			return (g_code);
 		if (check_heredoc(command->files, env) || do_fork(command, pipes, env))
 			return (2);
 		if (!command->lst_cmd && close(pipes->tube[1]))

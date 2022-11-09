@@ -6,7 +6,7 @@
 /*   By: fpurdom <fpurdom@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/11/05 12:24:19 by fpurdom       #+#    #+#                 */
-/*   Updated: 2022/11/08 13:27:29 by fpurdom       ########   odam.nl         */
+/*   Updated: 2022/11/09 15:54:01 by fpurdom       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	check_heredoc(t_file *files, t_env *env)
 		if (files->alt && !files->io)
 		{
 			file_n = ft_itoa(i);
-			hd_name = ft_strjoin("hd_files/", file_n);
+			hd_name = ft_strjoin(".hd_file_", file_n);
 			free(file_n);
 			if (open_heredoc(files, hd_name, env))
 			{

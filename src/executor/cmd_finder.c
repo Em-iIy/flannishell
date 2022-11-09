@@ -6,7 +6,7 @@
 /*   By: fpurdom <fpurdom@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/06 14:17:19 by fpurdom       #+#    #+#                 */
-/*   Updated: 2022/11/02 17:36:55 by fpurdom       ########   odam.nl         */
+/*   Updated: 2022/11/09 13:16:26 by fpurdom       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,23 +79,23 @@ char	*get_cmd_file(char *command, t_env *env)
 	return (cmd_file);
 }
 
-int	cmd_is_builtin(t_cmd *command)
+int	cmd_is_builtin(t_cmd *command, t_env *env)
 {
 	if (!ft_strncmp(*command->command, "echo", 5))
 		return (ft_echo(command->command + 1));
 	if (!ft_strncmp(*command->command, "exit", 5))
 		return (ft_exit(command));
-	return (0);
-	/*else if (!ft_strncmp(*command->command, "cd", 2))
-		return (ft_cd());
-	else if (!ft_strncmp(*command->command, "pwd", 3))
+	if (!ft_strncmp(*command->command, "cd", 3))
+		return (ft_cd(env, command->command[1]));
+	if (!ft_strncmp(*command->command, "pwd", 4))
 		return (ft_pwd());
-	else if (!ft_strncmp(*command->command, "export", 6))
+	if (!ft_strncmp(*command->command, "env", 4))
+		return (ft_env(env));
+	return (0);
+	/*else if (!ft_strncmp(*command->command, "export", 7))
 		return (ft_export());
-	else if (!ft_strncmp(*command->command, "unset", 5))
+	else if (!ft_strncmp(*command->command, "unset", 6))
 		return (ft_unset());
-	else if (!ft_strncmp(*command->command, "env", 3))
-		return (ft_env());
 	else
 		return (0);*/
 }

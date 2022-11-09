@@ -13,6 +13,7 @@ FILES_SRCS =	main.c \
 				ft_exit.c \
 				ft_env.c \
 				ft_pwd.c \
+				ft_cd.c \
 				lexer.c \
 				lexer_token.c \
 				lexer_token_utils.c \
@@ -79,7 +80,6 @@ all: $(NAME)
 
 $(NAME): $(DIR_OBJS) $(OBJS) $(LIBFT)
 	$(CC) $(CFLAGS) $(OBJS) -o $(NAME) -L $(HOME)/.brew/opt/readline/lib -lreadline $(INC) $(LIBFT)
-	mkdir -p hd_files
 
 $(DIR_OBJS)%.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@  -I $(HOME)/.brew/opt/readline/include $(INC)
