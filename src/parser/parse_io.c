@@ -6,7 +6,7 @@
 /*   By: gwinnink <gwinnink@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 11:32:18 by gwinnink          #+#    #+#             */
-/*   Updated: 2022/11/03 12:36:44 by gwinnink         ###   ########.fr       */
+/*   Updated: 2022/11/09 11:42:10 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ t_file	*parse_io(t_env *env, t_token **head)
 	bool	hd_quotes;
 
 	temp_head = *head;
+	hd_quotes = false;
 	if ((*head)->next == NULL)
 	{
 		printf("minishell: syntax error near unexpected token `newline'\n");
@@ -55,6 +56,7 @@ t_file	*parse_io(t_env *env, t_token **head)
 	if (!temp)
 		return (NULL);
 	ret = file_init(temp_head->iden);
+	ret->hd_quotes = hd_quotes;
 	ret->file_name = temp;
 	return (ret);
 }
