@@ -6,7 +6,7 @@
 /*   By: gwinnink <gwinnink@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 13:01:50 by gwinnink          #+#    #+#             */
-/*   Updated: 2022/11/04 13:10:37 by gwinnink         ###   ########.fr       */
+/*   Updated: 2022/11/09 16:06:40 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	ft_env(t_env *env)
 {
 	while (env)
 	{
-		printf("minishell: %s\n", env->str);
+		printf("%s\n", env->str);
 		env = env->next;
 	}
 	g_code = 0;

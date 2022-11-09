@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   executor.c                                         :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: fpurdom <fpurdom@student.codam.nl>           +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2022/09/22 16:29:32 by fpurdom       #+#    #+#                 */
-/*   Updated: 2022/11/09 13:52:05 by fpurdom       ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   executor.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gwinnink <gwinnink@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/22 16:29:32 by fpurdom           #+#    #+#             */
+/*   Updated: 2022/11/09 16:04:12 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,8 @@ static int	dont_fork(t_cmd *command, t_env *env)
 		return (ft_exit(command));
 	if (!ft_strncmp(*command->command, "cd", 3))
 		return (ft_cd(env, command->command[1]));
+	if (!ft_strncmp(*command->command, "unset", 5))
+		return (ft_unset(env, command->command));
 	return (0);
 }
 

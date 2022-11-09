@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   cmd_finder.c                                       :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: fpurdom <fpurdom@student.codam.nl>           +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2022/10/06 14:17:19 by fpurdom       #+#    #+#                 */
-/*   Updated: 2022/11/09 13:16:26 by fpurdom       ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   cmd_finder.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gwinnink <gwinnink@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/06 14:17:19 by fpurdom           #+#    #+#             */
+/*   Updated: 2022/11/09 16:01:27 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,11 +91,11 @@ int	cmd_is_builtin(t_cmd *command, t_env *env)
 		return (ft_pwd());
 	if (!ft_strncmp(*command->command, "env", 4))
 		return (ft_env(env));
+	if (!ft_strncmp(*command->command, "unset", 6))
+		return (ft_unset(env, command->command));
 	return (0);
 	/*else if (!ft_strncmp(*command->command, "export", 7))
 		return (ft_export());
-	else if (!ft_strncmp(*command->command, "unset", 6))
-		return (ft_unset());
 	else
 		return (0);*/
 }

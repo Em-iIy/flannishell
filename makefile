@@ -14,6 +14,7 @@ FILES_SRCS =	main.c \
 				ft_env.c \
 				ft_pwd.c \
 				ft_cd.c \
+				ft_unset.c \
 				lexer.c \
 				lexer_token.c \
 				lexer_token_utils.c \
