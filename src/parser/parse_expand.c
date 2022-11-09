@@ -6,7 +6,7 @@
 /*   By: gwinnink <gwinnink@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 16:54:32 by gwinnink          #+#    #+#             */
-/*   Updated: 2022/11/04 12:39:42 by gwinnink         ###   ########.fr       */
+/*   Updated: 2022/11/09 16:03:07 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ char	*parser_expand(t_env *env, char *str)
 	temp = parser_expand_g_code(str);
 	if (temp)
 		return (temp);
-	while (str[i] && ft_isalnum(str[i]))
+	while (str[i] && (str[i] == '_' || ft_isalnum(str[i])))
 		i++;
 	temp = ft_substr(str, 0, i);
 	ret = ft_strjoin(get_env(env, temp), &str[i]);
