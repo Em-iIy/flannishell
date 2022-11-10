@@ -3,10 +3,10 @@
 /*                                                        ::::::::            */
 /*   main.c                                             :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: gwinnink <gwinnink@student.codam.nl>         +#+                     */
+/*   By: gwinnink <gwinnink@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/13 15:20:49 by gwinnink      #+#    #+#                 */
-/*   Updated: 2022/11/10 15:09:17 by fpurdom       ########   odam.nl         */
+/*   Updated: 2022/11/10 18:49:33 by fpurdom       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 #include "libft.h"
 #include "lexer.h"
 #include "parser.h"
+#include "builtins.h"
 #include "environment.h"
 #include "executor.h"
 #include "signals.h"
@@ -45,7 +46,10 @@ int	main(int argc, char **argv, char **envp)
 	{
 		line = readline("minishell>");
 		if (!line)
-			return (0);
+		{
+			printf("exit\n");
+			exit(g_code);
+		}
 		if (line[0] == '\0')
 			continue ;
 		add_history(line);
@@ -54,7 +58,7 @@ int	main(int argc, char **argv, char **envp)
 			continue ;
 		prsr = parser(env, &lxr);
 		if (prsr->count != 0)
-			g_code = executor(prsr, env);
+			g_code = executor(prsr, &env);
 		if (g_code == 2)
 			perror("minishell");
 		free_lexer(&lxr);

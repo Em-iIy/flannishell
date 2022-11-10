@@ -6,7 +6,7 @@
 /*   By: gwinnink <gwinnink@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 12:48:40 by gwinnink          #+#    #+#             */
-/*   Updated: 2022/10/27 19:14:37 by gwinnink         ###   ########.fr       */
+/*   Updated: 2022/11/10 18:31:51 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,23 +16,6 @@
 #include "parse_io_utils.h"
 #include "parser_utils.h"
 #include "parser.h"
-
-static char	*add_cmd(char *cmds, char *new)
-{
-	char	*ret;
-	char	*temp;
-
-	temp = ft_strjoin(cmds, " ");
-	if (!temp)
-		return (NULL);
-	free(cmds);
-	ret = ft_strjoin(temp, new);
-	if (!ret)
-		return (NULL);
-	free(temp);
-	free(new);
-	return (ret);
-}
 
 static int	check_io_iden(int iden)
 {
@@ -55,6 +38,15 @@ static void	*free_n_ret_null(void *ptr)
 	return (NULL);
 }
 
+static void	env_add_n_free(t_env *env, t_token **head, t_env **env_temp)
+{
+	char	*temp;
+
+	temp = parse_str(env, head);
+	env_add_front(env_temp, env_new(temp));
+	free(temp);
+}
+
 t_cmd	*parse_cmd(t_env *env, t_token **head)
 {
 	t_cmd	*ret;
@@ -73,7 +65,7 @@ t_cmd	*parse_cmd(t_env *env, t_token **head)
 			io_add_back(&ret->files, io_temp);
 		}
 		else if (check_valid_str_iden((*head)->iden, (*head)->content))
-			env_add_front(&env_temp, env_new(parse_str(env, head)));
+			env_add_n_free(env, head, &env_temp);
 		*head = (*head)->next;
 	}
 	ret->command = make_envp(env_temp);

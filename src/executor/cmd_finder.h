@@ -6,7 +6,7 @@
 /*   By: gwinnink <gwinnink@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/06 14:20:24 by fpurdom       #+#    #+#                 */
-/*   Updated: 2022/11/10 12:20:19 by fpurdom       ########   odam.nl         */
+/*   Updated: 2022/11/10 18:49:15 by fpurdom       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,6 @@
 # include "parser.h"
 
 char	*get_cmd_file(char *command, t_env *env);
-int		cmd_is_builtin(t_cmd *command, t_env *env);
+int		cmd_is_builtin(t_cmd *command, t_env **env);
 
 #endif

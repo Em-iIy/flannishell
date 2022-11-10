@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   executor.h                                         :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: fpurdom <fpurdom@student.codam.nl>           +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2022/09/22 16:20:54 by fpurdom       #+#    #+#                 */
-/*   Updated: 2022/11/02 14:44:42 by fpurdom       ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   executor.h                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gwinnink <gwinnink@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/22 16:20:54 by fpurdom           #+#    #+#             */
+/*   Updated: 2022/11/10 16:06:45 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,6 @@ typedef struct s_pipe
 	int	i;
 }	t_pipe;
 
-int	executor(t_parser *prsr, t_env *env);
+int	executor(t_parser *prsr, t_env **env);
 
 #endif
