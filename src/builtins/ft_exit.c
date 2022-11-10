@@ -6,7 +6,7 @@
 /*   By: gwinnink <gwinnink@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 14:59:52 by fpurdom           #+#    #+#             */
-/*   Updated: 2022/11/02 17:15:33 by gwinnink         ###   ########.fr       */
+/*   Updated: 2022/11/10 11:29:37 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,22 +56,18 @@ int	ft_exit(t_cmd *command)
 	code = g_code;
 	if (command->frst_cmd && command->lst_cmd)
 		printf("exit\n");
-	// *A*
 	if (!command->command[1])
 		exit (code);
 	if (ft_check_valid_atoi(&code, command->command[1]) == false)
 	{
-		// *C*
 		exit_error_msg(command->command[1], ": numeric argument required\n");
 		exit (255);
 	}
 	if (command->command[2])
 	{
-		// *D*
 		exit_error_msg(NULL, "too many arguments\n");
 		g_code = 1;
 		return (1);
 	}
-	// *B*
-	exit (code);
+	exit(code);
 }

@@ -6,7 +6,7 @@
 /*   By: gwinnink <gwinnink@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 15:25:55 by gwinnink          #+#    #+#             */
-/*   Updated: 2022/10/27 19:16:23 by gwinnink         ###   ########.fr       */
+/*   Updated: 2022/11/10 11:29:05 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ void	env_free(t_env *env)
 	free(env->val);
 	free(env);
 }
-
 
 void	env_del(t_env **env, t_env *del)
 {
