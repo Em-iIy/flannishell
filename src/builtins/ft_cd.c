@@ -6,7 +6,7 @@
 /*   By: gwinnink <gwinnink@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 19:06:47 by fpurdom           #+#    #+#             */
-/*   Updated: 2022/11/04 16:06:18 by gwinnink         ###   ########.fr       */
+/*   Updated: 2022/11/09 18:01:07 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	ft_cd(t_env *env, char *path)
 	char	*old_pwd;
 	char	*new_pwd;
 
-	if (!path)
+	if (!path || !*path)
 		path = get_env(env, "HOME");
 	if (!path)
 		return (cd_error_msg("HOME not set\n", NULL));

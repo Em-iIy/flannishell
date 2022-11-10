@@ -3,10 +3,10 @@
 /*                                                        ::::::::            */
 /*   cmd_finder.h                                       :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: fpurdom <fpurdom@student.codam.nl>           +#+                     */
+/*   By: gwinnink <gwinnink@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/06 14:20:24 by fpurdom       #+#    #+#                 */
-/*   Updated: 2022/11/10 12:17:38 by fpurdom       ########   odam.nl         */
+/*   Updated: 2022/11/10 12:20:19 by fpurdom       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
