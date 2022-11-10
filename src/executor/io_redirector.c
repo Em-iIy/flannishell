@@ -6,7 +6,7 @@
 /*   By: fpurdom <fpurdom@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/06 15:44:57 by fpurdom       #+#    #+#                 */
-/*   Updated: 2022/11/05 13:22:23 by fpurdom       ########   odam.nl         */
+/*   Updated: 2022/11/09 17:01:44 by fpurdom       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,10 @@ static void	redirect_input(t_file *file)
 
 	fd = open(file->file_name, O_RDONLY);
 	if (fd < 0)
-		exit (2);
+	{
+		printf("minishell: %s: No such file or directory\n", file->file_name);
+		exit (1);
+	}
 	if (dup2(fd, STDIN_FILENO) < 0)
 		exit (2);
 }
@@ -40,6 +43,7 @@ static void	redirect_output(t_file *file)
 		fd = open(file->file_name, O_CREAT | O_RDWR | O_TRUNC, 0666);
 	if (fd < 0)
 		exit (2);
+	//need to add error message here
 	if (dup2(fd, STDOUT_FILENO) < 0)
 		exit (2);
 }

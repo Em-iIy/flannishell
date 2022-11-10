@@ -6,7 +6,7 @@
 /*   By: gwinnink <gwinnink@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/13 15:20:49 by gwinnink      #+#    #+#                 */
-/*   Updated: 2022/11/09 15:09:09 by fpurdom       ########   odam.nl         */
+/*   Updated: 2022/11/09 16:36:29 by fpurdom       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,6 @@
 #include "environment.h"
 #include "executor.h"
 
-/*static void	check_exit(void)
-{
-	system("leaks --quiet minishell");
-}*/
-
 int	g_code = 0;
 
 int	main(int argc, char **argv, char **envp)
@@ -42,8 +37,6 @@ int	main(int argc, char **argv, char **envp)
 	(void)argv;
 	env = env_cpy(envp);
 	env_shlvl_inc(&env);
-	// new_envp = make_envp(env);
-	//atexit(check_exit);
 	while (1)
 	{
 		line = readline("minishell>");
