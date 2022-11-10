@@ -15,6 +15,7 @@ FILES_SRCS =	main.c \
 				ft_pwd.c \
 				ft_cd.c \
 				ft_unset.c \
+				signals.c \
 				lexer.c \
 				lexer_token.c \
 				lexer_token_utils.c \
@@ -54,6 +55,7 @@ vpath %.c $(DIR_SRCS)executor/ $(DIR_OBJS)
 vpath %.c $(DIR_SRCS)builtins/ $(DIR_OBJS)
 vpath %.c $(DIR_SRCS)environment/ $(DIR_OBJS)
 vpath %.c $(DIR_SRCS)heredoc/ $(DIR_OBJS)
+vpath %.c $(DIR_SRCS)signals/ $(DIR_OBJS)
 
 
 # ----------------------------------------Sources

@@ -6,7 +6,7 @@
 /*   By: gwinnink <gwinnink@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/13 15:20:49 by gwinnink      #+#    #+#                 */
-/*   Updated: 2022/11/09 16:36:29 by fpurdom       ########   odam.nl         */
+/*   Updated: 2022/11/10 15:09:17 by fpurdom       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,13 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 #include <errno.h>
-#include <dirent.h>
+#include <signal.h>
 #include "libft.h"
 #include "lexer.h"
 #include "parser.h"
 #include "environment.h"
 #include "executor.h"
+#include "signals.h"
 
 int	g_code = 0;
 
@@ -37,6 +38,9 @@ int	main(int argc, char **argv, char **envp)
 	(void)argv;
 	env = env_cpy(envp);
 	env_shlvl_inc(&env);
+	suppress_sig_output();
+	signal(SIGINT, sig_func_parent);
+	signal(SIGQUIT, SIG_IGN);
 	while (1)
 	{
 		line = readline("minishell>");
