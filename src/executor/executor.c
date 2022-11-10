@@ -6,7 +6,7 @@
 /*   By: gwinnink <gwinnink@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 16:29:32 by fpurdom           #+#    #+#             */
-/*   Updated: 2022/11/09 16:04:12 by gwinnink         ###   ########.fr       */
+/*   Updated: 2022/11/10 17:53:36 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 #include <stdio.h>
 #include <errno.h>
 
-static int	do_fork(t_cmd *command, t_pipe *pipes, t_env *env)
+static int	do_fork(t_cmd *command, t_pipe *pipes, t_env **env)
 {
 	pipes->i++;
 	pipes->pid[pipes->i] = fork();
@@ -67,7 +67,7 @@ static t_pipe	*init_pipe(int size)
 	return (pipes);
 }
 
-static int	dont_fork(t_cmd *command, t_env *env)
+static int	dont_fork(t_cmd *command, t_env **env)
 {
 	if (!(command->frst_cmd && command->lst_cmd))
 		return (0);
@@ -77,14 +77,18 @@ static int	dont_fork(t_cmd *command, t_env *env)
 		return (ft_cd(env, command->command[1]));
 	if (!ft_strncmp(*command->command, "unset", 5))
 		return (ft_unset(env, command->command));
+	if (!ft_strncmp(*command->command, "export", 7))
+		return (ft_export(env, command->command));
 	return (0);
 }
 
-int	executor(t_parser *parser, t_env *env)
+int	executor(t_parser *parser, t_env **env)
 {
 	t_cmd		*command;
 	t_pipe		*pipes;
 
+	if (!parser->cmds->next && dont_fork(parser->cmds, env))
+		return (g_code);
 	pipes = init_pipe(parser->count);
 	command = parser->cmds;
 	while (command)
@@ -94,9 +98,7 @@ int	executor(t_parser *parser, t_env *env)
 			if (pipe(pipes->tube))
 				return (2);
 		}
-		else if (dont_fork(command, env))
-			return (g_code);
-		if (check_heredoc(command->files, env) || do_fork(command, pipes, env))
+		if (check_heredoc(command->files, *env) || do_fork(command, pipes, env))
 			return (2);
 		if (!command->lst_cmd && close(pipes->tube[1]))
 			return (2);

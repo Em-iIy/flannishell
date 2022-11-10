@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   executor_utils.h                                   :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: fpurdom <fpurdom@student.codam.nl>           +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2022/10/04 16:22:04 by fpurdom       #+#    #+#                 */
-/*   Updated: 2022/11/02 14:44:51 by fpurdom       ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   executor_utils.h                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gwinnink <gwinnink@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/04 16:22:04 by fpurdom           #+#    #+#             */
+/*   Updated: 2022/11/10 16:07:41 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,6 @@
 # include "parser.h"
 # include "executor.h"
 
-void	exec_command(t_cmd *command, t_pipe *pipes, t_env *env);
+void	exec_command(t_cmd *command, t_pipe *pipes, t_env **env);
 
 #endif

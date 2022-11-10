@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   main.c                                             :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: gwinnink <gwinnink@student.codam.nl>         +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2022/07/13 15:20:49 by gwinnink      #+#    #+#                 */
-/*   Updated: 2022/11/09 15:09:09 by fpurdom       ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gwinnink <gwinnink@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/07/13 15:20:49 by gwinnink          #+#    #+#             */
+/*   Updated: 2022/11/10 18:10:05 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 #include "libft.h"
 #include "lexer.h"
 #include "parser.h"
+#include "builtins.h"
 #include "environment.h"
 #include "executor.h"
 
@@ -48,7 +49,10 @@ int	main(int argc, char **argv, char **envp)
 	{
 		line = readline("minishell>");
 		if (!line)
-			return (0);
+		{
+			printf("exit\n");
+			exit(g_code);
+		}
 		if (line[0] == '\0')
 			continue ;
 		add_history(line);
@@ -57,7 +61,7 @@ int	main(int argc, char **argv, char **envp)
 			continue ;
 		prsr = parser(env, &lxr);
 		if (prsr->count != 0)
-			g_code = executor(prsr, env);
+			g_code = executor(prsr, &env);
 		if (g_code == 2)
 			perror("minishell");
 		free_lexer(&lxr);

@@ -6,7 +6,7 @@
 /*   By: gwinnink <gwinnink@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 19:06:47 by fpurdom           #+#    #+#             */
-/*   Updated: 2022/11/09 18:01:07 by gwinnink         ###   ########.fr       */
+/*   Updated: 2022/11/10 16:01:40 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,13 @@ static int	cd_error_msg(char *s1, char *s2)
 	return (1);
 }
 
-int	ft_cd(t_env *env, char *path)
+int	ft_cd(t_env **env, char *path)
 {
 	char	*old_pwd;
 	char	*new_pwd;
 
 	if (!path || !*path)
-		path = get_env(env, "HOME");
+		path = get_env(*env, "HOME");
 	if (!path)
 		return (cd_error_msg("HOME not set\n", NULL));
 	old_pwd = getcwd(NULL, 0);
@@ -43,8 +43,8 @@ int	ft_cd(t_env *env, char *path)
 	new_pwd = getcwd(NULL, 0);
 	if (!new_pwd)
 		exit(EXIT_FAILURE);
-	add_env(&env, "OLDPWD", old_pwd);
-	add_env(&env, "PWD", new_pwd);
+	add_env(env, "OLDPWD", old_pwd);
+	add_env(env, "PWD", new_pwd);
 	free(old_pwd);
 	free(new_pwd);
 	return (1);

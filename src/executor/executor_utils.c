@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   executor_utils.c                                   :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: fpurdom <fpurdom@student.codam.nl>           +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2022/10/04 16:20:52 by fpurdom       #+#    #+#                 */
-/*   Updated: 2022/11/09 13:02:50 by fpurdom       ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   executor_utils.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gwinnink <gwinnink@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/04 16:20:52 by fpurdom           #+#    #+#             */
+/*   Updated: 2022/11/10 16:05:33 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static int	has_path(char *command)
 	return (true);
 }
 
-void	exec_command(t_cmd *command, t_pipe *pipes, t_env *env)
+void	exec_command(t_cmd *command, t_pipe *pipes, t_env **env)
 {
 	char	*cmd_file;
 	int		fd;
@@ -61,8 +61,8 @@ void	exec_command(t_cmd *command, t_pipe *pipes, t_env *env)
 	if (has_path(*command->command))
 		cmd_file = *command->command;
 	else
-		cmd_file = get_cmd_file(*command->command, env);
-	if (execve(cmd_file, command->command, make_envp(env)) == -1)
+		cmd_file = get_cmd_file(*command->command, *env);
+	if (execve(cmd_file, command->command, make_envp(*env)) == -1)
 		exit (3);
 	exit (0);
 }
