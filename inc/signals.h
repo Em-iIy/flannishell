@@ -6,7 +6,7 @@
 /*   By: fpurdom <fpurdom@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/11/10 14:26:56 by fpurdom       #+#    #+#                 */
-/*   Updated: 2022/11/10 16:01:03 by fpurdom       ########   odam.nl         */
+/*   Updated: 2022/11/11 14:35:32 by fpurdom       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 void	suppress_sig_output(void);
 void	unsuppress_sig_output(void);
 void	sig_func_parent(int sig);
-void	sig_func_child(int sig);
+int		sig_func_child(int sig);
+void	sig_func_heredoc(int start);
 
 #endif

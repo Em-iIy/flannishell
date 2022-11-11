@@ -6,7 +6,7 @@
 /*   By: fpurdom <fpurdom@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/11/05 12:24:19 by fpurdom       #+#    #+#                 */
-/*   Updated: 2022/11/09 15:54:01 by fpurdom       ########   odam.nl         */
+/*   Updated: 2022/11/11 14:25:30 by fpurdom       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,28 +18,28 @@
 
 int	check_heredoc(t_file *files, t_env *env)
 {
-	static int	i = 0;
-	int			fd;
-	char		*hd_name;
-	char		*file_n;
+	int		fd;
+	int		status;
+	char	*delimiter;
 
 	while (files)
 	{
 		if (files->alt && !files->io)
 		{
-			file_n = ft_itoa(i);
-			hd_name = ft_strjoin(".hd_file_", file_n);
-			free(file_n);
-			if (open_heredoc(files, hd_name, env))
+			delimiter = create_hd_file(files);
+			if (fork() == 0)
 			{
-				free(hd_name);
-				return (1);
+				if (open_heredoc(files, delimiter, env))
+					exit (2);
+				exit (0);
 			}
-			free(files->file_name);
-			files->file_name = hd_name;
+			signal(SIGINT, SIG_IGN);
+			wait(&status);
+			signal(SIGINT, SIG_DFL);
+			if (WIFEXITED(status))
+				return (WEXITSTATUS(status));
 		}
 		files = files->next;
-		i++;
 	}
 	return (0);
 }

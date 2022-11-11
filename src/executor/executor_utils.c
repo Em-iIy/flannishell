@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   executor_utils.c                                   :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: gwinnink <gwinnink@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/04 16:20:52 by fpurdom           #+#    #+#             */
-/*   Updated: 2022/11/10 16:05:33 by gwinnink         ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   executor_utils.c                                   :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: gwinnink <gwinnink@student.42.fr>            +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2022/10/04 16:20:52 by fpurdom       #+#    #+#                 */
+/*   Updated: 2022/11/10 19:44:38 by fpurdom       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,6 @@ void	exec_command(t_cmd *command, t_pipe *pipes, t_env **env)
 	else
 		cmd_file = get_cmd_file(*command->command, *env);
 	if (execve(cmd_file, command->command, make_envp(*env)) == -1)
-		exit (3);
+		exit (2);
 	exit (0);
 }

@@ -1,19 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_cd.c                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: gwinnink <gwinnink@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/27 19:06:47 by fpurdom           #+#    #+#             */
-/*   Updated: 2022/11/10 16:01:40 by gwinnink         ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   ft_cd.c                                            :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: gwinnink <gwinnink@student.42.fr>            +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2022/10/27 19:06:47 by fpurdom       #+#    #+#                 */
+/*   Updated: 2022/11/11 16:12:45 by fpurdom       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <stdlib.h>
+#include <dirent.h>
+#include <errno.h>
+#include <string.h>
+#include <stdio.h>
 #include "environment.h"
 #include "libft.h"
+
+static int	check_error(char *path)
+{
+	if (!opendir(path))
+	{
+		ft_putstr_fd("minishell: ", 2);
+		ft_putstr_fd(path, 2);
+		ft_putstr_fd(": ", 2);
+		ft_putstr_fd(strerror(errno), 2);
+		ft_putchar_fd('\n', 2);
+	}
+	return (1);
+}
 
 static int	cd_error_msg(char *s1, char *s2)
 {
@@ -39,7 +56,7 @@ int	ft_cd(t_env **env, char *path)
 	if (!old_pwd)
 		exit(EXIT_FAILURE);
 	if (chdir(path) == -1)
-		return (cd_error_msg(path, ": No such file or directory\n"));
+		return (check_error(path));
 	new_pwd = getcwd(NULL, 0);
 	if (!new_pwd)
 		exit(EXIT_FAILURE);

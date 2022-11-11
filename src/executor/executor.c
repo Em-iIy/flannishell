@@ -6,7 +6,7 @@
 /*   By: gwinnink <gwinnink@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/22 16:29:32 by fpurdom       #+#    #+#                 */
-/*   Updated: 2022/11/10 18:48:21 by fpurdom       ########   odam.nl         */
+/*   Updated: 2022/11/11 14:34:58 by fpurdom       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,6 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <errno.h>
-
-static int	do_fork(t_cmd *command, t_pipe *pipes, t_env **env)
-{
-	pipes->i++;
-	pipes->pid[pipes->i] = fork();
-	if (pipes->pid[pipes->i] < 0)
-		return (2);
-	if (pipes->pid[pipes->i] == 0)
-		exec_command(command, pipes, env);
-	return (0);
-}
 
 static int	wait_forks(t_pipe *pipes, t_cmd *cmds)
 {
@@ -52,10 +41,12 @@ static int	wait_forks(t_pipe *pipes, t_cmd *cmds)
 	signal(SIGINT, sig_func_parent);
 	if (WIFEXITED(status))
 		return (WEXITSTATUS(status));
+	if (WIFSIGNALED(status))
+		return (sig_func_child(WTERMSIG(status)));
 	return (0);
 }
 
-static int	do_fork(t_cmd *command, t_pipe *pipes, t_env *env)
+static int	do_fork(t_cmd *command, t_pipe *pipes, t_env **env)
 {
 	pipes->i++;
 	pipes->pid[pipes->i] = fork();
@@ -64,8 +55,14 @@ static int	do_fork(t_cmd *command, t_pipe *pipes, t_env *env)
 	if (pipes->pid[pipes->i] == 0)
 	{
 		unsuppress_sig_output();
-		signal(SIGINT, sig_func_parent);
+		signal(SIGINT, SIG_DFL);
+		signal(SIGQUIT, SIG_DFL);
 		exec_command(command, pipes, env);
+	}
+	else
+	{
+		signal(SIGINT, SIG_IGN);
+		signal(SIGQUIT, SIG_IGN);
 	}
 	return (0);
 }
@@ -104,8 +101,8 @@ int	executor(t_parser *parser, t_env **env)
 {
 	t_cmd		*command;
 	t_pipe		*pipes;
+	int			error;
 
-	signal(SIGINT, SIG_IGN);
 	if (!parser->cmds->next && dont_fork(parser->cmds, env))
 		return (g_code);
 	pipes = init_pipe(parser->count);
@@ -117,7 +114,10 @@ int	executor(t_parser *parser, t_env **env)
 			if (pipe(pipes->tube))
 				return (2);
 		}
-		if (check_heredoc(command->files, *env) || do_fork(command, pipes, env))
+		error = check_heredoc(command->files, *env);
+		if (error)
+			return (error);
+		if (do_fork(command, pipes, env))
 			return (2);
 		if (!command->lst_cmd && close(pipes->tube[1]))
 			return (2);

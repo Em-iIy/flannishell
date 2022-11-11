@@ -6,7 +6,7 @@
 /*   By: fpurdom <fpurdom@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/11/10 14:16:04 by fpurdom       #+#    #+#                 */
-/*   Updated: 2022/11/10 18:19:21 by fpurdom       ########   odam.nl         */
+/*   Updated: 2022/11/11 14:35:29 by fpurdom       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 #include <stdio.h>
 #include <readline/readline.h>
 #include <stdlib.h>
+#include <signal.h>
+#include "libft.h"
 
 extern int	g_code;
 
@@ -43,7 +45,7 @@ void	sig_func_parent(int sig)
 {
 	if (sig == 2)
 	{
-		printf("\n");
+		ft_putchar_fd('\n', 1);
 		rl_on_new_line();
 		rl_replace_line("", 0);
 		rl_redisplay();
@@ -51,8 +53,21 @@ void	sig_func_parent(int sig)
 	}
 }
 
-void	sig_func_child(int sig)
+int	sig_func_child(int sig)
+{
+	if (sig == SIGINT)
+		ft_putchar_fd('\n', 1);
+	else if (sig == SIGQUIT)
+		ft_putstr_fd("Quit: 3\n", 1);
+	return (128 + sig);
+}
+
+void	sig_func_heredoc(int sig)
 {
 	if (sig == 2)
-		printf("test\n");
+	{
+		ft_putchar_fd('\n', 1);
+		g_code = 1;
+		exit (1);
+	}
 }
