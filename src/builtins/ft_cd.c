@@ -6,7 +6,7 @@
 /*   By: gwinnink <gwinnink@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/27 19:06:47 by fpurdom       #+#    #+#                 */
-/*   Updated: 2022/11/11 16:12:45 by fpurdom       ########   odam.nl         */
+/*   Updated: 2022/11/11 16:18:48 by fpurdom       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static int	check_error(char *path)
 {
 	if (!opendir(path))
 	{
-		ft_putstr_fd("minishell: ", 2);
+		ft_putstr_fd("minishell: cd: ", 2);
 		ft_putstr_fd(path, 2);
 		ft_putstr_fd(": ", 2);
 		ft_putstr_fd(strerror(errno), 2);
