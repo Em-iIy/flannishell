@@ -6,10 +6,11 @@
 /*   By: gwinnink <gwinnink@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/22 16:29:32 by fpurdom       #+#    #+#                 */
-/*   Updated: 2022/11/11 14:34:58 by fpurdom       ########   odam.nl         */
+/*   Updated: 2022/11/11 16:54:20 by fpurdom       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "enomem.h"
 #include "libft.h"
 #include "executor_utils.h"
 #include "executor.h"
@@ -40,7 +41,7 @@ static int	wait_forks(t_pipe *pipes, t_cmd *cmds)
 	suppress_sig_output();
 	signal(SIGINT, sig_func_parent);
 	if (WIFEXITED(status))
-		return (WEXITSTATUS(status));
+		return (check_exit(&status));
 	if (WIFSIGNALED(status))
 		return (sig_func_child(WTERMSIG(status)));
 	return (0);
@@ -110,18 +111,15 @@ int	executor(t_parser *parser, t_env **env)
 	while (command)
 	{
 		if (command->next)
-		{
 			if (pipe(pipes->tube))
 				return (2);
-		}
 		error = check_heredoc(command->files, *env);
 		if (error)
 			return (error);
 		if (do_fork(command, pipes, env))
 			return (2);
-		if (!command->lst_cmd && close(pipes->tube[1]))
-			return (2);
-		if (!command->frst_cmd && close(pipes->in_fd))
+		if ((!command->lst_cmd && close(pipes->tube[1]))
+			|| (!command->frst_cmd && close(pipes->in_fd)))
 			return (2);
 		pipes->in_fd = pipes->tube[0];
 		command = command->next;

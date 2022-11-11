@@ -3,6 +3,7 @@ NAME = minishell
 
 # ----------------------------------------FILES
 FILES_SRCS =	main.c \
+				enomem.c \
 				executor.c \
 				executor_utils.c \
 				cmd_finder.c \

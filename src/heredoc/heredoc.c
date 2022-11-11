@@ -6,10 +6,11 @@
 /*   By: fpurdom <fpurdom@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/11/05 12:24:19 by fpurdom       #+#    #+#                 */
-/*   Updated: 2022/11/11 14:25:30 by fpurdom       ########   odam.nl         */
+/*   Updated: 2022/11/11 16:44:16 by fpurdom       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "enomem.h"
 #include "hd_utils.h"
 #include "libft.h"
 #include <errno.h>
@@ -37,7 +38,7 @@ int	check_heredoc(t_file *files, t_env *env)
 			wait(&status);
 			signal(SIGINT, SIG_DFL);
 			if (WIFEXITED(status))
-				return (WEXITSTATUS(status));
+				return (check_exit(&status));
 		}
 		files = files->next;
 	}
