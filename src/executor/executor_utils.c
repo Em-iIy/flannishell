@@ -6,7 +6,7 @@
 /*   By: gwinnink <gwinnink@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/04 16:20:52 by fpurdom       #+#    #+#                 */
-/*   Updated: 2022/11/10 19:44:38 by fpurdom       ########   odam.nl         */
+/*   Updated: 2022/11/11 18:02:47 by fpurdom       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,13 @@ void	exec_command(t_cmd *command, t_pipe *pipes, t_env **env)
 	int		fd;
 
 	if (!command->frst_cmd && dup2(pipes->in_fd, STDIN_FILENO) < 0)
-		exit (2);
+		exit (3);
 	if (!command->lst_cmd && close(pipes->tube[0]))
-		exit (2);
+		exit (3);
 	if (!command->lst_cmd && dup2(pipes->tube[1], STDOUT_FILENO) < 0)
-		exit (2);
+		exit (3);
 	if (!command->lst_cmd && close(pipes->tube[1]))
-		exit (2);
+		exit (3);
 	if (command->files)
 		redirect_io(command);
 	if (cmd_is_builtin(command, env))
@@ -63,6 +63,6 @@ void	exec_command(t_cmd *command, t_pipe *pipes, t_env **env)
 	else
 		cmd_file = get_cmd_file(*command->command, *env);
 	if (execve(cmd_file, command->command, make_envp(*env)) == -1)
-		exit (2);
+		exit (3);
 	exit (0);
 }

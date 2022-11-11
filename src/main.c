@@ -6,7 +6,7 @@
 /*   By: gwinnink <gwinnink@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/13 15:20:49 by gwinnink      #+#    #+#                 */
-/*   Updated: 2022/11/11 13:33:00 by fpurdom       ########   odam.nl         */
+/*   Updated: 2022/11/11 18:13:09 by fpurdom       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,9 @@ int	main(int argc, char **argv, char **envp)
 		if (!lxr)
 			continue ;
 		prsr = parser(env, &lxr);
-		if (prsr->count != 0)
+		if (prsr->count > 0)
 			g_code = executor(prsr, &env);
-		if (g_code == 2)
+		if (g_code == 3)
 			perror("minishell");
 		free_lexer(&lxr);
 		free_parser(prsr);

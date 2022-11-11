@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   parse_cmd.c                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: gwinnink <gwinnink@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/14 12:48:40 by gwinnink          #+#    #+#             */
-/*   Updated: 2022/11/10 18:31:51 by gwinnink         ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   parse_cmd.c                                        :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: gwinnink <gwinnink@student.42.fr>            +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2022/10/14 12:48:40 by gwinnink      #+#    #+#                 */
+/*   Updated: 2022/11/11 17:25:23 by fpurdom       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,6 @@ static char	**ft_split_n_free(char *str, char c)
 	return (ret);
 }
 
-static void	*free_n_ret_null(void *ptr)
-{
-	free(ptr);
-	return (NULL);
-}
-
 static void	env_add_n_free(t_env *env, t_token **head, t_env **env_temp)
 {
 	char	*temp;
@@ -61,7 +55,7 @@ t_cmd	*parse_cmd(t_env *env, t_token **head)
 		{
 			io_temp = parse_io(env, head);
 			if (!io_temp)
-				return (free_n_ret_null(env_temp));
+				return (free(env_temp), NULL);
 			io_add_back(&ret->files, io_temp);
 		}
 		else if (check_valid_str_iden((*head)->iden, (*head)->content))

@@ -6,7 +6,7 @@
 /*   By: gwinnink <gwinnink@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/22 16:29:32 by fpurdom       #+#    #+#                 */
-/*   Updated: 2022/11/11 16:54:20 by fpurdom       ########   odam.nl         */
+/*   Updated: 2022/11/11 18:05:01 by fpurdom       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,13 @@ static int	wait_forks(t_pipe *pipes, t_cmd *cmds)
 	while (i <= pipes->i)
 	{
 		if (waitpid(pipes->pid[i], &status, 0) == -1)
-			return (2);
+			return (3);
 		i++;
 	}
 	free(pipes->pid);
 	free(pipes);
 	if (rm_heredoc_files(cmds))
-		return (2);
+		return (3);
 	suppress_sig_output();
 	signal(SIGINT, sig_func_parent);
 	if (WIFEXITED(status))
@@ -52,7 +52,7 @@ static int	do_fork(t_cmd *command, t_pipe *pipes, t_env **env)
 	pipes->i++;
 	pipes->pid[pipes->i] = fork();
 	if (pipes->pid[pipes->i] < 0)
-		return (2);
+		return (1);
 	if (pipes->pid[pipes->i] == 0)
 	{
 		unsuppress_sig_output();
@@ -112,15 +112,15 @@ int	executor(t_parser *parser, t_env **env)
 	{
 		if (command->next)
 			if (pipe(pipes->tube))
-				return (2);
+				return (3);
 		error = check_heredoc(command->files, *env);
 		if (error)
 			return (error);
 		if (do_fork(command, pipes, env))
-			return (2);
+			return (3);
 		if ((!command->lst_cmd && close(pipes->tube[1]))
 			|| (!command->frst_cmd && close(pipes->in_fd)))
-			return (2);
+			return (3);
 		pipes->in_fd = pipes->tube[0];
 		command = command->next;
 	}

@@ -6,7 +6,7 @@
 /*   By: gwinnink <gwinnink@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/27 19:06:47 by fpurdom       #+#    #+#                 */
-/*   Updated: 2022/11/11 16:32:49 by fpurdom       ########   odam.nl         */
+/*   Updated: 2022/11/11 17:23:02 by fpurdom       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,25 +21,11 @@
 
 static int	check_error(char *path)
 {
-	if (!opendir(path))
-	{
-		ft_putstr_fd("minishell: cd: ", 2);
-		ft_putstr_fd(path, 2);
-		ft_putstr_fd(": ", 2);
-		ft_putstr_fd(strerror(errno), 2);
-		ft_putchar_fd('\n', 2);
-	}
-	return (1);
-}
-
-static int	cd_error_msg(char *s1, char *s2)
-{
 	ft_putstr_fd("minishell: cd: ", 2);
-	if (s1)
-		ft_putstr_fd(s1, 2);
-	if (s2)
-		ft_putstr_fd(s2, 2);
-	g_code = 1;
+	ft_putstr_fd(path, 2);
+	ft_putstr_fd(": ", 2);
+	ft_putstr_fd(strerror(errno), 2);
+	ft_putchar_fd('\n', 2);
 	return (1);
 }
 
@@ -51,7 +37,7 @@ int	ft_cd(t_env **env, char *path)
 	if (!path || !*path)
 		path = get_env(*env, "HOME");
 	if (!path)
-		return (cd_error_msg("HOME not set\n", NULL));
+		return (ft_putstr_fd("minishell: cd: HOME not set\n", 2), 1);
 	old_pwd = getcwd(NULL, 0);
 	if (!old_pwd)
 		exit(EXIT_FAILURE);

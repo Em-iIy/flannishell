@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   parser.c                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: gwinnink <gwinnink@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/22 14:27:03 by gwinnink          #+#    #+#             */
-/*   Updated: 2022/10/27 16:02:13 by gwinnink         ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   parser.c                                           :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: gwinnink <gwinnink@student.42.fr>            +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2022/09/22 14:27:03 by gwinnink      #+#    #+#                 */
+/*   Updated: 2022/11/11 18:13:05 by fpurdom       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,13 +113,16 @@ t_parser	*parser(t_env *env, t_lexer **lxr)
 	{
 		temp = parse_cmd(env, &tok_temp);
 		if (!temp || check_cmd(temp, tok_temp) == false)
+		{
 			parser->count = -1;
+			break ;
+		}
 		if (tok_temp)
 			tok_temp = tok_temp->next;
 		parser->count++;
 		cmd_add_back(&parser->cmds, temp);
 	}
-	if (parser->count != 0)
+	if (parser->count > 0)
 		index_cmds(parser->cmds);
 	//print_prsr(parser);
 	return (parser);

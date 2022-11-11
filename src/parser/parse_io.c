@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   parse_io.c                                         :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: gwinnink <gwinnink@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/14 11:32:18 by gwinnink          #+#    #+#             */
-/*   Updated: 2022/11/09 11:42:10 by gwinnink         ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   parse_io.c                                         :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: gwinnink <gwinnink@student.42.fr>            +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2022/10/14 11:32:18 by gwinnink      #+#    #+#                 */
+/*   Updated: 2022/11/11 18:07:20 by fpurdom       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ t_file	*parse_io(t_env *env, t_token **head)
 	hd_quotes = false;
 	if ((*head)->next == NULL)
 	{
-		printf("minishell: syntax error near unexpected token `newline'\n");
+		printf("minishell: syntax error near unexpected token `newline'\n"); // switch to std err
 		g_code = 258;
 		return (NULL);
 	}

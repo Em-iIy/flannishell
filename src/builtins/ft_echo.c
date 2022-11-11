@@ -6,7 +6,7 @@
 /*   By: fpurdom <fpurdom@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/20 14:08:02 by fpurdom       #+#    #+#                 */
-/*   Updated: 2022/11/07 18:50:35 by fpurdom       ########   odam.nl         */
+/*   Updated: 2022/11/11 17:55:37 by fpurdom       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,35 @@
 #include <unistd.h>
 #include <stdbool.h>
 
+static bool	check_noption(char ***strs)
+{
+	bool	n_option;
+	int		i;
+
+	i = 0;
+	n_option = false;
+	while (**strs && (**strs)[i] == '-')
+	{
+		i++;
+		if ((**strs)[i] != 'n')
+			return (n_option);
+		while ((**strs)[i] == 'n' && (**strs)[i])
+			i++;
+		if (!(**strs)[i])
+			n_option = true;
+		else
+			return (false);
+		(*strs)++;
+		i = 0;
+	}
+	return (n_option);
+}
+
 int	ft_echo(char **strs)
 {
 	bool	n_option;
 
-	n_option = false;
-	while (*strs && !ft_strncmp(*strs, "-n", 3))
-	{
-		n_option = true;
-		strs++;
-	}
+	n_option = check_noption(&strs);
 	while (*strs)
 	{
 		ft_putstr_fd(*strs, 1);

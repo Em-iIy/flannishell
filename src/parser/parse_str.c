@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   parse_str.c                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: gwinnink <gwinnink@student.codam.nl>       +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/14 11:37:28 by gwinnink          #+#    #+#             */
-/*   Updated: 2022/10/18 21:02:12 by gwinnink         ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   parse_str.c                                        :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: gwinnink <gwinnink@student.codam.nl>         +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2022/10/14 11:37:28 by gwinnink      #+#    #+#                 */
+/*   Updated: 2022/11/11 18:14:57 by fpurdom       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	check_valid_str_iden(int iden, char *str)
 		iden != DQUOTE && \
 		iden != EXPAND)
 	{
-		printf("minishell: syntax error near unexpected token `%s'\n", str);
+		printf("minishell: syntax error near unexpected token `%s'\n", str); // change to stderr
 		return (0);
 	}
 	return (1);

@@ -6,7 +6,7 @@
 /*   By: fpurdom <fpurdom@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/11/05 12:24:19 by fpurdom       #+#    #+#                 */
-/*   Updated: 2022/11/11 16:44:16 by fpurdom       ########   odam.nl         */
+/*   Updated: 2022/11/11 18:03:24 by fpurdom       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	check_heredoc(t_file *files, t_env *env)
 			if (fork() == 0)
 			{
 				if (open_heredoc(files, delimiter, env))
-					exit (2);
+					exit (3);
 				exit (0);
 			}
 			signal(SIGINT, SIG_IGN);
