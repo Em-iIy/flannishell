@@ -6,7 +6,7 @@
 /*   By: gwinnink <gwinnink@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/14 12:48:40 by gwinnink      #+#    #+#                 */
-/*   Updated: 2022/11/11 17:25:23 by fpurdom       ########   odam.nl         */
+/*   Updated: 2022/11/14 14:53:34 by fpurdom       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,17 +46,20 @@ t_cmd	*parse_cmd(t_env *env, t_token **head)
 	t_cmd	*ret;
 	t_env	*env_temp;
 	t_file	*io_temp;
+	int		i;
 
+	i = 0;
 	ret = cmd_new();
 	env_temp = NULL;
 	while (*head && (*head)->iden != PIPE)
 	{
 		if (check_io_iden((*head)->iden))
 		{
-			io_temp = parse_io(env, head);
+			io_temp = parse_io(env, head, i);
 			if (!io_temp)
 				return (free(env_temp), NULL);
 			io_add_back(&ret->files, io_temp);
+			i++;
 		}
 		else if (check_valid_str_iden((*head)->iden, (*head)->content))
 			env_add_n_free(env, head, &env_temp);

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   parser_utils.h                                     :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: gwinnink <gwinnink@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/22 14:31:11 by gwinnink          #+#    #+#             */
-/*   Updated: 2022/11/02 19:26:54 by gwinnink         ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   parser_utils.h                                     :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: gwinnink <gwinnink@student.42.fr>            +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2022/09/22 14:31:11 by gwinnink      #+#    #+#                 */
+/*   Updated: 2022/11/14 14:55:32 by fpurdom       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ char		*parse_dquote(t_env *env, t_token **token);
 int			check_valid_str_iden(int iden, char *str);
 char		*parse_str(t_env *env, t_token **head);
 char		*parse_hd_dlm(t_token **head, bool *hd_quotes);
-t_file		*parse_io(t_env *env, t_token **head);
+t_file		*parse_io(t_env *env, t_token **head, int i);
 t_cmd		*parse_cmd(t_env *env, t_token **head);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: gwinnink <gwinnink@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/22 16:29:32 by fpurdom       #+#    #+#                 */
-/*   Updated: 2022/11/11 18:05:01 by fpurdom       ########   odam.nl         */
+/*   Updated: 2022/11/14 17:33:15 by fpurdom       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static int	wait_forks(t_pipe *pipes, t_cmd *cmds)
 	suppress_sig_output();
 	signal(SIGINT, sig_func_parent);
 	if (WIFEXITED(status))
-		return (check_exit(&status));
+		return (check_memory(&status));
 	if (WIFSIGNALED(status))
 		return (sig_func_child(WTERMSIG(status)));
 	return (0);
@@ -113,7 +113,7 @@ int	executor(t_parser *parser, t_env **env)
 		if (command->next)
 			if (pipe(pipes->tube))
 				return (3);
-		error = check_heredoc(command->files, *env);
+		error = check_heredoc(command, *env);
 		if (error)
 			return (error);
 		if (do_fork(command, pipes, env))

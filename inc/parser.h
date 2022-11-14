@@ -6,7 +6,7 @@
 /*   By: gwinnink <gwinnink@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/22 13:16:36 by gwinnink      #+#    #+#                 */
-/*   Updated: 2022/11/10 12:52:41 by fpurdom       ########   odam.nl         */
+/*   Updated: 2022/11/14 14:48:28 by fpurdom       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef struct s_file
 	bool			io;
 	bool			alt;
 	bool			hd_quotes;
+	int				i;
 }	t_file;
 
 typedef struct s_cmd

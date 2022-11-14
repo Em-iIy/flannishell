@@ -6,7 +6,7 @@
 /*   By: fpurdom <fpurdom@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/11/10 14:16:04 by fpurdom       #+#    #+#                 */
-/*   Updated: 2022/11/11 14:35:29 by fpurdom       ########   odam.nl         */
+/*   Updated: 2022/11/14 17:56:29 by fpurdom       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 #include <stdlib.h>
 #include <signal.h>
 #include "libft.h"
+#include "parser.h"
+#include "heredoc.h"
 
 extern int	g_code;
 
@@ -62,12 +64,15 @@ int	sig_func_child(int sig)
 	return (128 + sig);
 }
 
-void	sig_func_heredoc(int sig)
+int	sig_func_heredoc(int sig, t_cmd *cmds)
 {
-	if (sig == 2)
+	if (sig == SIGINT)
 	{
 		ft_putchar_fd('\n', 1);
 		g_code = 1;
-		exit (1);
+		if (rm_heredoc_files(cmds))
+			return (3);
+		return (1);
 	}
+	return (0);
 }

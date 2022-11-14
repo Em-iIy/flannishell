@@ -6,7 +6,7 @@
 /*   By: gwinnink <gwinnink@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/14 11:32:18 by gwinnink      #+#    #+#                 */
-/*   Updated: 2022/11/11 18:07:20 by fpurdom       ########   odam.nl         */
+/*   Updated: 2022/11/14 14:53:08 by fpurdom       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include "parser_utils.h"
 #include "parser.h"
 
-static t_file	*file_init(int iden)
+static t_file	*file_init(int iden, int i)
 {
 	t_file	*ret;
 
@@ -30,10 +30,11 @@ static t_file	*file_init(int iden)
 		ret->io = true;
 	if (iden == GREATGREAT || iden == LESSLESS)
 		ret->alt = true;
+	ret->i = i;
 	return (ret);
 }
 
-t_file	*parse_io(t_env *env, t_token **head)
+t_file	*parse_io(t_env *env, t_token **head, int i)
 {
 	t_file	*ret;
 	t_token	*temp_head;
@@ -55,7 +56,7 @@ t_file	*parse_io(t_env *env, t_token **head)
 		temp = parse_str(env, head);
 	if (!temp)
 		return (NULL);
-	ret = file_init(temp_head->iden);
+	ret = file_init(temp_head->iden, i);
 	ret->hd_quotes = hd_quotes;
 	ret->file_name = temp;
 	return (ret);
