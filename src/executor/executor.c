@@ -1,15 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   executor.c                                         :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: gwinnink <gwinnink@student.42.fr>            +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2022/09/22 16:29:32 by fpurdom       #+#    #+#                 */
-/*   Updated: 2022/11/14 17:33:15 by fpurdom       ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   executor.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gwinnink <gwinnink@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/22 16:29:32 by fpurdom           #+#    #+#             */
+/*   Updated: 2022/11/15 17:25:54 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <unistd.h>
+#include <stdlib.h>
+#include <errno.h>
 #include "enomem.h"
 #include "libft.h"
 #include "executor_utils.h"
@@ -17,10 +20,6 @@
 #include "builtins.h"
 #include "heredoc.h"
 #include "signals.h"
-#include <unistd.h>
-#include <stdlib.h>
-#include <stdio.h>
-#include <errno.h>
 
 static int	wait_forks(t_pipe *pipes, t_cmd *cmds)
 {

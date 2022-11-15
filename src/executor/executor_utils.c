@@ -6,19 +6,16 @@
 /*   By: gwinnink <gwinnink@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 16:20:52 by fpurdom           #+#    #+#             */
-/*   Updated: 2022/11/15 16:25:59 by gwinnink         ###   ########.fr       */
+/*   Updated: 2022/11/15 17:25:51 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <unistd.h>
+#include <stdlib.h>
+#include "error_msg.h"
 #include "libft.h"
 #include "cmd_finder.h"
 #include "io_redirector.h"
-#include <unistd.h>
-#include <stdlib.h>
-#include <stdio.h>
-#include <errno.h>
-#include <fcntl.h>
-#include "error_msg.h"
 
 static int	has_path(char *command)
 {

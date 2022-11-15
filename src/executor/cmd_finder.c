@@ -6,18 +6,17 @@
 /*   By: gwinnink <gwinnink@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 14:17:19 by fpurdom           #+#    #+#             */
-/*   Updated: 2022/11/15 16:16:25 by gwinnink         ###   ########.fr       */
+/*   Updated: 2022/11/15 17:25:47 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <unistd.h>
+#include <stdlib.h>
+#include <errno.h>
 #include "libft.h"
 #include "parser.h"
 #include "builtins.h"
-#include <unistd.h>
-#include <stdlib.h>
-#include <fcntl.h>
-#include <stdio.h>
-#include <errno.h>
+#include "environment.h"
 #include "error_msg.h"
 
 static void	cmd_not_found(char **to_free, char *cmd_file, char *command)

@@ -6,17 +6,17 @@
 /*   By: gwinnink <gwinnink@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/05 12:24:19 by fpurdom           #+#    #+#             */
-/*   Updated: 2022/11/15 16:26:08 by gwinnink         ###   ########.fr       */
+/*   Updated: 2022/11/15 17:26:01 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "enomem.h"
-#include "hd_utils.h"
-#include "libft.h"
-#include "signals.h"
 #include <errno.h>
 #include <fcntl.h>
 #include <unistd.h>
+#include <stdlib.h>
+#include "enomem.h"
+#include "hd_utils.h"
+#include "signals.h"
 
 static int	hd_fork(char *delimiter, t_file *files, t_cmd *cmds, t_env *env)
 {

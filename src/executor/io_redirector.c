@@ -6,19 +6,18 @@
 /*   By: gwinnink <gwinnink@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 15:44:57 by fpurdom           #+#    #+#             */
-/*   Updated: 2022/11/15 16:20:29 by gwinnink         ###   ########.fr       */
+/*   Updated: 2022/11/15 17:25:57 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "executor_utils.h"
-#include "libft.h"
 #include <stdio.h>
 #include <readline/readline.h>
 #include <unistd.h>
 #include <stdlib.h>
-#include <errno.h>
 #include <fcntl.h>
 #include "error_msg.h"
+#include "executor_utils.h"
+#include "libft.h"
 
 static void	redirect_input(t_file *file)
 {

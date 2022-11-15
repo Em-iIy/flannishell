@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_quote.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gwinnink <gwinnink@student.codam.nl>       +#+  +:+       +#+        */
+/*   By: gwinnink <gwinnink@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 12:04:32 by gwinnink          #+#    #+#             */
-/*   Updated: 2022/10/18 21:01:53 by gwinnink         ###   ########.fr       */
+/*   Updated: 2022/11/15 17:10:54 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 #include "parser_utils.h"
 
 /*
-returns expanded string from out of double quotes
-moves token pointer to closing double quote
+returns expanded string from out of quotes
+moves token pointer to closing quote
 */
 char	*parse_quote(t_env *env, t_token **token)
 {

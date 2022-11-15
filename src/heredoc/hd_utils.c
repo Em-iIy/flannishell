@@ -6,18 +6,18 @@
 /*   By: gwinnink <gwinnink@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 19:03:57 by fpurdom           #+#    #+#             */
-/*   Updated: 2022/11/15 16:26:15 by gwinnink         ###   ########.fr       */
+/*   Updated: 2022/11/15 16:55:49 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
-#include "libft.h"
-#include "signals.h"
 #include <signal.h>
 #include <stdio.h>
 #include <readline/readline.h>
 #include <fcntl.h>
 #include <unistd.h>
+#include "parser.h"
+#include "libft.h"
+#include "signals.h"
 
 char	*create_hd_file(t_file *files)
 {

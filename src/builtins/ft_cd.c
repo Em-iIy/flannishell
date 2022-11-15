@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   ft_cd.c                                            :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: gwinnink <gwinnink@student.42.fr>            +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2022/10/27 19:06:47 by fpurdom       #+#    #+#                 */
-/*   Updated: 2022/11/11 17:23:02 by fpurdom       ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   ft_cd.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gwinnink <gwinnink@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/27 19:06:47 by fpurdom           #+#    #+#             */
+/*   Updated: 2022/11/15 17:25:35 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 #include <dirent.h>
 #include <errno.h>
 #include <string.h>
-#include <stdio.h>
 #include "environment.h"
 #include "libft.h"
 

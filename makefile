@@ -24,7 +24,6 @@ FILES_SRCS =	main.c \
 				lexer_token.c \
 				lexer_token_utils.c \
 				lexer_token_del.c \
-				lexer_token_print.c \
 				free_lexer.c \
 				parser.c \
 				parser_utils.c \

@@ -6,21 +6,17 @@
 /*   By: gwinnink <gwinnink@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 15:20:49 by gwinnink          #+#    #+#             */
-/*   Updated: 2022/11/15 16:25:52 by gwinnink         ###   ########.fr       */
+/*   Updated: 2022/11/15 17:25:32 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include <unistd.h>
 #include <stdio.h>
 #include <readline/readline.h>
 #include <readline/history.h>
-#include <errno.h>
 #include <signal.h>
-#include "libft.h"
 #include "lexer.h"
 #include "parser.h"
-#include "builtins.h"
 #include "environment.h"
 #include "executor.h"
 #include "signals.h"

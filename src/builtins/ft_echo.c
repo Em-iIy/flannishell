@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   ft_echo.c                                          :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: fpurdom <fpurdom@student.codam.nl>           +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2022/10/20 14:08:02 by fpurdom       #+#    #+#                 */
-/*   Updated: 2022/11/11 17:55:37 by fpurdom       ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   ft_echo.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gwinnink <gwinnink@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/20 14:08:02 by fpurdom           #+#    #+#             */
+/*   Updated: 2022/11/15 17:25:40 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
-#include "libft.h"
-#include <unistd.h>
 #include <stdbool.h>
+#include "libft.h"
+
+extern int	g_code;
 
 static bool	check_noption(char ***strs)
 {
