@@ -6,7 +6,7 @@
 /*   By: gwinnink <gwinnink@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 16:20:52 by fpurdom           #+#    #+#             */
-/*   Updated: 2022/11/15 16:20:24 by gwinnink         ###   ########.fr       */
+/*   Updated: 2022/11/15 16:25:59 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ static int	has_path(char *command)
 void	exec_command(t_cmd *command, t_pipe *pipes, t_env **env)
 {
 	char	*cmd_file;
-	int		fd;
 
 	if (!command->frst_cmd && dup2(pipes->in_fd, STDIN_FILENO) < 0)
 		exit (3);

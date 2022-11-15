@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   heredoc.c                                          :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: fpurdom <fpurdom@student.codam.nl>           +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2022/11/05 12:24:19 by fpurdom       #+#    #+#                 */
-/*   Updated: 2022/11/14 17:58:44 by fpurdom       ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   heredoc.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gwinnink <gwinnink@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/11/05 12:24:19 by fpurdom           #+#    #+#             */
+/*   Updated: 2022/11/15 16:26:08 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ static int	hd_fork(char *delimiter, t_file *files, t_cmd *cmds, t_env *env)
 
 int	check_heredoc(t_cmd *cmds, t_env *env)
 {
-	int		fd;
 	int		error;
 	char	*delimiter;
 	t_file	*files;

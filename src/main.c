@@ -6,7 +6,7 @@
 /*   By: gwinnink <gwinnink@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 15:20:49 by gwinnink          #+#    #+#             */
-/*   Updated: 2022/11/15 16:05:55 by gwinnink         ###   ########.fr       */
+/*   Updated: 2022/11/15 16:25:52 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,10 +68,6 @@ static void	minishell(t_env *env)
 
 int	main(int argc, char **argv, char **envp)
 {
-	char		*line;
-	char		**new_envp;
-	t_lexer		*lxr;
-	t_parser	*prsr;
 	t_env		*env;
 
 	(void)argc;

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   parse_cmd.c                                        :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: gwinnink <gwinnink@student.42.fr>            +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2022/10/14 12:48:40 by gwinnink      #+#    #+#                 */
-/*   Updated: 2022/11/14 14:53:34 by fpurdom       ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   parse_cmd.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gwinnink <gwinnink@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/14 12:48:40 by gwinnink          #+#    #+#             */
+/*   Updated: 2022/11/15 16:26:50 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,6 @@ static int	check_io_iden(int iden)
 {
 	return (iden == GREAT || iden == GREATGREAT || \
 	iden == LESS || iden == LESSLESS);
-}
-
-static char	**ft_split_n_free(char *str, char c)
-{
-	char	**ret;
-
-	ret = ft_split(str, c);
-	free(str);
-	return (ret);
 }
 
 static void	env_add_n_free(t_env *env, t_token **head, t_env **env_temp)

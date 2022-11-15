@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   hd_utils.c                                         :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: fpurdom <fpurdom@student.codam.nl>           +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2022/11/07 19:03:57 by fpurdom       #+#    #+#                 */
-/*   Updated: 2022/11/14 17:29:57 by fpurdom       ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   hd_utils.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gwinnink <gwinnink@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/11/07 19:03:57 by fpurdom           #+#    #+#             */
+/*   Updated: 2022/11/15 16:26:15 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ static int	hd_expand(char *line, int fd, t_env *env)
 static void	write_to_file(t_file *file, char *line, int fd, t_env *env)
 {
 	int		i;
-	char	*env_var;
 
 	i = 0;
 	if (file->hd_quotes)
