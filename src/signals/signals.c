@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   signals.c                                          :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: fpurdom <fpurdom@student.codam.nl>           +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2022/11/10 14:16:04 by fpurdom       #+#    #+#                 */
-/*   Updated: 2022/11/14 17:56:29 by fpurdom       ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   signals.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gwinnink <gwinnink@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/11/10 14:16:04 by fpurdom           #+#    #+#             */
+/*   Updated: 2022/11/15 14:31:30 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,22 @@
 
 extern int	g_code;
 
+
+/*
+Set terminal settings to default
+fixes SIGQUIT out of programs that change terminal settings (top)
+*/
 void	suppress_sig_output(void)
 {
 	struct termios	new_settings;
 
 	if (tcgetattr(0, &new_settings))
 		perror("minishell: tcsetattr");
-	new_settings.c_lflag &= ~ECHOCTL;
+	// new_settings.c_lflag &= ~ECHOCTL;
+	new_settings.c_iflag = 0x6b02;
+	new_settings.c_oflag = 0x3;
+	new_settings.c_cflag = 0x4b00;
+	new_settings.c_lflag = 0x200005cf;
 	if (tcsetattr(0, 0, &new_settings))
 		perror("minishell: tcsetattr");
 }
