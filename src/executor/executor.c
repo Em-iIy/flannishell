@@ -6,7 +6,7 @@
 /*   By: gwinnink <gwinnink@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 16:29:32 by fpurdom           #+#    #+#             */
-/*   Updated: 2022/11/15 17:25:54 by gwinnink         ###   ########.fr       */
+/*   Updated: 2022/11/15 17:35:22 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,7 @@ static int	wait_forks(t_pipe *pipes, t_cmd *cmds)
 			return (3);
 		i++;
 	}
-	free(pipes->pid);
-	free(pipes);
+	free_pipes(pipes);
 	if (rm_heredoc_files(cmds))
 		return (3);
 	suppress_sig_output();
@@ -114,7 +113,7 @@ int	executor(t_parser *parser, t_env **env)
 				return (3);
 		error = check_heredoc(command, *env);
 		if (error)
-			return (error);
+			return (free_pipes(pipes), error);
 		if (do_fork(command, pipes, env))
 			return (3);
 		if ((!command->lst_cmd && close(pipes->tube[1]))

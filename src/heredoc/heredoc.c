@@ -6,7 +6,7 @@
 /*   By: gwinnink <gwinnink@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/05 12:24:19 by fpurdom           #+#    #+#             */
-/*   Updated: 2022/11/15 17:26:01 by gwinnink         ###   ########.fr       */
+/*   Updated: 2022/11/15 17:29:47 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,9 @@ int	check_heredoc(t_cmd *cmds, t_env *env)
 		{
 			delimiter = create_hd_file(files);
 			error = hd_fork(delimiter, files, cmds, env);
+			free(delimiter);
 			if (error)
 				return (error);
-			free(delimiter);
 		}
 		files = files->next;
 	}

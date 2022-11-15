@@ -6,7 +6,7 @@
 /*   By: gwinnink <gwinnink@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 13:16:36 by gwinnink          #+#    #+#             */
-/*   Updated: 2022/11/15 16:35:43 by gwinnink         ###   ########.fr       */
+/*   Updated: 2022/11/15 17:38:16 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 # include "environment.h"
 # include "lexer.h"
 # include <stdbool.h>
-
 
 //----------------------------------------Structs
 typedef struct s_file
