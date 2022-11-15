@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   parse_io.c                                         :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: gwinnink <gwinnink@student.42.fr>            +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2022/10/14 11:32:18 by gwinnink      #+#    #+#                 */
-/*   Updated: 2022/11/14 14:53:08 by fpurdom       ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   parse_io.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gwinnink <gwinnink@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/14 11:32:18 by gwinnink          #+#    #+#             */
+/*   Updated: 2022/11/15 14:44:01 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include <stdio.h>
 #include "parser_utils.h"
 #include "parser.h"
+#include "error_msg.h"
 
 static t_file	*file_init(int iden, int i)
 {
@@ -45,7 +46,8 @@ t_file	*parse_io(t_env *env, t_token **head, int i)
 	hd_quotes = false;
 	if ((*head)->next == NULL)
 	{
-		printf("minishell: syntax error near unexpected token `newline'\n"); // switch to std err
+		display_error(NULL, "syntax error near unexpected token `newline'",
+			NULL, NULL);
 		g_code = 258;
 		return (NULL);
 	}

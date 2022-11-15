@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   parser.c                                           :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: gwinnink <gwinnink@student.42.fr>            +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2022/09/22 14:27:03 by gwinnink      #+#    #+#                 */
-/*   Updated: 2022/11/11 18:13:05 by fpurdom       ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   parser.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gwinnink <gwinnink@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/22 14:27:03 by gwinnink          #+#    #+#             */
+/*   Updated: 2022/11/15 14:49:33 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,68 +14,70 @@
 #include "parser.h"
 #include "parser_utils.h"
 #include "parse_cmd_utils.h"
+#include "error_msg.h"
 
-#include <stdlib.h>
-#include <stdio.h>
+// #include <stdlib.h>
+// #include <stdio.h>
 
-static void	print_cmd(t_cmd *cmd)
-{
-	int		i;
-	t_file	*file;
+// static void	print_cmd(t_cmd *cmd)
+// {
+// 	int		i;
+// 	t_file	*file;
 
-	i = 0;
-	file = cmd->files;
-	if (!cmd)
-		return ;
-	printf("cmd: ");
-	while (cmd->command[i])
-	{
-		printf("`%s` ", cmd->command[i]);
-		i++;
-	}
-	printf("\n");
-	while (file)
-	{
-		if (file->io == false)
-		{
-			if (file->alt == false)
-				printf("in: ");
-			else
-				printf("hd.: ");
-		}
-		else
-		{
-			if (file->alt == false)
-				printf("out: ");
-			else
-				printf("app.: ");
-		}
-		printf("'%s' =>\t", file->file_name);
-		file = file->next;
-	}
-	printf("\n");
-}
+// 	i = 0;
+// 	file = cmd->files;
+// 	if (!cmd)
+// 		return ;
+// 	printf("cmd: ");
+// 	while (cmd->command[i])
+// 	{
+// 		printf("`%s` ", cmd->command[i]);
+// 		i++;
+// 	}
+// 	printf("\n");
+// 	while (file)
+// 	{
+// 		if (file->io == false)
+// 		{
+// 			if (file->alt == false)
+// 				printf("in: ");
+// 			else
+// 				printf("hd.: ");
+// 		}
+// 		else
+// 		{
+// 			if (file->alt == false)
+// 				printf("out: ");
+// 			else
+// 				printf("app.: ");
+// 		}
+// 		printf("'%s' =>\t", file->file_name);
+// 		file = file->next;
+// 	}
+// 	printf("\n");
+// }
 
-static void	print_prsr(t_parser *prsr)
-{
-	t_cmd	*temp;
+// static void	print_prsr(t_parser *prsr)
+// {
+// 	t_cmd	*temp;
 
-	temp = prsr->cmds;
-	printf("cmd count: %d", prsr->count);
-	while (temp)
-	{
-		printf("\n-----------------------------------------------------\n");
-		print_cmd(temp);
-		temp = temp->next;
-	}
-}
+// 	temp = prsr->cmds;
+// 	printf("cmd count: %d", prsr->count);
+// 	while (temp)
+// 	{
+// 		printf("\n-----------------------------------------------------\n");
+// 		print_cmd(temp);
+// 		temp = temp->next;
+// 	}
+// }
 
 static bool	check_cmd(t_cmd *cmd, t_token *token)
 {
 	if ((!*cmd->command && !cmd->files) || \
 		(token && token->iden == PIPE && !token->next))
 	{
-		printf("minishell: syntax error near unexpected token `|'\n");
+		display_error(NULL, "syntax error near unexpected token `|'",
+			NULL, NULL);
 		g_code = 258;
 		return (false);
 	}
@@ -124,6 +126,5 @@ t_parser	*parser(t_env *env, t_lexer **lxr)
 	}
 	if (parser->count > 0)
 		index_cmds(parser->cmds);
-	//print_prsr(parser);
 	return (parser);
 }

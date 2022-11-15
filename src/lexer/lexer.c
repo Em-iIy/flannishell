@@ -6,7 +6,7 @@
 /*   By: gwinnink <gwinnink@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 17:21:16 by gwinnink          #+#    #+#             */
-/*   Updated: 2022/10/27 16:32:42 by gwinnink         ###   ########.fr       */
+/*   Updated: 2022/11/15 16:19:42 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "lexer.h"
 #include "lexer_token_utils.h"
 #include "libft.h"
+#include "error_msg.h"
 
 static t_lexer	*init_lexer(char *line)
 {
@@ -42,11 +43,10 @@ t_lexer	*lexer(char *line)
 	{
 		i = create_next_token(&lxr, i);
 	}
-	//lexer_token_print(lxr->head);
 	if (lxr->dquote == 1 || lxr->quote == 1)
 	{
 		g_code = 258;
-		printf("minishell: syntax error unclosed token\n");
+		display_error(NULL, "syntax error unclosed token", NULL, NULL);
 		free(lxr->line);
 		free_lexer(&lxr);
 		return (NULL);

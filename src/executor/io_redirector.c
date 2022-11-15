@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   io_redirector.c                                    :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: fpurdom <fpurdom@student.codam.nl>           +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2022/10/06 15:44:57 by fpurdom       #+#    #+#                 */
-/*   Updated: 2022/11/11 18:03:18 by fpurdom       ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   io_redirector.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gwinnink <gwinnink@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/06 15:44:57 by fpurdom           #+#    #+#             */
+/*   Updated: 2022/11/15 16:20:29 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include <stdlib.h>
 #include <errno.h>
 #include <fcntl.h>
+#include "error_msg.h"
 
 static void	redirect_input(t_file *file)
 {
@@ -26,7 +27,7 @@ static void	redirect_input(t_file *file)
 	fd = open(file->file_name, O_RDONLY);
 	if (fd < 0)
 	{
-		printf("minishell: %s: No such file or directory\n", file->file_name);
+		display_error(file->file_name, "No such file or directory", NULL, NULL);
 		exit (1);
 	}
 	if (dup2(fd, STDIN_FILENO) < 0)
@@ -43,7 +44,7 @@ static void	redirect_output(t_file *file)
 		fd = open(file->file_name, O_CREAT | O_RDWR | O_TRUNC, 0666);
 	if (fd < 0)
 	{
-		printf("minishell: %s: Permission denied\n", file->file_name);
+		display_error(file->file_name, "Permission denied", NULL, NULL);
 		exit (1);
 	}
 	if (dup2(fd, STDOUT_FILENO) < 0)

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   parse_str.c                                        :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: gwinnink <gwinnink@student.codam.nl>         +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2022/10/14 11:37:28 by gwinnink      #+#    #+#                 */
-/*   Updated: 2022/11/11 18:14:57 by fpurdom       ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   parse_str.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gwinnink <gwinnink@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/14 11:37:28 by gwinnink          #+#    #+#             */
+/*   Updated: 2022/11/15 14:42:32 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "libft.h"
 #include "parser.h"
 #include "parser_utils.h"
+#include "error_msg.h"
 
 int	check_valid_str_iden(int iden, char *str)
 {
@@ -22,7 +23,7 @@ int	check_valid_str_iden(int iden, char *str)
 		iden != DQUOTE && \
 		iden != EXPAND)
 	{
-		printf("minishell: syntax error near unexpected token `%s'\n", str); // change to stderr
+		display_error(NULL, "syntax error near unexpected token `", str, "'");
 		return (0);
 	}
 	return (1);

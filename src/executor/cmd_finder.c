@@ -6,7 +6,7 @@
 /*   By: gwinnink <gwinnink@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 14:17:19 by fpurdom           #+#    #+#             */
-/*   Updated: 2022/11/10 16:08:00 by gwinnink         ###   ########.fr       */
+/*   Updated: 2022/11/15 16:16:25 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,11 @@
 #include <fcntl.h>
 #include <stdio.h>
 #include <errno.h>
+#include "error_msg.h"
 
 static void	cmd_not_found(char **to_free, char *cmd_file, char *command)
 {
-	printf("minishell: %s: command not found\n", command);
+	display_error(command, "command not found", NULL, NULL);
 	ft_free_all(to_free);
 	free(cmd_file);
 	exit (127);
@@ -29,7 +30,7 @@ static void	cmd_not_found(char **to_free, char *cmd_file, char *command)
 
 static void	permission_denied(char **to_free, char *cmd_file, char *command)
 {
-	printf("minishell: %s: Permission denied\n", command);
+	display_error(command, "Permission denied", NULL, NULL);
 	if (to_free)
 		ft_free_all(to_free);
 	if (cmd_file)
@@ -45,7 +46,7 @@ static char	**find_path(t_env *env, char *command)
 	val = get_env(env, "PATH");
 	if (!val)
 	{
-		printf("minishell: %s: No such file or directory\n", command);
+		display_error(command, "No such file or directory", NULL, NULL);
 		exit(127);
 	}
 	paths = ft_split(val, ':');

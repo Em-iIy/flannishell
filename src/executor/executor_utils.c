@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   executor_utils.c                                   :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: gwinnink <gwinnink@student.42.fr>            +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2022/10/04 16:20:52 by fpurdom       #+#    #+#                 */
-/*   Updated: 2022/11/11 18:02:47 by fpurdom       ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   executor_utils.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gwinnink <gwinnink@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/04 16:20:52 by fpurdom           #+#    #+#             */
+/*   Updated: 2022/11/15 16:20:24 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include <stdio.h>
 #include <errno.h>
 #include <fcntl.h>
+#include "error_msg.h"
 
 static int	has_path(char *command)
 {
@@ -30,12 +31,12 @@ static int	has_path(char *command)
 		return (false);
 	if (access(command, F_OK) == -1)
 	{
-		printf("minishell: %s: No such file or directory\n", command);
+		display_error(command, "No such file or directory", NULL, NULL);
 		exit (127);
 	}
 	else if (access(command, X_OK) == -1)
 	{
-		printf("minishell: %s: Permission denied\n", command);
+		display_error(command, "Permission denied", NULL, NULL);
 		exit (126);
 	}
 	return (true);
