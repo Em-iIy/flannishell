@@ -6,7 +6,7 @@
 /*   By: gwinnink <gwinnink@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 14:17:19 by fpurdom           #+#    #+#             */
-/*   Updated: 2022/11/15 17:25:47 by gwinnink         ###   ########.fr       */
+/*   Updated: 2022/11/15 19:17:25 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ static char	**find_path(t_env *env, char *command)
 	return (paths);
 }
 
+// lemme know if this works as it should
 char	*get_cmd_file(char *command, t_env *env)
 {
 	char	**paths;
@@ -65,10 +66,12 @@ char	*get_cmd_file(char *command, t_env *env)
 	if (!cmd_file)
 		exit (ENOMEM);
 	to_free = paths;
-	while (access(cmd_file, F_OK) == -1 && *paths)
+	while (*paths)
 	{
 		free(cmd_file);
 		cmd_file = ft_strjointhree(*paths, "/", command);
+		if (access(cmd_file, F_OK) != -1)
+			break ;
 		paths++;
 	}
 	if (access(cmd_file, F_OK) == 0 && access(cmd_file, X_OK) == -1)
