@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   io_redirector.c                                    :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: gwinnink <gwinnink@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/06 15:44:57 by fpurdom           #+#    #+#             */
-/*   Updated: 2022/11/15 17:25:57 by gwinnink         ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   io_redirector.c                                    :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: gwinnink <gwinnink@student.42.fr>            +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2022/10/06 15:44:57 by fpurdom       #+#    #+#                 */
+/*   Updated: 2022/11/16 13:55:30 by fpurdom       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,7 @@ static void	redirect_input(t_file *file)
 
 	fd = open(file->file_name, O_RDONLY);
 	if (fd < 0)
-	{
-		display_error(file->file_name, "No such file or directory", NULL, NULL);
-		exit (1);
-	}
+		exit (display_error(file->file_name, NO_FILE, NULL, NULL));
 	if (dup2(fd, STDIN_FILENO) < 0)
 		exit (3);
 }
@@ -42,10 +39,7 @@ static void	redirect_output(t_file *file)
 	else
 		fd = open(file->file_name, O_CREAT | O_RDWR | O_TRUNC, 0666);
 	if (fd < 0)
-	{
-		display_error(file->file_name, "Permission denied", NULL, NULL);
-		exit (1);
-	}
+		exit (display_error(file->file_name, NO_PERM, NULL, NULL));
 	if (dup2(fd, STDOUT_FILENO) < 0)
 		exit (3);
 }

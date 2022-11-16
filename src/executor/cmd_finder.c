@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   cmd_finder.c                                       :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: gwinnink <gwinnink@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/06 14:17:19 by fpurdom           #+#    #+#             */
-/*   Updated: 2022/11/15 19:17:25 by gwinnink         ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   cmd_finder.c                                       :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: gwinnink <gwinnink@student.42.fr>            +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2022/10/06 14:17:19 by fpurdom       #+#    #+#                 */
+/*   Updated: 2022/11/16 13:57:53 by fpurdom       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,20 +21,18 @@
 
 static void	cmd_not_found(char **to_free, char *cmd_file, char *command)
 {
-	display_error(command, "command not found", NULL, NULL);
 	ft_free_all(to_free);
 	free(cmd_file);
-	exit (127);
+	exit (display_error(command, NO_CMD, NULL, NULL) + 126);
 }
 
 static void	permission_denied(char **to_free, char *cmd_file, char *command)
 {
-	display_error(command, "Permission denied", NULL, NULL);
 	if (to_free)
 		ft_free_all(to_free);
 	if (cmd_file)
 		free(cmd_file);
-	exit (126);
+	exit (display_error(command, NO_PERM, NULL, NULL) + 125);
 }
 
 static char	**find_path(t_env *env, char *command)
@@ -45,7 +43,7 @@ static char	**find_path(t_env *env, char *command)
 	val = get_env(env, "PATH");
 	if (!val)
 	{
-		display_error(command, "No such file or directory", NULL, NULL);
+		display_error(command, NO_FILE, NULL, NULL);
 		exit(127);
 	}
 	paths = ft_split(val, ':');

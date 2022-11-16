@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   parse_io.c                                         :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: gwinnink <gwinnink@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/14 11:32:18 by gwinnink          #+#    #+#             */
-/*   Updated: 2022/11/15 14:44:01 by gwinnink         ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   parse_io.c                                         :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: gwinnink <gwinnink@student.42.fr>            +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2022/10/14 11:32:18 by gwinnink      #+#    #+#                 */
+/*   Updated: 2022/11/16 14:04:41 by fpurdom       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,7 @@ t_file	*parse_io(t_env *env, t_token **head, int i)
 	hd_quotes = false;
 	if ((*head)->next == NULL)
 	{
-		display_error(NULL, "syntax error near unexpected token `newline'",
-			NULL, NULL);
+		display_error(NULL, SYNTAX, "newline'", NULL);
 		g_code = 258;
 		return (NULL);
 	}

@@ -1,17 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_unset.c                                         :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: gwinnink <gwinnink@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/09 15:14:19 by gwinnink          #+#    #+#             */
-/*   Updated: 2022/11/10 15:59:39 by gwinnink         ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   ft_unset.c                                         :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: gwinnink <gwinnink@student.42.fr>            +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2022/11/09 15:14:19 by gwinnink      #+#    #+#                 */
+/*   Updated: 2022/11/16 13:44:52 by fpurdom       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "environment.h"
 #include "libft.h"
+#include "error_msg.h"
 
 static int	unset_error_msg(char *s1, char *s2)
 {

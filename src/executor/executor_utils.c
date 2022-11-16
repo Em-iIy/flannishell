@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   executor_utils.c                                   :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: gwinnink <gwinnink@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/04 16:20:52 by fpurdom           #+#    #+#             */
-/*   Updated: 2022/11/15 17:34:28 by gwinnink         ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   executor_utils.c                                   :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: gwinnink <gwinnink@student.42.fr>            +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2022/10/04 16:20:52 by fpurdom       #+#    #+#                 */
+/*   Updated: 2022/11/16 13:56:40 by fpurdom       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,9 @@ static int	has_path(char *command)
 	if (i < 0)
 		return (false);
 	if (access(command, F_OK) == -1)
-	{
-		display_error(command, "No such file or directory", NULL, NULL);
-		exit (127);
-	}
+		exit (display_error(command, NO_FILE, NULL, NULL) + 126);
 	else if (access(command, X_OK) == -1)
-	{
-		display_error(command, "Permission denied", NULL, NULL);
-		exit (126);
-	}
+		exit (display_error(command, NO_PERM, NULL, NULL) + 125);
 	return (true);
 }
 

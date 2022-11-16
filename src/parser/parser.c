@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   parser.c                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: gwinnink <gwinnink@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/22 14:27:03 by gwinnink          #+#    #+#             */
-/*   Updated: 2022/11/15 17:21:38 by gwinnink         ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   parser.c                                           :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: gwinnink <gwinnink@student.42.fr>            +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2022/09/22 14:27:03 by gwinnink      #+#    #+#                 */
+/*   Updated: 2022/11/16 14:05:50 by fpurdom       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,7 @@ static bool	check_cmd(t_cmd *cmd, t_token *token)
 	if ((!*cmd->command && !cmd->files) || \
 		(token && token->iden == PIPE && !token->next))
 	{
-		display_error(NULL, "syntax error near unexpected token `|'",
-			NULL, NULL);
+		display_error(NULL, SYNTAX, "|'", NULL);
 		g_code = 258;
 		return (false);
 	}
