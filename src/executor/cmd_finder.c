@@ -6,7 +6,7 @@
 /*   By: gwinnink <gwinnink@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/06 14:17:19 by fpurdom       #+#    #+#                 */
-/*   Updated: 2022/11/16 13:57:53 by fpurdom       ########   odam.nl         */
+/*   Updated: 2022/11/16 14:59:39 by fpurdom       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,11 @@ static char	**find_path(t_env *env, char *command)
 	val = get_env(env, "PATH");
 	if (!val)
 	{
-		display_error(command, NO_FILE, NULL, NULL);
-		exit(127);
+		if (access(command, F_OK) == -1)
+			exit (display_error(command, NO_FILE, NULL, NULL) + 126);
+		if (access(command, X_OK) == -1)
+			exit (display_error(command, NO_PERM, NULL, NULL) + 125);
+		return (NULL);
 	}
 	paths = ft_split(val, ':');
 	if (!paths)
@@ -52,7 +55,6 @@ static char	**find_path(t_env *env, char *command)
 	return (paths);
 }
 
-// lemme know if this works as it should
 char	*get_cmd_file(char *command, t_env *env)
 {
 	char	**paths;
@@ -60,9 +62,9 @@ char	*get_cmd_file(char *command, t_env *env)
 	char	*cmd_file;
 
 	paths = find_path(env, command);
-	cmd_file = ft_strdup(command);
-	if (!cmd_file)
-		exit (ENOMEM);
+	if (!paths)
+		return (command);
+	cmd_file = NULL;
 	to_free = paths;
 	while (*paths)
 	{
