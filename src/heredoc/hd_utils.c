@@ -6,7 +6,7 @@
 /*   By: gwinnink <gwinnink@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/11/07 19:03:57 by fpurdom       #+#    #+#                 */
-/*   Updated: 2022/11/16 19:11:53 by fpurdom       ########   odam.nl         */
+/*   Updated: 2022/11/17 18:34:23 by fpurdom       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static int	hd_expand(char *line, int fd, t_env *env)
 	char	*env_var;
 
 	i = 0;
-	while (line[i] && ft_isalnum(line[i]))
+	while (line[i] && (ft_isalnum(line[i]) || line[i] == '_'))
 			i++;
 	key = ft_substr(line, 0, i);
 	env_var = get_env(env, key);
@@ -79,7 +79,7 @@ int	open_heredoc(t_file *file, char *delimiter, t_env *env)
 
 	fd = open(file->file_name, O_CREAT | O_RDWR | O_TRUNC, 0666);
 	if (fd < 0)
-		return (1);
+		return (3);
 	signal(SIGINT, SIG_DFL);
 	while (1)
 	{
@@ -92,6 +92,6 @@ int	open_heredoc(t_file *file, char *delimiter, t_env *env)
 		free(line);
 	}
 	if (close(fd))
-		return (1);
+		return (3);
 	return (0);
 }

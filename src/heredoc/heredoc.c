@@ -6,7 +6,7 @@
 /*   By: gwinnink <gwinnink@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/11/05 12:24:19 by fpurdom       #+#    #+#                 */
-/*   Updated: 2022/11/17 14:10:23 by fpurdom       ########   odam.nl         */
+/*   Updated: 2022/11/17 18:32:29 by fpurdom       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,28 +37,6 @@ static int	hd_fork(char *delimiter, t_file *files, t_cmd *cmds, t_env *env)
 	return (0);
 }
 
-int	check_heredoc(t_cmd *cmds, t_env *env)
-{
-	int		error;
-	char	*delimiter;
-	t_file	*files;
-
-	files = cmds->files;
-	while (files)
-	{
-		if (files->alt && !files->io)
-		{
-			delimiter = create_hd_file(files);
-			error = hd_fork(delimiter, files, cmds, env);
-			free(delimiter);
-			if (error)
-				return (error);
-		}
-		files = files->next;
-	}
-	return (0);
-}
-
 int	rm_heredoc_files(t_cmd *commands)
 {
 	t_file	*files;
@@ -74,6 +52,32 @@ int	rm_heredoc_files(t_cmd *commands)
 			files = files->next;
 		}
 		commands = commands->next;
+	}
+	return (0);
+}
+
+int	check_heredoc(t_cmd *cmds, t_env *env)
+{
+	int		error;
+	char	*delimiter;
+	t_file	*files;
+
+	files = cmds->files;
+	while (files)
+	{
+		if (files->alt && !files->io)
+		{
+			delimiter = create_hd_file(files);
+			error = hd_fork(delimiter, files, cmds, env);
+			free(delimiter);
+			if (error)
+			{
+				if (rm_heredoc_files(cmds))
+					return (3);
+				return (error);
+			}
+		}
+		files = files->next;
 	}
 	return (0);
 }
