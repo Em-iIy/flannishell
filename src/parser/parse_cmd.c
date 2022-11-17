@@ -6,7 +6,7 @@
 /*   By: gwinnink <gwinnink@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 12:48:40 by gwinnink          #+#    #+#             */
-/*   Updated: 2022/11/15 16:26:50 by gwinnink         ###   ########.fr       */
+/*   Updated: 2022/11/17 14:04:23 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include "parse_io_utils.h"
 #include "parser_utils.h"
 #include "parser.h"
+#include "environment.h"
 
 static int	check_io_iden(int iden)
 {
@@ -48,7 +49,7 @@ t_cmd	*parse_cmd(t_env *env, t_token **head)
 		{
 			io_temp = parse_io(env, head, i);
 			if (!io_temp)
-				return (free(env_temp), NULL);
+				return (env_free_all(&env_temp), cmd_free(ret), NULL);
 			io_add_back(&ret->files, io_temp);
 			i++;
 		}
