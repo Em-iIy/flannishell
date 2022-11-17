@@ -6,7 +6,7 @@
 /*   By: gwinnink <gwinnink@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/11/05 12:24:19 by fpurdom       #+#    #+#                 */
-/*   Updated: 2022/11/16 19:20:43 by fpurdom       ########   odam.nl         */
+/*   Updated: 2022/11/17 14:10:23 by fpurdom       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,13 @@
 static int	hd_fork(char *delimiter, t_file *files, t_cmd *cmds, t_env *env)
 {
 	int	status;
+	int	pid;
 
-	if (fork() == 0)
+	pid = fork();
+	if (pid == 0)
 		exit (open_heredoc(files, delimiter, env));
 	signal(SIGINT, SIG_IGN);
-	wait(&status);
+	waitpid(pid, &status, 0);
 	signal(SIGINT, sig_func_parent);
 	if (WIFEXITED(status))
 		if (WEXITSTATUS(status))
