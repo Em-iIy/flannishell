@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: gwinnink <gwinnink@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/13 15:20:49 by gwinnink          #+#    #+#             */
-/*   Updated: 2022/11/15 17:25:32 by gwinnink         ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   main.c                                             :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: gwinnink <gwinnink@student.42.fr>            +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2022/07/13 15:20:49 by gwinnink      #+#    #+#                 */
+/*   Updated: 2022/11/17 19:23:17 by fpurdom       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 
 int	g_code = 0;
 
-static int	lex_parse_exe(t_env *env, char *line)
+static int	lex_parse_exe(t_env **env, char *line)
 {
 	t_lexer		*lxr;
 	t_parser	*prsr;
@@ -31,9 +31,9 @@ static int	lex_parse_exe(t_env *env, char *line)
 	lxr = lexer(line);
 	if (!lxr)
 		return (1);
-	prsr = parser(env, &lxr);
+	prsr = parser(*env, &lxr);
 	if (prsr->count > 0)
-		g_code = executor(prsr, &env);
+		g_code = executor(prsr, env);
 	if (g_code == 3)
 		perror("minishell");
 	free_lexer(&lxr);
@@ -41,7 +41,7 @@ static int	lex_parse_exe(t_env *env, char *line)
 	return (0);
 }
 
-static void	minishell(t_env *env)
+static void	minishell(t_env **env)
 {
 	char		*line;
 
@@ -73,5 +73,5 @@ int	main(int argc, char **argv, char **envp)
 	suppress_sig_output();
 	signal(SIGINT, sig_func_parent);
 	signal(SIGQUIT, SIG_IGN);
-	minishell(env);
+	minishell(&env);
 }
