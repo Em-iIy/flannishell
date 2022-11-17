@@ -6,7 +6,7 @@
 /*   By: gwinnink <gwinnink@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 14:39:44 by gwinnink          #+#    #+#             */
-/*   Updated: 2022/11/15 17:25:44 by gwinnink         ###   ########.fr       */
+/*   Updated: 2022/11/17 17:37:27 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	ft_pwd(void)
 
 	temp = getcwd(NULL, 0);
 	if (!temp)
-		exit (1);
+		exit (3);
 	printf("%s\n", temp);
 	free(temp);
 	g_code = 0;

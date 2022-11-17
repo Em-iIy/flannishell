@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   hd_utils.c                                         :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: gwinnink <gwinnink@student.42.fr>            +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2022/11/07 19:03:57 by fpurdom       #+#    #+#                 */
-/*   Updated: 2022/11/16 19:11:53 by fpurdom       ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   hd_utils.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gwinnink <gwinnink@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/11/07 19:03:57 by fpurdom           #+#    #+#             */
+/*   Updated: 2022/11/17 17:16:00 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static int	hd_expand(char *line, int fd, t_env *env)
 	char	*env_var;
 
 	i = 0;
-	while (line[i] && ft_isalnum(line[i]))
+	while (line[i] && (ft_isalnum(line[i]) || line[i] == '_'))
 			i++;
 	key = ft_substr(line, 0, i);
 	env_var = get_env(env, key);

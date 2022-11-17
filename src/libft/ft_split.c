@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gwinnink <gwinnink@student.codam.nl>       +#+  +:+       +#+        */
+/*   By: gwinnink <gwinnink@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 13:44:20 by gwinnink          #+#    #+#             */
-/*   Updated: 2022/10/03 15:35:52 by gwinnink         ###   ########.fr       */
+/*   Updated: 2022/11/17 19:30:01 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <errno.h>
 
 static int	ft_str_count(const char *s, char c)
 {
@@ -39,7 +40,7 @@ char	**ft_split(const char *s, char c)
 	str_count = ft_str_count(s, c);
 	ret = (char **)malloc((str_count + 1) * sizeof(char *));
 	if (!ret)
-		exit(-1);
+		exit(ENOMEM);
 	while (words < str_count)
 	{
 		i = 0;

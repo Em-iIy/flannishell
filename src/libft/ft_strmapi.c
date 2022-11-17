@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gwinnink <gwinnink@student.codam.nl>       +#+  +:+       +#+        */
+/*   By: gwinnink <gwinnink@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 13:44:41 by gwinnink          #+#    #+#             */
-/*   Updated: 2022/10/03 15:37:04 by gwinnink         ###   ########.fr       */
+/*   Updated: 2022/11/17 19:30:43 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <errno.h>
 
 char	*ft_strmapi(const char	*s, char (*f)(unsigned int, char))
 {
@@ -22,7 +23,7 @@ char	*ft_strmapi(const char	*s, char (*f)(unsigned int, char))
 		return (0);
 	ret = (char *)malloc(ft_strlen(s) + 1);
 	if (!ret)
-		exit(-1);
+		exit(ENOMEM);
 	while (s[i])
 	{
 		ret[i] = f(i, s[i]);

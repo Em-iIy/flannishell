@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gwinnink <gwinnink@student.codam.nl>       +#+  +:+       +#+        */
+/*   By: gwinnink <gwinnink@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 13:44:54 by gwinnink          #+#    #+#             */
-/*   Updated: 2022/10/03 15:34:22 by gwinnink         ###   ########.fr       */
+/*   Updated: 2022/11/17 19:30:52 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <stdlib.h>
+#include <errno.h>
 
 char	*ft_substr(const char *s, unsigned int start, size_t len)
 {
@@ -25,7 +26,7 @@ char	*ft_substr(const char *s, unsigned int start, size_t len)
 		return (ft_strdup(""));
 	ret = (char *)malloc((len + 1) * sizeof(char));
 	if (!ret)
-		exit(-1);
+		exit(ENOMEM);
 	while (i < len && s[start + i])
 	{
 		ret[i] = s[start + i];

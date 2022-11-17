@@ -6,11 +6,12 @@
 /*   By: gwinnink <gwinnink@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 15:25:55 by gwinnink          #+#    #+#             */
-/*   Updated: 2022/11/10 18:21:57 by gwinnink         ###   ########.fr       */
+/*   Updated: 2022/11/17 15:55:14 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
+#include <errno.h>
 #include "libft.h"
 #include "environment.h"
 
@@ -21,7 +22,7 @@ t_env	*env_new(char *str)
 
 	ret = (t_env *)malloc(sizeof(t_env));
 	if (!ret)
-		exit(-1);
+		exit(ENOMEM);
 	ret->str = NULL;
 	ret->key = NULL;
 	ret->val = NULL;
