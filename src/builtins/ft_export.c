@@ -6,7 +6,7 @@
 /*   By: gwinnink <gwinnink@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 11:53:04 by gwinnink          #+#    #+#             */
-/*   Updated: 2022/11/10 18:31:38 by gwinnink         ###   ########.fr       */
+/*   Updated: 2022/11/18 11:51:09 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ static void	export_error_msg(char *s1, char *s2)
 
 static bool	check_var_name(char	*str)
 {
+	if (!*str || ft_isdigit(*str))
+		return (false);
 	while (*str && (*str == '_' || ft_isalnum(*str)))
 		str++;
 	if (!*str)
@@ -44,6 +46,8 @@ static void	export_add_env(t_env **env, char *str)
 	i = 0;
 	while (str[i] && str[i] != '=')
 		i++;
+	if (!i)
+		i++;
 	key = ft_substr(str, 0, i);
 	if (check_var_name(key) == true)
 	{
@@ -55,7 +59,7 @@ static void	export_add_env(t_env **env, char *str)
 		}
 	}
 	else
-		export_error_msg(key, "': not a valid identifier\n");
+		export_error_msg(str, "': not a valid identifier\n");
 	free(key);
 }
 
