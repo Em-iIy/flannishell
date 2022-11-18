@@ -6,7 +6,7 @@
 /*   By: gwinnink <gwinnink@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/11/07 19:03:57 by fpurdom       #+#    #+#                 */
-/*   Updated: 2022/11/17 18:34:23 by fpurdom       ########   odam.nl         */
+/*   Updated: 2022/11/17 19:33:43 by fpurdom       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static int	hd_expand(char *line, int fd, t_env *env)
 
 	i = 0;
 	while (line[i] && (ft_isalnum(line[i]) || line[i] == '_'))
-			i++;
+		i++;
 	key = ft_substr(line, 0, i);
 	env_var = get_env(env, key);
 	free(key);

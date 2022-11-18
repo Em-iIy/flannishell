@@ -6,7 +6,7 @@
 /*   By: gwinnink <gwinnink@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/11/05 12:24:19 by fpurdom       #+#    #+#                 */
-/*   Updated: 2022/11/17 18:32:29 by fpurdom       ########   odam.nl         */
+/*   Updated: 2022/11/18 13:50:23 by fpurdom       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static int	hd_fork(char *delimiter, t_file *files, t_cmd *cmds, t_env *env)
 	signal(SIGINT, sig_func_parent);
 	if (WIFEXITED(status))
 		if (WEXITSTATUS(status))
-			return (check_memory(&status));
+			return (check_memory(&status, cmds));
 	if (WIFSIGNALED(status))
 		return (sig_func_heredoc(WTERMSIG(status), cmds));
 	return (0);
