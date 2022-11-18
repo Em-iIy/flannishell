@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   parse_str.c                                        :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: gwinnink <gwinnink@student.42.fr>            +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2022/10/14 11:37:28 by gwinnink      #+#    #+#                 */
-/*   Updated: 2022/11/16 14:03:38 by fpurdom       ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   parse_str.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gwinnink <gwinnink@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/14 11:37:28 by gwinnink          #+#    #+#             */
+/*   Updated: 2022/11/18 11:18:05 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int	check_valid_str_iden(int iden, char *str)
 		iden != EXPAND)
 	{
 		display_error(NULL, SYNTAX, str, "'");
+		g_code = 2;
 		return (0);
 	}
 	return (1);
