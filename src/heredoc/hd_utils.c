@@ -6,7 +6,7 @@
 /*   By: gwinnink <gwinnink@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/11/07 19:03:57 by fpurdom       #+#    #+#                 */
-/*   Updated: 2022/11/18 13:53:13 by fpurdom       ########   odam.nl         */
+/*   Updated: 2022/11/18 15:16:47 by fpurdom       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static void	write_to_file(t_file *file, char *line, int fd, t_env *env)
 	}
 	while (line[i])
 	{
-		if (line[i] == '$')
+		if (line[i] == '$' && (ft_isalnum(line[i + 1]) || line[i + 1] == '_'))
 			i += hd_expand(&line[i + 1], fd, env);
 		else
 			ft_putchar_fd(line[i], fd);
