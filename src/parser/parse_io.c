@@ -1,18 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   parse_io.c                                         :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: gwinnink <gwinnink@student.42.fr>            +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2022/10/14 11:32:18 by gwinnink      #+#    #+#                 */
-/*   Updated: 2022/11/16 14:04:41 by fpurdom       ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   parse_io.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gwinnink <gwinnink@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/14 11:32:18 by gwinnink          #+#    #+#             */
+/*   Updated: 2022/11/17 16:46:20 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include <stdbool.h>
 #include <stdio.h>
+#include <errno.h>
 #include "parser_utils.h"
 #include "parser.h"
 #include "error_msg.h"
@@ -23,7 +24,7 @@ static t_file	*file_init(int iden, int i)
 
 	ret = (t_file *)malloc(sizeof(t_file));
 	if (!ret)
-		exit(-1);
+		exit(ENOMEM);
 	ret->next = NULL;
 	ret->io = false;
 	ret->alt = false;

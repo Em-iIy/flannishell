@@ -6,12 +6,13 @@
 /*   By: gwinnink <gwinnink@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 12:38:37 by gwinnink          #+#    #+#             */
-/*   Updated: 2022/11/09 11:42:19 by gwinnink         ###   ########.fr       */
+/*   Updated: 2022/11/17 19:31:14 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "parser.h"
+#include <errno.h>
 
 t_file	*io_new(int iden)
 {
@@ -19,7 +20,7 @@ t_file	*io_new(int iden)
 
 	ret = (t_file *)malloc(sizeof(t_file));
 	if (!ret)
-		exit(-1);
+		exit(ENOMEM);
 	ret->next = NULL;
 	ret->io = false;
 	ret->alt = false;

@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_token_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gwinnink <gwinnink@student.codam.nl>       +#+  +:+       +#+        */
+/*   By: gwinnink <gwinnink@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 17:34:38 by gwinnink          #+#    #+#             */
-/*   Updated: 2022/10/18 20:54:03 by gwinnink         ###   ########.fr       */
+/*   Updated: 2022/11/17 19:29:11 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
+#include <errno.h>
 #include "lexer.h"
 #include "libft.h"
 
@@ -49,7 +50,7 @@ t_token	*tok_new(int iden)
 
 	ret = (t_token *)malloc(sizeof(t_token));
 	if (!ret)
-		exit(1);
+		exit(ENOMEM);
 	ret->content = NULL;
 	ret->next = NULL;
 	ret->prev = NULL;

@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gwinnink <gwinnink@student.codam.nl>       +#+  +:+       +#+        */
+/*   By: gwinnink <gwinnink@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 13:43:51 by gwinnink          #+#    #+#             */
-/*   Updated: 2022/10/03 15:35:06 by gwinnink         ###   ########.fr       */
+/*   Updated: 2022/11/17 19:29:49 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <limits.h>
 #include <stdlib.h>
+#include <errno.h>
 
 static int	ft_digits(int n)
 {
@@ -65,7 +66,7 @@ char	*ft_itoa(int n)
 		digits = ft_digits(n);
 	ret = (char *)malloc((digits + 1) * sizeof(char));
 	if (!ret)
-		exit(-1);
+		exit(ENOMEM);
 	if (n == INT_MIN)
 	{
 		ft_strlcpy(ret, "-2147483648", 12);

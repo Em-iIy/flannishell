@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   parse_cmd_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gwinnink <gwinnink@student.codam.nl>       +#+  +:+       +#+        */
+/*   By: gwinnink <gwinnink@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 11:41:50 by gwinnink          #+#    #+#             */
-/*   Updated: 2022/10/18 13:28:00 by gwinnink         ###   ########.fr       */
+/*   Updated: 2022/11/17 19:31:08 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
+#include <errno.h>
 #include "libft.h"
 #include "parser.h"
 #include "parse_io_utils.h"
@@ -21,7 +22,7 @@ t_cmd	*cmd_new(void)
 
 	ret = (t_cmd *)malloc(sizeof(t_cmd));
 	if (!ret)
-		exit(-1);
+		exit(ENOMEM);
 	ret->next = NULL;
 	ret->files = NULL;
 	ret->command = NULL;

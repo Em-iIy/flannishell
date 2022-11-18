@@ -6,11 +6,12 @@
 /*   By: gwinnink <gwinnink@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 17:21:16 by gwinnink          #+#    #+#             */
-/*   Updated: 2022/11/15 16:19:42 by gwinnink         ###   ########.fr       */
+/*   Updated: 2022/11/17 16:13:30 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
+#include <errno.h>
 #include "lexer.h"
 #include "lexer_token_utils.h"
 #include "libft.h"
@@ -22,8 +23,8 @@ static t_lexer	*init_lexer(char *line)
 
 	ret = (t_lexer *)malloc(sizeof(t_lexer));
 	if (!ret)
-		exit(1);
-	ret->head = 0;
+		exit(ENOMEM);
+	ret->head = NULL;
 	ret->line = line;
 	ret->quote = -1;
 	ret->dquote = -1;
@@ -40,9 +41,7 @@ t_lexer	*lexer(char *line)
 	while (ft_isspace(line[i]))
 		i++;
 	while (line[i])
-	{
 		i = create_next_token(&lxr, i);
-	}
 	if (lxr->dquote == 1 || lxr->quote == 1)
 	{
 		g_code = 258;
