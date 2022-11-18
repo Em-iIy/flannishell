@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   ft_unset.c                                         :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: gwinnink <gwinnink@student.42.fr>            +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2022/11/09 15:14:19 by gwinnink      #+#    #+#                 */
-/*   Updated: 2022/11/16 13:44:52 by fpurdom       ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   ft_unset.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gwinnink <gwinnink@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/11/09 15:14:19 by gwinnink          #+#    #+#             */
+/*   Updated: 2022/11/18 11:52:20 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ static int	unset_error_msg(char *s1, char *s2)
 
 static bool	check_var_name(char	*str)
 {
+	if (ft_isdigit(*str))
+		return (false);
 	while (*str && (*str == '_' || ft_isalnum(*str)))
 		str++;
 	if (!*str)
