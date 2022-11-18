@@ -6,7 +6,7 @@
 /*   By: gwinnink <gwinnink@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/22 16:29:32 by fpurdom       #+#    #+#                 */
-/*   Updated: 2022/11/18 13:52:59 by fpurdom       ########   odam.nl         */
+/*   Updated: 2022/11/18 15:44:31 by fpurdom       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,8 @@ static int	do_fork(t_cmd *command, t_pipe *pipes, t_env **env)
 
 static int	dont_fork(t_cmd *command, t_env **env)
 {
+	if (!*command->command)
+		return (0);
 	if (!ft_strncmp(*command->command, "exit", 5))
 		return (ft_exit(command));
 	if (!ft_strncmp(*command->command, "cd", 3))
