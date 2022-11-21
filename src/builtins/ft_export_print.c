@@ -6,7 +6,7 @@
 /*   By: gwinnink <gwinnink@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 15:01:40 by gwinnink          #+#    #+#             */
-/*   Updated: 2022/11/21 18:23:45 by gwinnink         ###   ########.fr       */
+/*   Updated: 2022/11/21 19:39:06 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,19 @@
 #include <stdio.h>
 #include "libft.h"
 
-void	arr_swap(char **s1, char **s2)
+static int	max_strlen(char *s1, char *s2)
+{
+	int	len1;
+	int	len2;
+
+	len1 = ft_strlen(s1);
+	len2 = ft_strlen(s2);
+	if (len1 > len2)
+		return (len1);
+	return (len2);
+}
+
+static void	arr_swap(char **s1, char **s2)
 {
 	char	*temp;
 
@@ -36,7 +48,8 @@ static void	export_sort(char **env)
 		j = 0;
 		while (env[j] && env[j + 1])
 		{
-			if (ft_strncmp(env[j], env[j + 1], ft_strlen(env[j] + 1)) > 0)
+			if (ft_strncmp(env[j], env[j + 1],
+					max_strlen(env[j], env[j + 1]) + 1) > 0)
 				arr_swap(&env[j], &env[j + 1]);
 			j++;
 		}
