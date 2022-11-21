@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   environment_get.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gwinnink <gwinnink@student.codam.nl>       +#+  +:+       +#+        */
+/*   By: gwinnink <gwinnink@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 11:00:18 by gwinnink          #+#    #+#             */
-/*   Updated: 2022/10/11 11:49:25 by gwinnink         ###   ########.fr       */
+/*   Updated: 2022/11/21 18:43:11 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_env	*env_chr(t_env *env, char *key)
 		return (NULL);
 	while (env)
 	{
-		if (!ft_strncmp(env->key, key, ft_strlen(key) + 1))
+		if (env->key && !ft_strncmp(env->key, key, ft_strlen(key) + 1))
 			return (env);
 		env = env->next;
 	}

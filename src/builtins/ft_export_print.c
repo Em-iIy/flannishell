@@ -6,7 +6,7 @@
 /*   By: gwinnink <gwinnink@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 15:01:40 by gwinnink          #+#    #+#             */
-/*   Updated: 2022/11/10 15:02:57 by gwinnink         ###   ########.fr       */
+/*   Updated: 2022/11/21 18:23:45 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,15 @@ static void	export_printf(char *str)
 	while (str[i] && str[i] != '=')
 		i++;
 	key = ft_substr(str, 0, i + 1);
-	val = ft_strdup(&str[i + 1]);
-	printf("declare -x %s\"%s\"\n", key, val);
+	if (str[i])
+	{
+		val = ft_strdup(&str[i + 1]);
+		printf("declare -x %s\"%s\"\n", key, val);
+		free(val);
+	}
+	else
+		printf("declare -x %s\n", key);
 	free(key);
-	free(val);
 }
 
 int	export_print(char **env)

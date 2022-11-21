@@ -6,7 +6,7 @@
 /*   By: gwinnink <gwinnink@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 11:53:04 by gwinnink          #+#    #+#             */
-/*   Updated: 2022/11/18 11:51:09 by gwinnink         ###   ########.fr       */
+/*   Updated: 2022/11/21 19:09:20 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,14 +49,13 @@ static void	export_add_env(t_env **env, char *str)
 	if (!i)
 		i++;
 	key = ft_substr(str, 0, i);
+	val = NULL;
 	if (check_var_name(key) == true)
 	{
 		if (str[i])
-		{
 			val = ft_strdup(&str[i + 1]);
-			add_env(env, key, val);
-			free(val);
-		}
+		add_env(env, key, val);
+		free(val);
 	}
 	else
 		export_error_msg(str, "': not a valid identifier\n");

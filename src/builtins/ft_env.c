@@ -6,7 +6,7 @@
 /*   By: gwinnink <gwinnink@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 13:01:50 by gwinnink          #+#    #+#             */
-/*   Updated: 2022/11/09 16:06:40 by gwinnink         ###   ########.fr       */
+/*   Updated: 2022/11/21 18:24:34 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ int	ft_env(t_env *env)
 {
 	while (env)
 	{
-		printf("%s\n", env->str);
+		if (env->key && env->val)
+			printf("%s\n", env->str);
 		env = env->next;
 	}
 	g_code = 0;

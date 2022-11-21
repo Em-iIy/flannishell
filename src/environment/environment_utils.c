@@ -6,7 +6,7 @@
 /*   By: gwinnink <gwinnink@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 15:25:55 by gwinnink          #+#    #+#             */
-/*   Updated: 2022/11/17 15:55:14 by gwinnink         ###   ########.fr       */
+/*   Updated: 2022/11/21 19:05:04 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,9 @@ t_env	*env_new(char *str)
 	i = 0;
 	while (str[i] && str[i] != '=')
 		i++;
-	if (str[i] != '=')
-		return (ret);
 	ret->key = ft_substr(str, 0, i);
-	ret->val = ft_strdup(&str[i + 1]);
+	if (str[i])
+		ret->val = ft_strdup(&str[i + 1]);
 	return (ret);
 }
 
