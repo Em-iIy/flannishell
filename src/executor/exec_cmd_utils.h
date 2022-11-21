@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   io_redirector.h                                    :+:    :+:            */
+/*   exec_cmd_utils.h                                   :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: fpurdom <fpurdom@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2022/10/06 15:45:57 by fpurdom       #+#    #+#                 */
-/*   Updated: 2022/11/21 13:34:41 by fpurdom       ########   odam.nl         */
+/*   Created: 2022/11/21 12:59:01 by fpurdom       #+#    #+#                 */
+/*   Updated: 2022/11/21 13:00:13 by fpurdom       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef IO_REDIRECTOR_H
-# define IO_REDIRECTOR_H
+#ifndef EXEC_CMD_UTILS_H
+# define EXEC_CMD_UTILS_H
 
-# include "executor_utils.h"
+#include "executor.h"
 
-int	redirect_io(t_cmd *command);
-int	redirect_io_back(int infd, int outfd);
+int		has_path(char *command);
+void	dup_everything(t_cmd *command, t_pipe *pipes);
 
 #endif

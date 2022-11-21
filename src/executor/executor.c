@@ -6,7 +6,7 @@
 /*   By: gwinnink <gwinnink@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/22 16:29:32 by fpurdom       #+#    #+#                 */
-/*   Updated: 2022/11/18 15:44:31 by fpurdom       ########   odam.nl         */
+/*   Updated: 2022/11/21 14:10:16 by fpurdom       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,15 @@
 #include "libft.h"
 #include "executor_utils.h"
 #include "executor.h"
-#include "builtins.h"
 #include "heredoc.h"
 #include "signals.h"
+
+static void	free_pipes(t_pipe *pipes)
+{
+	free(pipes->pid);
+	free(pipes);
+}
+
 
 static int	wait_forks(t_pipe *pipes, t_cmd *cmds)
 {
@@ -42,42 +48,6 @@ static int	wait_forks(t_pipe *pipes, t_cmd *cmds)
 		return (check_memory(&status, cmds));
 	if (WIFSIGNALED(status))
 		return (sig_func_child(WTERMSIG(status)));
-	return (0);
-}
-
-static int	do_fork(t_cmd *command, t_pipe *pipes, t_env **env)
-{
-	pipes->i++;
-	pipes->pid[pipes->i] = fork();
-	if (pipes->pid[pipes->i] < 0)
-		return (1);
-	if (pipes->pid[pipes->i] == 0)
-	{
-		unsuppress_sig_output();
-		signal(SIGINT, SIG_DFL);
-		signal(SIGQUIT, SIG_DFL);
-		exec_command(command, pipes, env);
-	}
-	else
-	{
-		signal(SIGINT, SIG_IGN);
-		signal(SIGQUIT, SIG_IGN);
-	}
-	return (0);
-}
-
-static int	dont_fork(t_cmd *command, t_env **env)
-{
-	if (!*command->command)
-		return (0);
-	if (!ft_strncmp(*command->command, "exit", 5))
-		return (ft_exit(command));
-	if (!ft_strncmp(*command->command, "cd", 3))
-		return (ft_cd(env, command->command[1]));
-	if (!ft_strncmp(*command->command, "unset", 5))
-		return (ft_unset(env, command->command));
-	if (!ft_strncmp(*command->command, "export", 7))
-		return (ft_export(env, command->command));
 	return (0);
 }
 
