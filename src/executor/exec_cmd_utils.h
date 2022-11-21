@@ -1,23 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   executor_utils.h                                   :+:    :+:            */
+/*   exec_cmd_utils.h                                   :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: gwinnink <gwinnink@student.42.fr>            +#+                     */
+/*   By: fpurdom <fpurdom@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2022/10/04 16:22:04 by fpurdom       #+#    #+#                 */
-/*   Updated: 2022/11/21 14:14:38 by fpurdom       ########   odam.nl         */
+/*   Created: 2022/11/21 12:59:01 by fpurdom       #+#    #+#                 */
+/*   Updated: 2022/11/21 14:39:20 by fpurdom       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EXECUTOR_UTILS_H
-# define EXECUTOR_UTILS_H
+#ifndef EXEC_CMD_UTILS_H
+# define EXEC_CMD_UTILS_H
 
-# include "parser.h"
 # include "executor.h"
 
-void	exec_command(t_cmd *command, t_pipe *pipes, t_env **env);
-int		do_fork(t_cmd *command, t_pipe *pipes, t_env **env);
-int		dont_fork(t_cmd *command, t_env **env);
+int		has_path(char *command);
+void	dup_everything(t_cmd *command, t_pipe *pipes);
 
 #endif

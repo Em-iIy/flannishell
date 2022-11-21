@@ -7,6 +7,7 @@ FILES_SRCS =	main.c \
 				error_msg.c \
 				executor.c \
 				executor_utils.c \
+				exec_cmd_utils.c \
 				cmd_finder.c \
 				io_redirector.c \
 				heredoc.c \

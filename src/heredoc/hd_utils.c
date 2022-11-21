@@ -6,7 +6,7 @@
 /*   By: gwinnink <gwinnink@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/11/07 19:03:57 by fpurdom       #+#    #+#                 */
-/*   Updated: 2022/11/18 15:16:47 by fpurdom       ########   odam.nl         */
+/*   Updated: 2022/11/21 15:21:25 by fpurdom       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,13 @@ char	*create_hd_file(t_file *files)
 	char		*file_n;
 	char		*hd_name;
 	char		*delimiter;
+	char		*tty_name;
 
+	tty_name = ttyname(STDIN_FILENO);
+	if (!tty_name)
+		return (NULL);
 	file_n = ft_itoa(files->i);
-	hd_name = ft_strjoin(".hd_file_", file_n);
+	hd_name = ft_strjointhree(".hd_file_", ft_strrchr(tty_name, 's'), file_n);
 	free(file_n);
 	delimiter = files->file_name;
 	files->file_name = hd_name;

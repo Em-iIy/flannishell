@@ -6,7 +6,7 @@
 /*   By: gwinnink <gwinnink@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/06 15:44:57 by fpurdom       #+#    #+#                 */
-/*   Updated: 2022/11/16 13:55:30 by fpurdom       ########   odam.nl         */
+/*   Updated: 2022/11/21 15:34:30 by fpurdom       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,21 @@
 #include "executor_utils.h"
 #include "libft.h"
 
-static void	redirect_input(t_file *file)
+static int	redirect_input(t_file *file)
 {
 	int		fd;
 
 	fd = open(file->file_name, O_RDONLY);
 	if (fd < 0)
-		exit (display_error(file->file_name, NO_FILE, NULL, NULL));
+		return (display_error(file->file_name, NO_FILE, NULL, NULL));
 	if (dup2(fd, STDIN_FILENO) < 0)
-		exit (3);
+		return (3);
+	if (close(fd))
+		return (3);
+	return (0);
 }
 
-static void	redirect_output(t_file *file)
+static int	redirect_output(t_file *file)
 {
 	int	fd;
 
@@ -39,19 +42,43 @@ static void	redirect_output(t_file *file)
 	else
 		fd = open(file->file_name, O_CREAT | O_RDWR | O_TRUNC, 0666);
 	if (fd < 0)
-		exit (display_error(file->file_name, NO_PERM, NULL, NULL));
+		return (display_error(file->file_name, NO_PERM, NULL, NULL));
 	if (dup2(fd, STDOUT_FILENO) < 0)
-		exit (3);
+		return (3);
+	if (close(fd))
+		return (3);
+	return (0);
 }
 
-void	redirect_io(t_cmd *command)
+int	redirect_io(t_cmd *command)
 {
-	while (command->files)
+	int		error;
+	t_file	*files;
+
+	error = 0;
+	files = command->files;
+	while (files)
 	{
-		if (command->files->io)
-			redirect_output(command->files);
+		if (files->io)
+			error = redirect_output(files);
 		else
-			redirect_input(command->files);
-		command->files = command->files->next;
+			error = redirect_input(files);
+		if (error)
+			return (error);
+		files = files->next;
 	}
+	return (0);
+}
+
+int	redirect_io_back(int infd, int outfd)
+{
+	if (dup2(infd, STDIN_FILENO) < 0)
+		return (1);
+	if (close(infd))
+		return (1);
+	if (dup2(outfd, STDOUT_FILENO) < 0)
+		return (1);
+	if (close(outfd))
+		return (1);
+	return (0);
 }

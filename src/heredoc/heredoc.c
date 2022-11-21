@@ -6,7 +6,7 @@
 /*   By: gwinnink <gwinnink@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/11/05 12:24:19 by fpurdom       #+#    #+#                 */
-/*   Updated: 2022/11/18 13:50:23 by fpurdom       ########   odam.nl         */
+/*   Updated: 2022/11/21 15:21:38 by fpurdom       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,8 @@ int	check_heredoc(t_cmd *cmds, t_env *env)
 		if (files->alt && !files->io)
 		{
 			delimiter = create_hd_file(files);
+			if (!delimiter)
+				return (3);
 			error = hd_fork(delimiter, files, cmds, env);
 			free(delimiter);
 			if (error)
