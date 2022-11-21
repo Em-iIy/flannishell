@@ -6,11 +6,12 @@
 /*   By: gwinnink <gwinnink@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 15:29:08 by gwinnink          #+#    #+#             */
-/*   Updated: 2022/10/27 18:33:36 by gwinnink         ###   ########.fr       */
+/*   Updated: 2022/11/21 13:01:57 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
+#include <errno.h>
 #include "libft.h"
 #include "environment.h"
 #include "environment_utils.h"
@@ -43,7 +44,7 @@ char	**make_envp(t_env *env)
 	}
 	ret = (char **)malloc((i + 1) * sizeof(char *));
 	if (!ret)
-		exit(-1);
+		exit(ENOMEM);
 	ret[i] = NULL;
 	i--;
 	temp = env;
