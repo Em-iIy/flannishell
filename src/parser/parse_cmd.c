@@ -6,7 +6,7 @@
 /*   By: gwinnink <gwinnink@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 12:48:40 by gwinnink          #+#    #+#             */
-/*   Updated: 2022/11/17 14:04:23 by gwinnink         ###   ########.fr       */
+/*   Updated: 2022/11/21 13:22:19 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,40 +24,40 @@ static int	check_io_iden(int iden)
 	iden == LESS || iden == LESSLESS);
 }
 
-static void	env_add_n_free(t_env *env, t_token **head, t_env **env_temp)
+static void	slist_add_n_free(t_env *env, t_token **head, t_str_list **slist)
 {
 	char	*temp;
 
 	temp = parse_str(env, head);
-	env_add_front(env_temp, env_new(temp));
+	ft_str_list_add_front(slist, ft_str_list_new(temp));
 	free(temp);
 }
 
 t_cmd	*parse_cmd(t_env *env, t_token **head)
 {
-	t_cmd	*ret;
-	t_env	*env_temp;
-	t_file	*io_temp;
-	int		i;
+	t_cmd		*ret;
+	t_str_list	*slist;
+	t_file		*io_temp;
+	int			i;
 
 	i = 0;
 	ret = cmd_new();
-	env_temp = NULL;
+	slist = NULL;
 	while (*head && (*head)->iden != PIPE)
 	{
 		if (check_io_iden((*head)->iden))
 		{
 			io_temp = parse_io(env, head, i);
 			if (!io_temp)
-				return (env_free_all(&env_temp), cmd_free(ret), NULL);
+				return (ft_str_list_free_all(&slist), cmd_free(ret), NULL);
 			io_add_back(&ret->files, io_temp);
 			i++;
 		}
 		else if (check_valid_str_iden((*head)->iden, (*head)->content))
-			env_add_n_free(env, head, &env_temp);
+			slist_add_n_free(env, head, &slist);
 		*head = (*head)->next;
 	}
-	ret->command = make_envp(env_temp);
-	env_free_all(&env_temp);
+	ret->command = ft_str_list_to_arr(slist);
+	ft_str_list_free_all(&slist);
 	return (ret);
 }
