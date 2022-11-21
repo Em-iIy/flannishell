@@ -6,7 +6,7 @@
 /*   By: gwinnink <gwinnink@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/22 16:29:32 by fpurdom       #+#    #+#                 */
-/*   Updated: 2022/11/21 14:10:16 by fpurdom       ########   odam.nl         */
+/*   Updated: 2022/11/21 18:07:00 by fpurdom       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ static void	free_pipes(t_pipe *pipes)
 	free(pipes->pid);
 	free(pipes);
 }
-
 
 static int	wait_forks(t_pipe *pipes, t_cmd *cmds)
 {

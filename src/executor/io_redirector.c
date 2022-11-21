@@ -6,7 +6,7 @@
 /*   By: gwinnink <gwinnink@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/06 15:44:57 by fpurdom       #+#    #+#                 */
-/*   Updated: 2022/11/21 14:36:04 by fpurdom       ########   odam.nl         */
+/*   Updated: 2022/11/21 15:34:30 by fpurdom       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ static int	redirect_input(t_file *file)
 		return (display_error(file->file_name, NO_FILE, NULL, NULL));
 	if (dup2(fd, STDIN_FILENO) < 0)
 		return (3);
+	if (close(fd))
+		return (3);
 	return (0);
 }
 
@@ -42,6 +44,8 @@ static int	redirect_output(t_file *file)
 	if (fd < 0)
 		return (display_error(file->file_name, NO_PERM, NULL, NULL));
 	if (dup2(fd, STDOUT_FILENO) < 0)
+		return (3);
+	if (close(fd))
 		return (3);
 	return (0);
 }

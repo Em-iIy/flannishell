@@ -6,7 +6,7 @@
 /*   By: gwinnink <gwinnink@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/04 16:20:52 by fpurdom       #+#    #+#                 */
-/*   Updated: 2022/11/21 14:30:02 by fpurdom       ########   odam.nl         */
+/*   Updated: 2022/11/21 15:30:21 by fpurdom       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 #include "builtins.h"
 #include "io_redirector.h"
 #include "signals.h"
+#include "heredoc.h"
 
 int	do_fork(t_cmd *command, t_pipe *pipes, t_env **env)
 {
@@ -80,6 +81,9 @@ int	dont_fork(t_cmd *command, t_env **env)
 	cmd = is_unforkable(command);
 	if (!cmd)
 		return (0);
+	error = check_heredoc(command, *env);
+	if (error)
+		return (error);
 	infd = dup(STDIN_FILENO);
 	outfd = dup(STDOUT_FILENO);
 	if (infd < 0 || outfd < 0)
@@ -88,7 +92,7 @@ int	dont_fork(t_cmd *command, t_env **env)
 	if (error)
 		return (error);
 	error = exec_unforkable(cmd, command, env);
-	if (redirect_io_back(infd, outfd))
+	if (redirect_io_back(infd, outfd) || rm_heredoc_files(command))
 		return (3);
 	return (error);
 }
