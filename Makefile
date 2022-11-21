@@ -109,7 +109,6 @@ clean:
 fclean: clean
 	make -C $(DIR_LIBFT) fclean
 	rm -f $(NAME)
-	rm -rf hd_files
 
 re: fclean all
 
