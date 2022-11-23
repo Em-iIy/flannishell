@@ -6,7 +6,7 @@
 /*   By: gwinnink <gwinnink@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 15:20:49 by gwinnink          #+#    #+#             */
-/*   Updated: 2022/11/23 14:08:55 by gwinnink         ###   ########.fr       */
+/*   Updated: 2022/11/23 15:21:23 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,7 @@ static int	lex_parse_exe(t_env **env, char *line)
 	if (prsr->count > 0)
 		g_code = executor(prsr, env);
 	if (g_code == 3)
-	{
 		perror("minishell");
-		unsuppress_sig_output();
-		exit(errno);
-	}
 	free_lexer(&lxr);
 	free_parser(prsr);
 	return (0);
