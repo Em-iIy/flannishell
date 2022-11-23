@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   executor_utils.c                                   :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: gwinnink <gwinnink@student.42.fr>            +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2022/10/04 16:20:52 by fpurdom       #+#    #+#                 */
-/*   Updated: 2022/11/21 15:30:21 by fpurdom       ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   executor_utils.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gwinnink <gwinnink@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/04 16:20:52 by fpurdom           #+#    #+#             */
+/*   Updated: 2022/11/23 13:49:29 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ static int	is_unforkable(t_cmd *command)
 
 static int	exec_unforkable(int cmd, t_cmd *command, t_env **env)
 {
+	unsuppress_sig_output();
 	if (cmd == 1)
 		return (ft_exit(command));
 	if (cmd == 2)
@@ -92,6 +93,7 @@ int	dont_fork(t_cmd *command, t_env **env)
 	if (error)
 		return (error);
 	error = exec_unforkable(cmd, command, env);
+	suppress_sig_output();
 	if (redirect_io_back(infd, outfd) || rm_heredoc_files(command))
 		return (3);
 	return (error);
