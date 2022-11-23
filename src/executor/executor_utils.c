@@ -6,7 +6,7 @@
 /*   By: gwinnink <gwinnink@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/04 16:20:52 by fpurdom       #+#    #+#                 */
-/*   Updated: 2022/11/23 16:55:13 by fpurdom       ########   odam.nl         */
+/*   Updated: 2022/11/23 16:57:03 by fpurdom       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ static int	exec_unforkable(int cmd, t_cmd *command, t_env **env)
 	if (cmd == 4)
 		return (ft_export(env, command->command));
 	if (cmd == 5)
-		return (ft_echo(command->command));
+		return (ft_echo(command->command + 1));
 	return (0);
 }
 
