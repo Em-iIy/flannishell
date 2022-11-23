@@ -6,7 +6,7 @@
 /*   By: gwinnink <gwinnink@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 19:06:47 by fpurdom           #+#    #+#             */
-/*   Updated: 2022/11/17 17:41:27 by gwinnink         ###   ########.fr       */
+/*   Updated: 2022/11/23 14:53:27 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,14 @@ static void	funi_return(void)
 	g_code = 3;
 }
 
+static void	cd_update_env(t_env **env, char *old_pwd, char *new_pwd)
+{
+	if (env_chr(*env, "OLDPWD"))
+		add_env(env, "OLDPWD", old_pwd);
+	if (env_chr(*env, "PWD"))
+		add_env(env, "PWD", new_pwd);
+}
+
 int	ft_cd(t_env **env, char *path)
 {
 	char	*old_pwd;
@@ -59,8 +67,7 @@ int	ft_cd(t_env **env, char *path)
 	new_pwd = getcwd(NULL, 0);
 	if (!new_pwd)
 		return (funi_return(), 1);
-	add_env(env, "OLDPWD", old_pwd);
-	add_env(env, "PWD", new_pwd);
+	cd_update_env(env, old_pwd, new_pwd);
 	free(old_pwd);
 	free(new_pwd);
 	g_code = 0;
