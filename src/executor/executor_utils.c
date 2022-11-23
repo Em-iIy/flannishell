@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   executor_utils.c                                   :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: gwinnink <gwinnink@student.42.fr>            +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2022/10/04 16:20:52 by fpurdom       #+#    #+#                 */
-/*   Updated: 2022/11/23 15:25:54 by fpurdom       ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   executor_utils.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gwinnink <gwinnink@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/04 16:20:52 by fpurdom           #+#    #+#             */
+/*   Updated: 2022/11/23 15:35:39 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ static int	exec_unforkable(int cmd, t_cmd *command, t_env **env)
 	if (cmd == 4)
 		return (ft_export(env, command->command));
 	if (cmd == 5)
-		return (ft_echo(command->command));
+		return (ft_echo(command->command + 1));
 	return (0);
 }
 
