@@ -6,7 +6,7 @@
 /*   By: gwinnink <gwinnink@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/04 16:20:52 by fpurdom       #+#    #+#                 */
-/*   Updated: 2022/11/23 15:25:54 by fpurdom       ########   odam.nl         */
+/*   Updated: 2022/11/23 16:55:13 by fpurdom       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,8 @@ static int	is_unforkable(t_cmd *command)
 
 static int	exec_unforkable(int cmd, t_cmd *command, t_env **env)
 {
-	unsuppress_sig_output();
 	if (cmd == 1)
-		return (ft_exit(command));
+		return (unsuppress_sig_output(), ft_exit(command));
 	if (cmd == 2)
 		return (ft_cd(env, command->command[1]));
 	if (cmd == 3)
@@ -97,7 +96,6 @@ int	dont_fork(t_cmd *command, t_env **env)
 	if (error)
 		return (error);
 	error = exec_unforkable(cmd, command, env);
-	suppress_sig_output();
 	if (redirect_io_back(infd, outfd) || rm_heredoc_files(command))
 		return (3);
 	return (error);
