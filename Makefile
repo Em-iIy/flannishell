@@ -83,7 +83,8 @@ endif
 
 
 # ----------------------------------------Making
-all: $(NAME)
+all:
+	@$(MAKE) $(NAME) -j4
 
 $(NAME): $(DIR_OBJS) $(OBJS) $(LIBFT)
 	$(CC) $(CFLAGS) $(OBJS) -o $(NAME) -L $(HOME)/.brew/opt/readline/lib -lreadline $(INC) $(LIBFT)
