@@ -6,7 +6,7 @@
 /*   By: gwinnink <gwinnink@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 15:20:49 by gwinnink          #+#    #+#             */
-/*   Updated: 2022/11/21 12:20:05 by gwinnink         ###   ########.fr       */
+/*   Updated: 2022/11/23 13:29:32 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static void	minishell(t_env **env)
 
 	while (1)
 	{
-		line = readline("minishell> ");
+		line = readline("minis\033[0;91mHELL\033[0;97m> ");
 		if (!line)
 		{
 			printf("exit\n");
