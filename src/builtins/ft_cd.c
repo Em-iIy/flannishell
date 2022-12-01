@@ -6,7 +6,7 @@
 /*   By: gwinnink <gwinnink@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 19:06:47 by fpurdom           #+#    #+#             */
-/*   Updated: 2022/11/23 14:53:27 by gwinnink         ###   ########.fr       */
+/*   Updated: 2022/12/01 12:57:31 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,10 @@ int	ft_cd(t_env **env, char *path)
 	if (!old_pwd)
 		return (funi_return(), 1);
 	if (chdir(path) == -1)
-		return (check_error(path));
+		return (free(old_pwd), check_error(path));
 	new_pwd = getcwd(NULL, 0);
 	if (!new_pwd)
-		return (funi_return(), 1);
+		return (free(old_pwd), funi_return(), 1);
 	cd_update_env(env, old_pwd, new_pwd);
 	free(old_pwd);
 	free(new_pwd);
